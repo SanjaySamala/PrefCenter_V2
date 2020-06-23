@@ -11,21 +11,9 @@
 				<ObjectStatus text="{oCommEditModel>/sError}" state="Error"
 					icon="sap-icon://error"/>
 			</VBox>
-			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Telephone'}">
-				<Label text="Telephone:"></Label>
-				<Input id="id_telephone" class="CustomAdrs" liveChange="onChangePhone" value="{oCommEditModel>/selCommValue}"></Input>
-			</VBox>
-			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mobile'}">
-				<Label text="Mobile:"></Label>
-				<Input id="id_mobile" class="CustomAdrs" liveChange="onChangePhone" value="{oCommEditModel>/selCommValue}"></Input>
-			</VBox>
-			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Email'}">
-				<Label text="Email:"></Label>
-				<Input id="id_email" class="CustomAdrs" liveChange="onChangePhone" value="{oCommEditModel>/selCommValue}"></Input>
-			</VBox>
-			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Fax'}">
-				<Label text="Fax:"></Label>
-				<Input id="id_fax" class="CustomAdrs" liveChange="onChangePhone" value="{oCommEditModel>/selCommValue}"></Input>
+			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} !== 'Mail'}">
+				<Label text="{oCommEditModel>/selComm}:"></Label>
+				<Input id="id_commInp" class="CustomAdrs" liveChange="onChangePhone" value="{oCommEditModel>/selCommValue}"></Input>
 			</VBox>
 		</VBox>
 	</Dialog>

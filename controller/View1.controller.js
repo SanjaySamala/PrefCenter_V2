@@ -2508,8 +2508,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					var telephone = this.getView().getModel("oCommEditModel").getProperty("/selCommValue");
 					if (telephone !== "" && !phnNumPattern.test(telephone)) {
 
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_telephone").setValueState("Error");
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_telephone").setValueStateText("Invalid Telephone");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueState("Error");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueStateText("Invalid Telephone");
 						this.getView().getModel("oCommEditModel").setProperty("/sError", "Please maintain valid Telephone number");
 
 						//return false;
@@ -2517,8 +2517,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						// errorCount = errorCount + 1;
 					} else {
 						this.getView().getModel("POSTADR").setProperty("/1/value", telephone);
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_telephone").setValueState("None");
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_telephone").setValueStateText("");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueState("None");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueStateText("");
 						this.getView().getModel("oCommEditModel").setProperty("/sError", "");
 						this.getView().getModel("oCommEditModel").refresh(true);
 						this._commEditPopup.close();
@@ -2528,8 +2528,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					var mobile = this.getView().getModel("oCommEditModel").getProperty("/selCommValue");
 					if (mobile !== "" && !phnNumPattern.test(mobile)) {
 
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_mobile").setValueState("Error");
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_mobile").setValueStateText("Invalid Telephone");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueState("Error");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueStateText("Invalid Telephone");
 						this.getView().getModel("oCommEditModel").setProperty("/sError", "Please maintain valid Mobile number");
 
 						//return false;
@@ -2537,8 +2537,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						// errorCount = errorCount + 1;
 					} else {
 						this.getView().getModel("POSTADR").setProperty("/2/value", mobile);
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_mobile").setValueState("None");
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_mobile").setValueStateText("");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueState("None");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueStateText("");
 						this.getView().getModel("oCommEditModel").setProperty("/sError", "");
 						this.getView().getModel("oCommEditModel").refresh(true);
 						this._commEditPopup.close();
@@ -2548,8 +2548,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					var email = this.getView().getModel("oCommEditModel").getProperty("/selCommValue");
 					if (!mailPattern.test(email)) {
 
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_email").setValueState("Error");
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_email").setValueStateText("Invalid Telephone");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueState("Error");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueStateText("Invalid Telephone");
 						this.getView().getModel("oCommEditModel").setProperty("/sError", "Please maintain valid Email");
 
 						//return false;
@@ -2557,8 +2557,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						// errorCount = errorCount + 1;
 					} else {
 						this.getView().getModel("POSTADR").setProperty("/3/value", email);
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_email").setValueState("None");
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_email").setValueStateText("");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueState("None");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueStateText("");
 						this.getView().getModel("oCommEditModel").setProperty("/sError", "");
 						this.getView().getModel("oCommEditModel").refresh(true);
 						this._commEditPopup.close();
