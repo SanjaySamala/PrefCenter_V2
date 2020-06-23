@@ -908,7 +908,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				var oTab_adrnr = this.getView().byId("T1");
 				var adr_items = oTab_adrnr.getItems();
 				for (var j = 0; j < adr_items.length; j++) { // Comm. Data
-					var data2 = adr_items[j].getBindingContext('POSTADR').oModel.oData[j];
+					// var data2 = adr_items[j].getBindingContext('POSTADR').oModel.oData[j];
+					var data2 = this.getView().getModel('POSTADR').getData()[j];
 					if (data2.text === "Email" && data2.value === "") {
 						no_email = "X";
 					}
@@ -1041,7 +1042,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					var bp = this.getView().byId("BP").getValue();
 					var oTab_adrnr = this.getView().byId("T1");
 					var adr_items = oTab_adrnr.getItems();
-					var address = adr_items[0].getBindingContext('POSTADR').oModel.oData[0];
+					// var address = adr_items[0].getBindingContext('POSTADR').oModel.oData[0];
+					var address = this.getView().getModel('POSTADR').getData()[0];
 
 					if (seq_no === "") {
 						sequence = "000";
@@ -1550,7 +1552,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					var oTab_adrnr = that.getView().byId("T1");
 					var adr_items = oTab_adrnr.getItems();
 					for (var j = 0; j < adr_items.length; j++) { // Comm. Data
-						var data2 = adr_items[j].getBindingContext('POSTADR').oModel.oData[j];
+						// var data2 = adr_items[j].getBindingContext('POSTADR').oModel.oData[j];
+						var data2 = this.getView().getModel('POSTADR').getData()[j];
 						if (data2.text === "Email" && data2.value === "") {
 							no_email = "X";
 						}
