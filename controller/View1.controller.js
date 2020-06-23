@@ -560,7 +560,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 				var oTab_adrnr = this.getView().byId("T1");
 				var adr_items = oTab_adrnr.getItems();
-				var address = adr_items[0].getBindingContext('POSTADR').oModel.oData[0];
+				// var address = adr_items[0].getBindingContext('POSTADR').oModel.oData[0];
+				var address = this.getView().getModel("POSTADR").getData()[0];
 
 				var path = "/CustPrefSet?$filter=CA_BP_NUM eq '" + bp + "' and ADDRESS_NUM eq '" + address.AddressNumber +
 					"' and CONSNUMBER eq '" + seq_no + "'";
