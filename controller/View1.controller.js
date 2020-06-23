@@ -1336,6 +1336,31 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 			},
 
 			GetPreference: function (path_pref) {
+				
+				var oManifestEntrydefault = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_GET_PREFERENCES_SRV.uri;
+				var oModelDefault2 = new sap.ui.model.odata.ODataModel(oManifestEntrydefault, {
+					json: true,
+					loadMetadataAsync: true
+				});
+
+				oModelDefault2.read("/DefaultPrefSet", {
+					async: false,
+					success: function (data) {
+						def_pref = data.results;
+					},
+
+					error: function (error) {
+						// var sMessage = JSON.parse(error.response.body);
+						var sMessage;
+						// sap.m.MessageBox.show(sMessage.error.message.value, {
+						// 	icon: "ERROR",
+						// 	title: "Message",
+						// 	styleClass: "Message",
+						// 	actions: [sap.m.MessageBox.Action.OK],
+						// 	onClose: function(oAction) {}
+						// });
+					}
+				});
 
 				var oManifestEntry1 = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_PREF_USERTRANSDATA_SRV.uri;
 				var oModel1 = new sap.ui.model.odata.ODataModel(oManifestEntry1, {

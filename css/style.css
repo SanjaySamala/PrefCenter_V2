@@ -43,7 +43,7 @@
 
     font-size: 0.9rem !important;
     font-weight: bold;
-    color:dimgray;
+    color:#ffffff;
 }
 .PrefLabel.sapMText{
 
@@ -638,11 +638,13 @@ font-size: 1rem;
 	height: 37px;
 }
 .sapMListTbl .sapMTableTH {
-    background: #c3d9ff;
-    background: -moz-linear-gradient(top, #c3d9ff 0%, #b1c8ef 41%, #98b0d9 100%);
-    background: -webkit-linear-gradient(top, #c3d9ff 0%,#b1c8ef 41%,#98b0d9 100%);
-    background: linear-gradient(to bottom, #c3d9ff 0%,#b1c8ef 41%,#98b0d9 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3d9ff', endColorstr='#98b0d9',GradientType=0 );
+    /*background: #c3d9ff;*/
+    /*background: -moz-linear-gradient(top, #c3d9ff 0%, #b1c8ef 41%, #98b0d9 100%);*/
+    /*background: -webkit-linear-gradient(top, #c3d9ff 0%,#b1c8ef 41%,#98b0d9 100%);*/
+    /*background: linear-gradient(to bottom, #c3d9ff 0%,#b1c8ef 41%,#98b0d9 100%);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3d9ff', endColorstr='#98b0d9',GradientType=0 );*/
+    color: #ffffff;
+    background: #5496cd;
     padding: 0;
 }
 
@@ -1166,4 +1168,15 @@ font-size: 1rem;
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#c3d9ff', endColorstr='#98b0d9', GradientType=0);
     height: 2rem;
+}
+
+.cust_toolbar {
+    color: #fff;
+    background: #5496cd;
+    line-height: 2rem;
+    height: 2rem;
+}
+
+.ttlColor{
+	color: #ffffff;
 }
