@@ -111,50 +111,56 @@
 						</items>-->
 									<!--</VBox>-->
 									<VBox class="flexItemCls sapUiTinyMarginTop">
-										<Toolbar class="cust_toolbar"><!--masterTB-->
-											<core:Icon src="sap-icon://discussion-2"></core:Icon>
-											<Title class="sapUiTinyMarginBegin ttlColor" level="H4" text="Communication" ></Title>
+										<Toolbar class="cust_toolbar">
+											<!--masterTB-->
+											<core:Icon src="sap-icon://discussion-2" class="sapUiTinyMarginBegin"></core:Icon>
+											<Text class="sapUiTinyMarginBegin TextLabel" text="Communication"></Text>
 										</Toolbar>
-										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center" justifyContent="SpaceBetween">
 											<Label text="Mail:" width="7rem"></Label>
-											<TextArea id="id_mail" class="CustomAdrs" enabled="{POSTADR>/0/enabled}" liveChange="onChangePhone" value="{POSTADR>/0/value}" rows="4"></TextArea>
-											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin" color="dimgray"
+											<Text class="CustomAdrs" text="{POSTADR>/0/value}"></Text>
+											<!--<TextArea id="id_mail" class="CustomAdrs" enabled="{POSTADR>/0/enabled}" liveChange="onChangePhone" value="{POSTADR>/0/value}" rows="4"></TextArea>-->
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
 												tooltip="Mail"/>
 											<!--<Text class="txt_formelement" text="{POSTADR>/0/value}"></Text>-->
 										</HBox>
-										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center" justifyContent="SpaceBetween">
 											<Label text="Telephone:" width="7rem"></Label>
-											<Input id="id_telephone" class="CustomAdrs" enabled="{POSTADR>/1/enabled}" liveChange="onChangePhone" value="{POSTADR>/1/value}"></Input>
-											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin" color="dimgray"
+											<Text class="CustomAdrs" text="{POSTADR>/1/value}"></Text>
+											<!--<Input id="id_telephone" class="CustomAdrs" enabled="{POSTADR>/1/enabled}" liveChange="onChangePhone" value="{POSTADR>/1/value}"></Input>-->
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon  sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
 												tooltip="Telephone"/>
 											<!--<Text class="txt_formelement" text="{POSTADR>/1/value}"></Text>-->
 										</HBox>
-										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center" justifyContent="SpaceBetween">
 											<Label text="Mobile:" width="7rem"></Label>
-											<Input id="id_mobile" class="CustomAdrs" enabled="{POSTADR>/2/enabled}" liveChange="onChangePhone" value="{POSTADR>/2/value}"></Input>
-											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin" color="dimgray"
+											<Text class="CustomAdrs" text="{POSTADR>/2/value}"></Text>
+											<!--<Input id="id_mobile" class="CustomAdrs" enabled="{POSTADR>/2/enabled}" liveChange="onChangePhone" value="{POSTADR>/2/value}"></Input>-->
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon  sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
 												tooltip="Mobile"/>
 											<!--<Text class="txt_formelement" text="{POSTADR>/2/value}"></Text>-->
 										</HBox>
-										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center" justifyContent="SpaceBetween">
 											<Label text="Email:" width="7rem"></Label>
-											<Input id="id_email" class="CustomAdrs" enabled="{POSTADR>/3/enabled}" liveChange="onChangePhone" value="{POSTADR>/3/value}"></Input>
-											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin" color="dimgray"
+											<Text class="CustomAdrs" text="{POSTADR>/3/value}"></Text>
+											<!--<Input id="id_email" class="CustomAdrs" enabled="{POSTADR>/3/enabled}" liveChange="onChangePhone" value="{POSTADR>/3/value}"></Input>-->
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon  sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
 												tooltip="Email"/>
 											<!--<Text class="txt_formelement" text="{POSTADR>/3/value}"></Text>-->
 										</HBox>
-										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center" justifyContent="SpaceBetween">
 											<Label text="Fax:" width="7rem"></Label>
-											<Input id="id_fax" class="CustomAdrs" enabled="{POSTADR>/4/enabled}" liveChange="onChangePhone" value="{POSTADR>/4/value}"></Input>
-											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin" color="dimgray"
+											<Text class="CustomAdrs" text="{POSTADR>/4/value}"></Text>
+											<!--<Input id="id_fax" class="CustomAdrs" enabled="{POSTADR>/4/enabled}" liveChange="onChangePhone" value="{POSTADR>/4/value}"></Input>-->
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
 												tooltip="Fax"/>
 											<!--<Text class="txt_formelement" text="{POSTADR>/4/value}"></Text>-->
 										</HBox>
 									</VBox>
 									<VBox class="flexItemCls sapUiSmallMarginTop">
 										<Toolbar class="cust_toolbar">
-											<core:Icon src="sap-icon://bell"></core:Icon>
-											<Title class="sapUiTinyMarginBegin ttlColor" level="H4" text="Notification Timings"></Title>
+											<core:Icon src="sap-icon://bell" class="sapUiTinyMarginBegin"></core:Icon>
+											<Text class="sapUiTinyMarginBegin TextLabel" text="Notification Timings"></Text>
 										</Toolbar>
 										<Label text="Text Messages:" class="sapUiTinyMarginBegin sapUiTinyMarginTop"></Label>
 										<HBox>
@@ -178,7 +184,7 @@
 							<Page class="sapUiContentPadding" showHeader="false">
 								<content>
 									<HBox height="2px"/>
-									<Panel id="PL4" expandable="true" expanded="false" width="auto" class="sapUiResponsiveMargin">
+									<Panel id="PL4" expandable="true" expanded="false" width="auto" class="">
 										<headerToolbar>
 											<Toolbar height="auto">
 												<core:Icon src="sap-icon://account" size="1.5rem" color="navy"/>
@@ -192,7 +198,7 @@
 													<columns>
 														<Column>
 															<l:HorizontalLayout>
-																<core:Icon src="sap-icon://account" class="size1" tooltip="Contract Account" color="dimgray"/>
+																<core:Icon src="sap-icon://account" class="size1" tooltip="Contract Account" color="#ffffff"/>
 																<Text width="5px"/>
 																<Text text="Contract Account" class="TextLabel"/>
 															</l:HorizontalLayout>
@@ -245,7 +251,7 @@
 											</ScrollContainer>
 										</content>
 									</Panel>
-									<Panel id="contData" expandable="true" expanded="true" width="auto" class="sapUiResponsiveMargin">
+									<Panel id="contData" expandable="true" expanded="true" width="auto" class="">
 										<headerToolbar>
 											<Toolbar height="auto">
 												<core:Icon size="1.5rem" src="sap-icon://customer-briefing" color="navy"/>
@@ -269,16 +275,16 @@
 															<Text text="Email" class="sapUiTinyMarginBegin TextLabel"></Text>
 														</Column>
 														<Column hAlign="Left">
-															<Text text="Phone" class="sapUiTinyMarginBegin"></Text>
+															<Text text="Phone" class="sapUiTinyMarginBegin TextLabel"></Text>
 														</Column>
 														<Column hAlign="Left">
-															<Text text="Relation Type" class="sapUiTinyMarginBegin"></Text>
+															<Text text="Relation Type" class="sapUiTinyMarginBegin TextLabel"></Text>
 														</Column>
 														<Column hAlign="Left" width="5rem">
-															<Text text="" class="sapUiTinyMarginBegin"></Text>
+															<Text text="" class="sapUiTinyMarginBegin TextLabel"></Text>
 														</Column>
 														<Column hAlign="Left">
-															<Text text="" class="sapUiTinyMarginBegin"></Text>
+															<Text text="" class="sapUiTinyMarginBegin TextLabel"></Text>
 														</Column>
 													</columns>
 													<items>
@@ -300,7 +306,7 @@
 											</ScrollContainer>
 										</content>
 									</Panel>
-									<Panel expandable="true" expanded="false" headerText="Comm. Data" width="auto" class="sapUiResponsiveMargin" visible="false">
+									<Panel expandable="true" expanded="false" headerText="Comm. Data" width="auto" class="" visible="false">
 										<headerToolbar>
 											<Toolbar height="auto">
 												<core:Icon size="1.5rem" src="sap-icon://discussion-2" color="navy"/>
@@ -319,10 +325,10 @@
 													<items>
 														<ColumnListItem class="text_custom">
 															<cells>
-																<core:Icon src="{POSTADR>src}" color="dimgray"/>
+																<core:Icon src="{POSTADR>src}" color="#ffffff"/>
 																<Text text="{POSTADR>text}" class="TextLabel"/>
 																<Input id="adrs" value="{POSTADR>value}" class="CustomAdrs" enabled="{POSTADR>enabled}" liveChange="onChangePhone"/>
-																<core:Icon id="Edit1" src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon" color="dimgray"/>
+																<core:Icon id="Edit1" src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon" color="#ffffff"/>
 																<Input id="Email" visible="false"/>
 																<Input id="telephone" visible="false"/>
 																<Input id="SMS" visible="false"/>
@@ -337,7 +343,7 @@
 									<!--<Panel expandable="true" expanded="false" width="auto" headerText="Recipients" class="sapUiResponsiveMargin">-->
 									<!--	<content/>-->
 									<!--</Panel>-->
-									<Panel id="PR" expandable="true" expanded="false" width="auto" class="sapUiResponsiveMargin">
+									<Panel id="PR" expandable="true" expanded="false" width="auto" class="">
 										<headerToolbar>
 											<Toolbar height="auto">
 												<core:Icon src="sap-icon://user-settings" size="1.5rem" color="navy"/>
@@ -374,21 +380,21 @@
 														<Column/>
 														<Column>
 															<l:HorizontalLayout>
-																<core:Icon src="sap-icon://email" class="size1" tooltip="Email" color="dimgray"/>
+																<core:Icon src="sap-icon://email" class="size1" tooltip="Email" color="#ffffff"/>
 																<Text width="5px"/>
 																<Text text="Email" class="TextLabel"/>
 															</l:HorizontalLayout>
 														</Column>
 														<Column>
 															<l:HorizontalLayout>
-																<core:Icon src="sap-icon://iphone" class="size1" tooltip="SMS" color="dimgray"/>
+																<core:Icon src="sap-icon://iphone" class="size1" tooltip="SMS" color="#ffffff"/>
 																<Text width="5px"/>
 																<Text text="Text" class="TextLabel"/>
 															</l:HorizontalLayout>
 														</Column>
 														<Column>
 															<l:HorizontalLayout>
-																<core:Icon src="sap-icon://letter" class="size1" tooltip="Post" color="dimgray"/>
+																<core:Icon src="sap-icon://letter" class="size1" tooltip="Post" color="#ffffff"/>
 																<Text width="5px"/>
 																<Text text="Mail" class="TextLabel"/>
 															</l:HorizontalLayout>
@@ -473,7 +479,7 @@
 											</ScrollContainer>
 										</content>
 									</Panel>
-									<Panel id="AL" expandable="true" expanded="false" width="auto" class="sapUiResponsiveMargin">
+									<Panel id="AL" expandable="true" expanded="false" width="auto" class="">
 										<headerToolbar>
 											<Toolbar height="auto">
 												<core:Icon src="sap-icon://bell" size="1.5rem" color="navy"/>

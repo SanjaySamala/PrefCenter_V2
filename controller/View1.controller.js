@@ -1336,7 +1336,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 			},
 
 			GetPreference: function (path_pref) {
-				
+
 				var oManifestEntrydefault = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_GET_PREFERENCES_SRV.uri;
 				var oModelDefault2 = new sap.ui.model.odata.ODataModel(oManifestEntrydefault, {
 					json: true,
@@ -2396,27 +2396,87 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 				this.getView().byId("T1").getModel("POSTADR").refresh(true);*/
 
-				var selCommMode = oEvent.getSource().getTooltip();
-				var selRow;
-				switch (selCommMode) {
+				this.selCommMode = oEvent.getSource().getTooltip();
+				switch (this.selCommMode) {
 				case "Mail":
-					selRow = this.getView().getModel("POSTADR").getProperty("/0");
+					/*if (!this._commEditPopup) {
+						this._commEditPopup = sap.ui.xmlfragment(this.getView().getId(),
+							"ZPREFCNTR_v2.Fragments.EditCommunication", this);
+
+					}
+					this.getView().setModel(new JSONModel({
+						selCommValue: this.getView().getModel("POSTADR").getProperty("/0/value")
+						selComm: this.selCommMode,
+						sError: ""
+					}), "oCommEditModel");
+					this.getView().addDependent(this._commEditPopup);
+					this._commEditPopup.open();*/
+					// selRow = this.getView().getModel("POSTADR").getProperty("/0");
 					break;
 				case "Telephone":
-					selRow = this.getView().getModel("POSTADR").getProperty("/1");
+					if (!this._commEditPopup) {
+						this._commEditPopup = sap.ui.xmlfragment(this.getView().getId(),
+							"ZPREFCNTR_v2.Fragments.EditCommunication", this);
+
+					}
+					this.getView().setModel(new JSONModel({
+						selCommValue: this.getView().getModel("POSTADR").getProperty("/1/value"),
+						selComm: this.selCommMode,
+						sError: ""
+					}), "oCommEditModel");
+					this.getView().addDependent(this._commEditPopup);
+					this._commEditPopup.open();
+					// selRow = this.getView().getModel("POSTADR").getProperty("/1");
 					break;
 				case "Mobile":
-					selRow = this.getView().getModel("POSTADR").getProperty("/2");
+					if (!this._commEditPopup) {
+						this._commEditPopup = sap.ui.xmlfragment(this.getView().getId(),
+							"ZPREFCNTR_v2.Fragments.EditCommunication", this);
+
+					}
+					this.getView().setModel(new JSONModel({
+						selCommValue: this.getView().getModel("POSTADR").getProperty("/2/value"),
+						selComm: this.selCommMode,
+						sError: ""
+					}), "oCommEditModel");
+					this.getView().addDependent(this._commEditPopup);
+					this._commEditPopup.open();
+					// selRow = this.getView().getModel("POSTADR").getProperty("/2");
 					break;
 				case "Email":
-					selRow = this.getView().getModel("POSTADR").getProperty("/3");
+					if (!this._commEditPopup) {
+						this._commEditPopup = sap.ui.xmlfragment(this.getView().getId(),
+							"ZPREFCNTR_v2.Fragments.EditCommunication", this);
+
+					}
+					this.getView().setModel(new JSONModel({
+						selCommValue: this.getView().getModel("POSTADR").getProperty("/3/value"),
+						selComm: this.selCommMode,
+						sError: ""
+					}), "oCommEditModel");
+					this.getView().addDependent(this._commEditPopup);
+					this._commEditPopup.open();
+					// selRow = this.getView().getModel("POSTADR").getProperty("/3");
 					break;
 				case "Fax":
-					selRow = this.getView().getModel("POSTADR").getProperty("/4");
+					if (!this._commEditPopup) {
+						this._commEditPopup = sap.ui.xmlfragment(this.getView().getId(),
+							"ZPREFCNTR_v2.Fragments.EditCommunication", this);
+
+					}
+					this.getView().setModel(new JSONModel({
+						selCommValue: this.getView().getModel("POSTADR").getProperty("/4/value"),
+						selComm: this.selCommMode,
+						sError: ""
+					}), "oCommEditModel");
+					this.getView().addDependent(this._commEditPopup);
+					this._commEditPopup.open();
+					// selRow = this.getView().getModel("POSTADR").getProperty("/4");
 					break;
 				}
+				this.getView().getModel("oCommEditModel").refresh(true);
 
-				if (selRow.enabled) {
+				/*if (selRow.enabled) {
 					selRow.enabled = false;
 					if (selRow.text === "Mobile") {
 						selRow.value = JSON.parse(this.tempAdrs)[2].value;
@@ -2433,7 +2493,87 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						selRow.enabled = true;
 					}
 				}
-				this.getView().getModel("POSTADR").refresh(true);
+				this.getView().getModel("POSTADR").refresh(true);*/
+			},
+
+			onEditCommSave: function (oEvent) {
+				var selCommMode = this.getView().getModel("oCommEditModel").getProperty("/selComm");
+				var phnNumPattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+				var mailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+				switch (selCommMode) {
+				case "Mail":
+					this._commEditPopup.close();
+					break;
+				case "Telephone":
+					var telephone = this.getView().getModel("oCommEditModel").getProperty("/selCommValue");
+					if (telephone !== "" && !phnNumPattern.test(telephone)) {
+
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_telephone").setValueState("Error");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_telephone").setValueStateText("Invalid Telephone");
+						this.getView().getModel("oCommEditModel").setProperty("/sError", "Please maintain valid Telephone number");
+
+						//return false;
+						// errorMessages.push("Please maintain valid Telephone number");
+						// errorCount = errorCount + 1;
+					} else {
+						this.getView().getModel("POSTADR").setProperty("/1/value", telephone);
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_telephone").setValueState("None");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_telephone").setValueStateText("");
+						this.getView().getModel("oCommEditModel").setProperty("/sError", "");
+						this.getView().getModel("oCommEditModel").refresh(true);
+						this._commEditPopup.close();
+					}
+					break;
+				case "Mobile":
+					var mobile = this.getView().getModel("oCommEditModel").getProperty("/selCommValue");
+					if (mobile !== "" && !phnNumPattern.test(mobile)) {
+
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_mobile").setValueState("Error");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_mobile").setValueStateText("Invalid Telephone");
+						this.getView().getModel("oCommEditModel").setProperty("/sError", "Please maintain valid Mobile number");
+
+						//return false;
+						// errorMessages.push("Please maintain valid Telephone number");
+						// errorCount = errorCount + 1;
+					} else {
+						this.getView().getModel("POSTADR").setProperty("/2/value", mobile);
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_mobile").setValueState("None");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_mobile").setValueStateText("");
+						this.getView().getModel("oCommEditModel").setProperty("/sError", "");
+						this.getView().getModel("oCommEditModel").refresh(true);
+						this._commEditPopup.close();
+					}
+					break;
+				case "Email":
+					var email = this.getView().getModel("oCommEditModel").getProperty("/selCommValue");
+					if (!mailPattern.test(email)) {
+
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_email").setValueState("Error");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_email").setValueStateText("Invalid Telephone");
+						this.getView().getModel("oCommEditModel").setProperty("/sError", "Please maintain valid Email");
+
+						//return false;
+						// errorMessages.push("Please maintain valid Telephone number");
+						// errorCount = errorCount + 1;
+					} else {
+						this.getView().getModel("POSTADR").setProperty("/3/value", email);
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_email").setValueState("None");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_email").setValueStateText("");
+						this.getView().getModel("oCommEditModel").setProperty("/sError", "");
+						this.getView().getModel("oCommEditModel").refresh(true);
+						this._commEditPopup.close();
+					}
+					break;
+				case "Fax":
+					this._commEditPopup.close();
+					break;
+				}
+				
+				
+			},
+			
+			onEditCommCancel: function(){
+				this._commEditPopup.close();
 			},
 
 			commDataSave: function (oEvent) {
@@ -2955,8 +3095,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				this.getView().addDependent(this._prefAdd);
 				this._prefAdd.open();
 			},
-			
-			onPrefLiveChange: function(oEvent){
+
+			onPrefLiveChange: function (oEvent) {
 				oEvent.getSource().setValue(oEvent.getSource().getValue().toUpperCase());
 			},
 
@@ -2991,14 +3131,14 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				}
 
 			},
-			
-			saveNewPreference: function(aNewPrefData){
+
+			saveNewPreference: function (aNewPrefData) {
 				var sDefaultComm = "";
-				if(aNewPrefData.iDefaultPrefSel === 0){
+				if (aNewPrefData.iDefaultPrefSel === 0) {
 					sDefaultComm = "E";
-				} else if(aNewPrefData.iDefaultPrefSel === 1){
+				} else if (aNewPrefData.iDefaultPrefSel === 1) {
 					sDefaultComm = "S";
-				} else if(aNewPrefData.iDefaultPrefSel === 2){
+				} else if (aNewPrefData.iDefaultPrefSel === 2) {
 					sDefaultComm = "P";
 				}
 				var aNewPrefPayload = {
@@ -3007,7 +3147,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					DefaultComm: sDefaultComm,
 					EmailFlag: aNewPrefData.bEmail,
 					SmsFlag: aNewPrefData.bMobile,
-					PostFlag: aNewPrefData. bMail
+					PostFlag: aNewPrefData.bMail
 				}
 				var addNewPrefSet = "/CreatePreferenceSet";
 				var oManifestEntryAddNewPref = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_GET_ADDRESS_SRV.uri;
@@ -3018,10 +3158,10 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					success: jQuery.proxy(this.addNewPrefResults, this),
 					error: jQuery.proxy(this.oError, this)
 				});
-				
+
 			},
-			
-			addNewPrefResults: function(oData, oResponse){
+
+			addNewPrefResults: function (oData, oResponse) {
 				var bp = this.getView().byId("BP").getValue();
 				var path_pref = "/PrefUserDataSet?$filter=CA_BP_NUM eq '" + bp + "' and ADDRESS_NUM eq '" + this.adrNum +
 					"' and CONSNUMBER eq '" + this.CONSNUMBER + "'";
