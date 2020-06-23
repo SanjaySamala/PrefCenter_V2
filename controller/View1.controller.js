@@ -1340,8 +1340,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					loadMetadataAsync: true
 				});
 
-				var post_adr = this.getView().byId("T1");
-				var ca_data = post_adr.getModel("POSTADR").getData();
+				// var post_adr = this.getView().byId("T1");
+				var ca_data = this.getView().getModel("POSTADR").getData();
 
 				var pref = [];
 				var inst_pref = [];
@@ -2993,6 +2993,10 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 			},
 			
 			addNewPrefResults: function(oData, oResponse){
+				var bp = this.getView().byId("BP").getValue();
+				var path_pref = "/PrefUserDataSet?$filter=CA_BP_NUM eq '" + bp + "' and ADDRESS_NUM eq '" + this.adrNum +
+					"' and CONSNUMBER eq '" + this.CONSNUMBER + "'";
+				this.GetPreference(path_pref);
 				sap.m.MessageToast.show("New Pref Added");
 			},
 
