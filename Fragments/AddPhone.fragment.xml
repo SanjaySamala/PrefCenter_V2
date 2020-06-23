@@ -1,0 +1,23 @@
+<!--Added by Hemant, we will open this fragment when the user clicks on Add phone button -->
+<!--This is the format for calling the fragment , this is lika a popup-->
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core" >
+   <Dialog
+      id="AddPhoneDialog" 
+      title="Add Recipient">
+   	<VBox id="callahead">
+   		<Input placeholder="Add Phone #" value="" id="AddPhoneID" type="Text"/>
+    </VBox>
+   	    <beginButton>
+   	      <Button
+            text="SAVE"
+            press=".SaveDialog"/>
+        </beginButton>
+        <endButton>
+        	 <Button
+            text="CANCEL"
+            press=".CloseDialog"/>
+        </endButton>
+   </Dialog>
+</core:FragmentDefinition>

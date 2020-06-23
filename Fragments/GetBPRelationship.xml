@@ -1,0 +1,23 @@
+<!--Added by Hemant, we will open this fragment when the user clicks on GetBPRelationship Button-->
+<!--This is the format for calling the fragment , this is lika a popup-->
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core" >
+   <Dialog
+      id="GetBPRelationship" 
+      title="BP Relationships">
+   	<VBox id="callahead">
+   		<Input placeholder="Add Phone #" value="" id="AddPhoneID" type="Text"/>
+    </VBox>
+   	    <beginButton>
+   	      <Button
+            text="SAVE"
+            press=".SaveDialog"/>
+        </beginButton>
+        <endButton>
+        	 <Button
+            text="CANCEL"
+            press=".CloseDialog"/>
+        </endButton>
+   </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Add Preference" contentWidth="auto" contentHeight="auto" class="flexItemCls">
+		<beginButton>
+			<Button text="SAVE" press="onAddPrefSave"/>
+		</beginButton>
+		<endButton>
+			<Button text="CANCEL" press="onAddPrefCancel"/>
+		</endButton>
+		<VBox class="sapUiSmallMarginTop sapUiSmallMarginBeginEnd" height="auto">
+			<VBox visible="{=${oAddPrefModel>/sError}.length > 0}">
+				<ObjectStatus text="{oAddPrefModel>/sError}" state="Error"
+					icon="sap-icon://error"/>
+			</VBox>
+			<VBox class="sapUiTinyMarginTop">
+				<Label text="Preference"></Label>
+				<Input value="{oAddPrefModel>/sPref}" liveChange="onPrefLiveChange"></Input>
+			</VBox>
+			<VBox class="sapUiTinyMarginTop">
+				<Label text="Allowed Mode of Communication" class="sapUiTinyMarginTop"></Label>
+				<HBox>
+					<CheckBox text="Email" selected="{oAddPrefModel>/bEmail}"></CheckBox>
+					<CheckBox text="Mobile" selected="{oAddPrefModel>/bMobile}"></CheckBox>
+					<CheckBox text="Mail" selected="{oAddPrefModel>/bMail}"></CheckBox>
+				</HBox>
+			</VBox>
+			<VBox class="sapUiTinyMarginTop">
+				<Label text="Default Preference" class="sapUiTinyMarginTop"></Label>
+				<RadioButtonGroup id="rbg1" selectedIndex="{oAddPrefModel>/iDefaultPrefSel}" columns="3">
+					<buttons>
+						<RadioButton text="Email"></RadioButton>
+						<RadioButton text="Mobile"></RadioButton>
+						<RadioButton text="Mail"></RadioButton>
+					</buttons>
+				</RadioButtonGroup>
+			</VBox>
+		</VBox>
+	</Dialog>
+</core:FragmentDefinition>

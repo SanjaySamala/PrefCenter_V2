@@ -1,0 +1,25 @@
+{
+	"PList": [{
+		"Pref": "Billing & Payment",
+		"Phone": "X",
+		"Email": "X",
+		"Msg": " "
+	}, {
+		"Pref": "Service",
+		"Phone": "",
+		"Email": "X",
+		"Msg": "X"
+	}, {
+		"Pref": "Outage",
+		"Phone": "",
+		"Email": "",
+		"Msg": "X"
+	},
+	 {
+		"Pref": "Marketing & Promotions",
+		"Phone": "X",
+		"Email": "",
+		"Msg": "X"
+	}
+	]
+}

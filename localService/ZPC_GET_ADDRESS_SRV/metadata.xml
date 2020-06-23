@@ -1,0 +1,59 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZPC_GET_ADDRESS_SRV" xml:lang="en" sap:schema-version="1">
+            <EntityType Name="ContactNumbers" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="BpNum"/>
+                    <PropertyRef Name="SeqNumber"/>
+                    <PropertyRef Name="AddressNumber"/>
+                </Key>
+                <Property Name="ImInput" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Character Field of Length 12" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ExBpOrCa" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Character Field of Length 12" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ExBpOrCaFlag" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="BP/CA Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BpNum" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="BP/Contract Num" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SeqNumber" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Sequence Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AddressNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Address number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ContactNumber" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Contact Numbers" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="MailAddress" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="BpNum"/>
+                    <PropertyRef Name="SeqNumber"/>
+                    <PropertyRef Name="AddressNumber"/>
+                </Key>
+                <Property Name="ImInput" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Character Field of Length 12" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ExBpOrCa" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Character Field of Length 12" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ExBpOrCaFlag" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="BP/CA Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BpNum" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="BP/Contract Num" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SeqNumber" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Sequence Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AddressNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Address number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EmailAddress" Type="Edm.String" Nullable="false" MaxLength="241" sap:unicode="false" sap:label="E-Mail Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="PostAddress" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="BpNum"/>
+                    <PropertyRef Name="AddressNumber"/>
+                </Key>
+                <Property Name="ImInput" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Character Field of Length 12" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ExBpOrCa" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Character Field of Length 12" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ExBpOrCaFlag" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="BP/CA Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BpNum" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="BP/Contract Num" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AddressNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Address number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PostalAddress" Type="Edm.String" Nullable="false" MaxLength="150" sap:unicode="false" sap:label="Postal Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZPC_GET_ADDRESS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ContactNumbersSet" EntityType="ZPC_GET_ADDRESS_SRV.ContactNumbers" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="MailAddressSet" EntityType="ZPC_GET_ADDRESS_SRV.MailAddress" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="PostAddressSet" EntityType="ZPC_GET_ADDRESS_SRV.PostAddress" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZPC_GET_ADDRESS_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZPC_GET_ADDRESS_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

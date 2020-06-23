@@ -1,0 +1,769 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:tnt="sap.tnt" xmlns:HTML="sap.ui.core.HTML"
+	xmlns:smartForm="sap.ui.comp.smartform" xmlns:smartField="sap.ui.comp.smartfield" controllerName="ZPREFCNTR_v2.controller.View1"
+	displayBlock="true">
+	<App>
+		<pages>
+			<Page>
+				<headerContent>
+					<HBox class="hBox" height="60px" width="100%">
+						<VBox width="10%">
+							<Image src="images/Deloitte.JPG" height="40px" width="130px"/>
+						</VBox>
+						<VBox width="70%" alignContent="Center" justifyContent="Center" alignItems="Center">
+							<Title text="Preference Center"/>
+						</VBox>
+						<VBox width="10%" alignContent="Center" alignItems="Center" direction="Column" justifyContent="Center">
+							<core:Icon src="sap-icon://arrow-left" class="size2" id="Back" press="BackToBp" tooltip="Navigate to Business Partner"/>
+						</VBox>
+						<VBox width="10%" alignContent="Center" alignItems="Center" direction="Column" justifyContent="Center">
+							<core:Icon src="sap-icon://save" class="size2 sapUiMediumMarginEnd" id="ALL" press="SaveAll" tooltip="Save your preferences"/>
+							<Text text="V1.17" class="versionText sapUiMediumMarginBegin"></Text>
+						</VBox>
+					</HBox>
+				</headerContent>
+				<subHeader>
+					<Toolbar>
+						<HBox class="hBox" height="60px" width="100%">
+							<VBox width="4%" fitContainer="true" class="sapUiSmallMarginTop"/>
+							<VBox width="19%" fitContainer="true" class="sapUiSmallMarginTop" direction="RowReverse" alignContent="End" justifyContent="Inherit"
+								alignItems="Center">
+								<items>
+									<Label text="Business Partner/Account Number" textAlign="End" textDirection="LTR" id="__label14" class="BpLabel"/>
+								</items>
+							</VBox>
+							<VBox width="1%"/>
+							<VBox width="13%" fitContainer="true" class="sapUiSmallMarginTop">
+								<items>
+									<Input id="BP" required="true" showValueHelp="false" placeholder="Enter Business Partner/Account Number ..." submit="handleSearch"
+										textAlign="Begin" width="95%" fieldWidth="30%" class="CustomInput"/>
+								</items>
+							</VBox>
+							<items>
+								<VBox xmlns="sap.m" width="7%" fitContainer="true" class="sapUiSmallMarginTop" justifyContent="End" direction="RowReverse"
+									alignContent="End">
+									<items>
+										<core:Icon src="sap-icon://sys-find" class="size3" id="B1" press="handleSearch" tooltip="Search"/>
+									</items>
+								</VBox>
+							</items>
+							<!--<HBox xmlns="sap.m" fitContainer="true" alignItems="Center" class="sapUiSmallMarginTop sapUiSmallMarginEnd">
+								<items>
+									
+								</items>
+							</HBox>-->
+							<VBox xmlns="sap.m" fitContainer="true" class="sapUiSmallMarginTop" justifyContent="End" direction="RowReverse" alignContent="End">
+								<items>
+									<ObjectStatus class="sapUiSmallMarginEnd sapUiTinyMarginTop" icon="sap-icon://customer" text="{oBpCaModel>/sBpCa}"
+										state="{=${oBpCaModel>/sBpCa} === 'BP' ? 'Warning' : 'Success'}" visible="{=${oBpCaModel>/sBpCa}.length > 0}"></ObjectStatus>
+								</items>
+							</VBox>
+							<VBox xmlns="sap.m" fitContainer="true" class="sapUiSmallMarginTop" justifyContent="End" direction="RowReverse" alignContent="End">
+								<items>
+									<Label id="name" class="BpLabel"/>
+								</items>
+							</VBox>
+						</HBox>
+						<ToolbarSpacer/>
+					</Toolbar>
+				</subHeader>
+				<content>
+					<SplitApp id="idApp" visible="{=${oBpCaModel>/sBpCa}.length > 0}" initialDetail="detail" initialMaster="master">
+						<masterPages>
+							<Page>
+								<content>
+									<!--<VBox id="CD">-->
+									<!--<HBox>
+							<core:Icon size="1.5rem" src="sap-icon://discussion-2" color="navy"/>
+							<Title text="Communication Data"/>
+						</HBox>
+						<List items="{POSTADR>/}" id="T1">
+							<items>
+								<CustomListItem>
+									<VBox class="sapUiTinyMargin">
+										<HBox>
+											<core:Icon src="{POSTADR>src}" color="dimgray"/>
+											<Text text="{POSTADR>text}" class="TextLabel"/>
+										</HBox>
+										<HBox height="2rem">
+											<Input width="9rem" id="adrs" value="{POSTADR>value}" class="CustomAdrs" enabled="{POSTADR>enabled}" liveChange="onChangePhone"/>
+											<core:Icon id="Edit1" src="sap-icon://edit" press="onEditCommDets" color="dimgray"/>
+											<Input id="Email" visible="false"/>
+											<Input id="telephone" visible="false"/>
+											<Input id="SMS" visible="false"/>
+											<Input id="fax" visible="false"/>
+										</HBox>
+									</VBox>
+								</CustomListItem>
+							</items>
+						</List>-->
+									<!--	<items>
+							<ColumnListItem class="text_custom">
+								<cells>
+									<Input width="9rem" id="adrs" value="{POSTADR>value}" class="CustomAdrs" enabled="{POSTADR>enabled}" liveChange="onChangePhone"/>
+									<core:Icon id="Edit1" src="sap-icon://edit" press="onEditCommDets" color="dimgray"/>
+									<Input id="Email" visible="false"/>
+									<Input id="telephone" visible="false"/>
+									<Input id="SMS" visible="false"/>
+									<Input id="fax" visible="false"/>
+								</cells>
+							</ColumnListItem>
+						</items>-->
+									<!--</VBox>-->
+									<VBox class="flexItemCls sapUiTinyMarginTop">
+										<Toolbar class="masterTB">
+											<core:Icon src="sap-icon://discussion-2"></core:Icon>
+											<Title class="sapUiTinyMarginBegin" level="H4" text="Communication"></Title>
+										</Toolbar>
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+											<Label text="Mail:" width="7rem"></Label>
+											<TextArea id="id_mail" class="CustomAdrs" enabled="{POSTADR>/0/enabled}" liveChange="onChangePhone" value="{POSTADR>/0/value}" rows="4"></TextArea>
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin" color="dimgray"
+												tooltip="Mail"/>
+											<!--<Text class="txt_formelement" text="{POSTADR>/0/value}"></Text>-->
+										</HBox>
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+											<Label text="Telephone:" width="7rem"></Label>
+											<Input id="id_telephone" class="CustomAdrs" enabled="{POSTADR>/1/enabled}" liveChange="onChangePhone" value="{POSTADR>/1/value}"></Input>
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin" color="dimgray"
+												tooltip="Telephone"/>
+											<!--<Text class="txt_formelement" text="{POSTADR>/1/value}"></Text>-->
+										</HBox>
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+											<Label text="Mobile:" width="7rem"></Label>
+											<Input id="id_mobile" class="CustomAdrs" enabled="{POSTADR>/2/enabled}" liveChange="onChangePhone" value="{POSTADR>/2/value}"></Input>
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin" color="dimgray"
+												tooltip="Mobile"/>
+											<!--<Text class="txt_formelement" text="{POSTADR>/2/value}"></Text>-->
+										</HBox>
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+											<Label text="Email:" width="7rem"></Label>
+											<Input id="id_email" class="CustomAdrs" enabled="{POSTADR>/3/enabled}" liveChange="onChangePhone" value="{POSTADR>/3/value}"></Input>
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin" color="dimgray"
+												tooltip="Email"/>
+											<!--<Text class="txt_formelement" text="{POSTADR>/3/value}"></Text>-->
+										</HBox>
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+											<Label text="Fax:" width="7rem"></Label>
+											<Input id="id_fax" class="CustomAdrs" enabled="{POSTADR>/4/enabled}" liveChange="onChangePhone" value="{POSTADR>/4/value}"></Input>
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin" color="dimgray"
+												tooltip="Fax"/>
+											<!--<Text class="txt_formelement" text="{POSTADR>/4/value}"></Text>-->
+										</HBox>
+									</VBox>
+									<VBox class="flexItemCls sapUiSmallMarginTop">
+										<Toolbar class="masterTB">
+											<core:Icon src="sap-icon://bell"></core:Icon>
+											<Title class="sapUiTinyMarginBegin" level="H4" text="Notification Timings"></Title>
+										</Toolbar>
+										<Label text="Text Messages:" class="sapUiTinyMarginBegin sapUiTinyMarginTop"></Label>
+										<HBox>
+											<RadioButtonGroup columns="2" select="TextMsg" id="RG1">
+												<buttons>
+													<RadioButton text="Anytime"></RadioButton>
+													<RadioButton text="Between"></RadioButton>
+												</buttons>
+											</RadioButtonGroup>
+										</HBox>
+										<HBox alignItems="Center" id="TMB">
+											<TimePicker id="TM1"></TimePicker>
+											<Text text="-" id="TML1"></Text>
+											<TimePicker id="TM2"></TimePicker>
+										</HBox>
+									</VBox>
+								</content>
+							</Page>
+						</masterPages>
+						<detailPages>
+							<Page class="sapUiContentPadding" showHeader="false">
+								<content>
+									<HBox height="2px"/>
+									<Panel id="PL4" expandable="true" expanded="false" width="auto" class="sapUiResponsiveMargin">
+										<headerToolbar>
+											<Toolbar height="auto">
+												<core:Icon src="sap-icon://account" size="1.5rem" color="navy"/>
+												<Title text="Contract Accounts"/>
+											</Toolbar>
+										</headerToolbar>
+										<content>
+											<ScrollContainer horizontal="false" vertical="true" focusable="true" height="100px" width="100%">
+												<Table id="CA" items="{CA_LIST>/}" showNoData="false" growing="true" growingThreshold="100" growingScrollToLoad="true" width="95%"
+													class="sapUiSmallMarginBegin">
+													<columns>
+														<Column>
+															<l:HorizontalLayout>
+																<core:Icon src="sap-icon://account" class="size1" tooltip="Contract Account" color="dimgray"/>
+																<Text width="5px"/>
+																<Text text="Contract Account" class="TextLabel"/>
+															</l:HorizontalLayout>
+														</Column>
+														<Column>
+															<l:HorizontalLayout>
+																<Text width="5px"/>
+																<Text text=" Address" class="TextLabel"/>
+															</l:HorizontalLayout>
+														</Column>
+														<Column>
+															<l:HorizontalLayout>
+																<Text width="5px"/>
+																<Text text="CA Type" class="TextLabel"/>
+															</l:HorizontalLayout>
+														</Column>
+														<Column/>
+														<Column/>
+														<Column width="15px"/>
+													</columns>
+													<items>
+														<ColumnListItem>
+															<cells>
+																<l:HorizontalLayout>
+																	<Text width="8px"/>
+																	<Link text="{CA_LIST>CA_BP_NUM}" class="CustLink" press="open_ca"/>
+																</l:HorizontalLayout>
+																<l:HorizontalLayout>
+																	<Text text="{CA_LIST>PREM_ADDRESS}" class="CaAdrs"/>
+																</l:HorizontalLayout>
+																<l:HorizontalLayout>
+																	<Text text="{CA_LIST>CATYPE}"/>
+																</l:HorizontalLayout>
+																<l:HorizontalLayout class="sapUiSmallMarginEnd">
+																	<!--<Text width="8px"/>-->
+																	<Switch id="CA_def" state="{CA_LIST>DEF_PREF_FLAG}" customTextOn="On" customTextOff="Off" change="CA_Def"/>
+																	<Label id="CA_def1" text="{CA_LIST>DEF_PREF_TXT}" textAlign="End" textDirection="LTR" labelFor="CA_def"
+																		class="CaToggle sapUiTinyMarginRight"/>
+																</l:HorizontalLayout>
+																<l:HorizontalLayout class="sapUiSmallMarginBeginEnd">
+																	<!--<Text width="8px"/>-->
+																	<Switch id="CA_bpref" state="{CA_LIST>BP_PREF_FLAG}" customTextOn="On" customTextOff="Off" change="CA_bpref"/>
+																	<Label id="CA_bperf1" text="{CA_LIST>BP_PREF_TXT}" textAlign="End" textDirection="LTR" labelFor="CA_bpref" class="CaToggle"/>
+																</l:HorizontalLayout>
+																<Text></Text>
+															</cells>
+														</ColumnListItem>
+													</items>
+												</Table>
+											</ScrollContainer>
+										</content>
+									</Panel>
+									<Panel id="contData" expandable="true" expanded="true" width="auto" class="sapUiResponsiveMargin">
+										<headerToolbar>
+											<Toolbar height="auto">
+												<core:Icon size="1.5rem" src="sap-icon://customer-briefing" color="navy"/>
+												<Title text="Contact Person Data"/>
+												<ToolbarSpacer/>
+												<Button text="Add" icon="sap-icon://add" press="onContAdd" class="sapUiLargeMarginEnd"></Button>
+											</Toolbar>
+										</headerToolbar>
+										<content>
+											<ScrollContainer horizontal="true" vertical="true" focusable="true" height="100px" width="100%">
+												<Table id="tbl_ContPrsnData" showNoData="true" items="{oContactPersonData>/}" growing="true" growingThreshold="100"
+													growingScrollToLoad="true" width="95%" class="sapUiSmallMarginBegin">
+													<columns>
+														<Column hAlign="Left">
+															<Label text="First Name" design="Bold" class="sapUiSmallMarginBegin"></Label>
+														</Column>
+														<Column hAlign="Left">
+															<Label text="Last Name" design="Bold" class="sapUiTinyMarginBegin"></Label>
+														</Column>
+														<Column hAlign="Left">
+															<Label text="Email" design="Bold" class="sapUiTinyMarginBegin"></Label>
+														</Column>
+														<Column hAlign="Left">
+															<Label text="Phone" design="Bold" class="sapUiTinyMarginBegin"></Label>
+														</Column>
+														<Column hAlign="Left">
+															<Label text="Relation Type" design="Bold" class="sapUiTinyMarginBegin"></Label>
+														</Column>
+														<Column hAlign="Left" width="5rem">
+															<Label text="" design="Bold" class="sapUiTinyMarginBegin"></Label>
+														</Column>
+														<Column hAlign="Left">
+															<Label text="" design="Bold" class="sapUiTinyMarginBegin"></Label>
+														</Column>
+													</columns>
+													<items>
+														<ColumnListItem>
+															<cells>
+																<Text class="sapUiTinyMarginBegin" text="{oContactPersonData>ContactFirstName}" wrapping="true"></Text>
+																<Text text="{oContactPersonData>ContactLastName}" wrapping="true"></Text>
+																<Text text="{oContactPersonData>Email}" wrapping="true"></Text>
+																<Text text="{oContactPersonData>Phone}" wrapping="true"></Text>
+																<Text text="{oContactPersonData>Relationship}" wrapping="true"></Text>
+																<ObjectStatus text="{oContactPersonData>ObjectType}" state="{= ${oContactPersonData>ObjectType} === 'BP' ? 'Warning' : 'Success' }"
+																	icon="sap-icon://customer"/>
+																<!--<core:Icon src="sap-icon://edit" color="dimgray" press="onEditContactPersonData"></core:Icon>-->
+																<core:Icon src="sap-icon://edit" class="AdrsIcon" color="dimgray" press="onContactEdit"/>
+															</cells>
+														</ColumnListItem>
+													</items>
+												</Table>
+											</ScrollContainer>
+										</content>
+									</Panel>
+									<Panel expandable="true" expanded="false" headerText="Comm. Data" width="auto" class="sapUiResponsiveMargin" visible="false">
+										<headerToolbar>
+											<Toolbar height="auto">
+												<core:Icon size="1.5rem" src="sap-icon://discussion-2" color="navy"/>
+												<Title text="Communication Data"/>
+											</Toolbar>
+										</headerToolbar>
+										<content>
+											<ScrollContainer horizontal="true" vertical="true" focusable="true" height="10.5em" width="100%">
+												<Table id="T1" width="100%" items="{POSTADR>/}">
+													<columns>
+														<Column demandPopin="true" width="4%"/>
+														<Column demandPopin="true" width="8%"/>
+														<Column demandPopin="true"/>
+														<Column demandPopin="true"/>
+													</columns>
+													<items>
+														<ColumnListItem class="text_custom">
+															<cells>
+																<core:Icon src="{POSTADR>src}" color="dimgray"/>
+																<Text text="{POSTADR>text}" class="TextLabel"/>
+																<Input id="adrs" value="{POSTADR>value}" class="CustomAdrs" enabled="{POSTADR>enabled}" liveChange="onChangePhone"/>
+																<core:Icon id="Edit1" src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon" color="dimgray"/>
+																<Input id="Email" visible="false"/>
+																<Input id="telephone" visible="false"/>
+																<Input id="SMS" visible="false"/>
+																<Input id="fax" visible="false"/>
+															</cells>
+														</ColumnListItem>
+													</items>
+												</Table>
+											</ScrollContainer>
+										</content>
+									</Panel>
+									<!--<Panel expandable="true" expanded="false" width="auto" headerText="Recipients" class="sapUiResponsiveMargin">-->
+									<!--	<content/>-->
+									<!--</Panel>-->
+									<Panel id="PR" expandable="true" expanded="false" width="auto" class="sapUiResponsiveMargin">
+										<headerToolbar>
+											<Toolbar height="auto">
+												<core:Icon src="sap-icon://user-settings" size="1.5rem" color="navy"/>
+												<Title text="Preferences"/>
+												<ObjectStatus id="obj_noBpPref" text="No BP Preferences Exists" icon="sap-icon://message-information" state="None"
+													class="sapUiSmallMarginBegin"></ObjectStatus>
+												<ToolbarSpacer/>
+												<Button text="Add" icon="sap-icon://add" press="onPrefAdd" class="sapUiLargeMarginEnd"></Button>
+											</Toolbar>
+										</headerToolbar>
+										<content>
+											<ScrollContainer horizontal="true" vertical="true" focusable="true" height="15rem" width="100%">
+												<Table id="PL1" items="{PREFERENCE>/}" showNoData="false" growing="true" growingThreshold="100" growingScrollToLoad="true" width="95%"
+													class="sapUiSmallMarginBegin">
+													<headerToolbar>
+														<Toolbar>
+															<content>
+																<Switch id="Toggle1" state="false" customTextOn="On" customTextOff="Off" change="DefaultToggle"/>
+																<!--<Label text="Default Preferences" textAlign="End" textDirection="LTR" labelFor="Toggle1"/>-->
+																<Label id="defPref" textAlign="End" textDirection="LTR" labelFor="Toggle1"/>
+																<Label/>
+																<Switch id="Toggle2" state="false" customTextOn="On" customTextOff="Off" change="BPToggle"/>
+																<!--<Label id="BP_Label" text="BP Preferences" textAlign="Begin" textDirection="LTR" labelFor="Toggle2"/>-->
+																<Label id="BP_Label" textAlign="Begin" textDirection="LTR" labelFor="Toggle2"/>
+																<!--Start of change by Hemant Bhalla -->
+																<!-- Add button for Adding phone -->
+																<!--<Text width="15px"/> -->
+																<!--<core:Icon id="AddPhone" press="AddPhone" src="sap-icon://call" size="1.5rem" color="black"/> -->
+																<!--End of change by Hemant Bhalla-->
+															</content>
+														</Toolbar>
+													</headerToolbar>
+													<columns>
+														<Column/>
+														<Column>
+															<l:HorizontalLayout>
+																<core:Icon src="sap-icon://email" class="size1" tooltip="Email" color="dimgray"/>
+																<Text width="5px"/>
+																<Text text="Email" class="TextLabel"/>
+															</l:HorizontalLayout>
+														</Column>
+														<Column>
+															<l:HorizontalLayout>
+																<core:Icon src="sap-icon://iphone" class="size1" tooltip="SMS" color="dimgray"/>
+																<Text width="5px"/>
+																<Text text="Text" class="TextLabel"/>
+															</l:HorizontalLayout>
+														</Column>
+														<Column>
+															<l:HorizontalLayout>
+																<core:Icon src="sap-icon://letter" class="size1" tooltip="Post" color="dimgray"/>
+																<Text width="5px"/>
+																<Text text="Mail" class="TextLabel"/>
+															</l:HorizontalLayout>
+															<!--<Button icon="sap-icon://save" id="S2" text="Save Preferences" press="PrefSave"/>-->
+														</Column>
+													</columns>
+													<items>
+														<ColumnListItem>
+															<cells>
+																<Text text="{PREFERENCE>PREF_TEXT}" class="PrefLabel"/>
+																<!--Start of change by Hemant Bhalla -->
+																<l:HorizontalLayout>
+																	<HBox>
+																		<CheckBox id="cb1" visible="true" selected="{PREFERENCE>EMAIL_FLAG}" editable="{PREFERENCE>def_email}" select="onMasterPrefSel"
+																			class="cbClass"/>
+																		<customData>
+																			<core:CustomData key="colType" value="Email"></core:CustomData>
+																		</customData>
+																	</HBox>
+																	<!--Start of change by Hemant Bhalla -->
+																	<!-- <Text width="42px"/> -->
+																	<!-- <core:Icon id="GetBPRelationship" press="GetBPRel" src="sap-icon://customer" size=".90rem" color="black"  /> -->
+																	<!--End of change by Hemant Bhalla    color="{=${PREFERENCE>EMAIL_ICON_FLG} === 'X' ? 'green' : 'black'}"-->
+																	<!--<Text width="50px"/>-->
+																	<HBox>
+																		<core:Icon src="{=${PREFERENCE>EMAIL_ICON_FLG} === 'X' ? 'sap-icon://employee-approvals' : 'sap-icon://add'}" size=".90rem"
+																			press="onPrefPress" tooltip="{=${PREFERENCE>EMAIL_ICON_FLG} === 'X' ? 'Manage additional recipients' : 'Add additional recipients'}"
+																			class="sapUiTinyMarginEnd" color="{parts:['PREFERENCE>EMAIL_FLAG','PREFERENCE>EMAIL_ICON_FLG'], formatter:'.iconColorFormatter'}"></core:Icon>
+																		<customData>
+																			<core:CustomData key="prefType" value="Email"></core:CustomData>
+																		</customData>
+																	</HBox>
+																</l:HorizontalLayout>
+																<!--End of change by Hemant Bhalla -->
+																<!--Start of change by Hemant Bhalla -->
+																<l:HorizontalLayout>
+																	<HBox>
+																		<CheckBox id="cb2" visible="true" selected="{PREFERENCE>MOBILE_FLAG}" editable="{PREFERENCE>def_sms}" select="onMasterPrefSel"
+																			class="cbClass"/>
+																		<customData>
+																			<core:CustomData key="colType" value="Text"></core:CustomData>
+																		</customData>
+																	</HBox>
+																	<!--<Text width="50px"/>-->
+																	<HBox>
+																		<core:Icon src="{=${PREFERENCE>MOBILE_ICON_FLG} === 'X' ? 'sap-icon://employee-approvals' : 'sap-icon://add'}" size=".90rem"
+																			color="{parts:['PREFERENCE>MOBILE_FLAG','PREFERENCE>MOBILE_ICON_FLG'], formatter:'.iconColorFormatter'}" press="onPrefPress"
+																			tooltip="{=${PREFERENCE>MOBILE_ICON_FLG} === 'X' ? 'Manage additional recipients' : 'Add additional recipients'}" class="sapUiTinyMarginEnd"></core:Icon>
+																		<customData>
+																			<core:CustomData key="prefType" value="Phone Number"></core:CustomData>
+																		</customData>
+																	</HBox>
+																</l:HorizontalLayout>
+																<!--End of change by Hemant Bhalla -->
+																<!--Start of change by Hemant Bhalla -->
+																<l:HorizontalLayout>
+																	<HBox>
+																		<CheckBox id="cb3" visible="true" selected="{PREFERENCE>POSTAL_FLAG}" editable="{PREFERENCE>def_post}" select="onMasterPrefSel"
+																			class="cbClass"/>
+																		<customData>
+																			<core:CustomData key="colType" value="Mail"></core:CustomData>
+																		</customData>
+																	</HBox>
+																	<!--<Text width="50px"/>-->
+																	<HBox>
+																		<customData>
+																			<core:CustomData key="prefType" value="Mail"></core:CustomData>
+																		</customData>
+																		<core:Icon src="{=${PREFERENCE>POSTAL_ICON_FLG} === 'X' ? 'sap-icon://employee-approvals' : 'sap-icon://add'}" size=".90rem"
+																			color="{parts:['PREFERENCE>POSTAL_FLAG','PREFERENCE>POSTAL_ICON_FLG'], formatter:'.iconColorFormatter'}" press="onPrefPress"
+																			tooltip="{=${PREFERENCE>POSTAL_ICON_FLG} === 'X' ? 'Manage additional recipients' : 'Add additional recipients'}" class="sapUiTinyMarginEnd"></core:Icon>
+																	</HBox>
+																</l:HorizontalLayout>
+																<!--End of change by Hemant Bhalla -->
+																<!--<CheckBox id="cb1" textAlign="Center" textDirection="LTR" text="Email" visible="{PREFERENCE>pemail_flag}" selected="{PREFERENCE>EMAIL_FLAG}" editable="{PREFERENCE>DEF_FLG}"/>-->
+																<!--<CheckBox id="cb2" textAlign="Center" textDirection="LTR" text="SMS" visible="{PREFERENCE>psms_flag}" selected="{PREFERENCE>MOBILE_FLAG}" editable="{PREFERENCE>DEF_FLG}"/>-->
+																<!--<CheckBox id="cb3" textDirection="LTR" text="Post" visible="{PREFERENCE>ppost_flag}" selected="{PREFERENCE>POSTAL_FLAG}" editable="{PREFERENCE>DEF_FLG}" textAlign="Center"/>-->
+															</cells>
+														</ColumnListItem>
+													</items>
+												</Table>
+											</ScrollContainer>
+										</content>
+									</Panel>
+									<Panel id="AL" expandable="true" expanded="false" width="auto" class="sapUiResponsiveMargin">
+										<headerToolbar>
+											<Toolbar height="auto">
+												<core:Icon src="sap-icon://bell" size="1.5rem" color="navy"/>
+												<Title text="Notifications"/>
+											</Toolbar>
+										</headerToolbar>
+										<ScrollContainer horizontal="true" vertical="true" focusable="true" height="21.5rem" width="100%" id="SC1">
+											<Table id="ALT1" items="{ALERTS_NEW>/}" showNoData="false" growing="true" growingThreshold="100" growingScrollToLoad="true" width="95%"
+												class="sapUiSmallMarginBegin">
+												<columns>
+													<Column width="35%"/>
+													<Column width="55%"/>
+													<Column width="10%"/>
+												</columns>
+												<items>
+													<ColumnListItem class="text_custom">
+														<cells>
+															<l:VerticalLayout>
+																<Label text="{ALERTS_NEW>AlertText}"/>
+																<Text text="{ALERTS_NEW>AlertDescr}" class="AlertDesc"/>
+															</l:VerticalLayout>
+															<HBox>
+																<HBox height="40px" visible="{ALERTS_NEW>PR}">
+																	<VBox width="40%" alignContent="End">
+																		<l:HorizontalLayout>
+																			<Text text="{ALERTS_NEW>PR_TXT1}" width="80px" class="AlertText"/>
+																			<ComboBox id="Days" items="{/Days}" width="100px" value="{ALERTS_NEW>DAYS}" editable="{ALERTS_NEW>PR_EDIT}">
+																				<items>
+																					<core:Item key="{key}" text="{text}"/>
+																				</items>
+																			</ComboBox>
+																			<Text text="" width="10px"/>
+																			<Text text="{ALERTS_NEW>PR_TXT2}" width="200px" class="AlertText"/>
+																		</l:HorizontalLayout>
+																	</VBox>
+																</HBox>
+																<HBox height="40px" visible="{ALERTS_NEW>HB}">
+																	<VBox>
+																		<l:HorizontalLayout>
+																			<Text text="{ALERTS_NEW>HB_TXT1}" width="220px" class="AlertText"/>
+																			<Input id="notify" value="{ALERTS_NEW>NOTIFY}" class="Inputpad" editable="{ALERTS_NEW>HB_EDIT}"/>
+																		</l:HorizontalLayout>
+																	</VBox>
+																</HBox>
+																<HBox height="40px">
+																	<VBox width="40%" visible="{ALERTS_NEW>SU}">
+																		<l:HorizontalLayout>
+																			<Text text="{ALERTS_NEW>SU_TXT1}" width="40px" class="AlertText"/>
+																			<ComboBox id="combo" items="{/Updates}" width="120px" value="{ALERTS_NEW>FREQ}">
+																				<items>
+																					<core:Item key="{key}" text="{text}"/>
+																				</items>
+																			</ComboBox>
+																		</l:HorizontalLayout>
+																	</VBox>
+																</HBox>
+															</HBox>
+															<Switch id="ALRT1" state="{ALERTS_NEW>AlertFlag}" customTextOn="On" customTextOff="Off" change="SetPrHb" visible="{ALERTS_NEW>show}"/>
+														</cells>
+													</ColumnListItem>
+												</items>
+											</Table>
+										</ScrollContainer>
+										<!--<HBox>-->
+										<!--	<VBox width="2%"></VBox>-->
+										<!--	<VBox width="80%" height="380px">-->
+										<!--		<HBox height="37px">-->
+										<!--			<VBox width="420px"></VBox>-->
+										<!--			<VBox width="210px">-->
+										<!--				<l:HorizontalLayout>-->
+										<!--					<core:Icon src="sap-icon://email" color="dimgray" size="1.4rem" width="30px"/>-->
+										<!--					<Text text="Email" class="TextLabel"/>-->
+										<!--				</l:HorizontalLayout>-->
+										<!--			</VBox>-->
+										<!--			<VBox width="212px">-->
+										<!--				<l:HorizontalLayout>-->
+										<!--				<core:Icon src="sap-icon://iphone" color="dimgray" size="1.4rem" width="30px"/>-->
+										<!--					<Text text ="Text" class="TextLabel"/>-->
+										<!--				</l:HorizontalLayout>-->
+										<!--			</VBox>-->
+										<!--			<VBox width="205px">-->
+										<!--				<l:HorizontalLayout>-->
+										<!--				<core:Icon src="sap-icon://phone" color="dimgray" size="1.4rem" width="30px"/>-->
+										<!--					<Text text ="Voice" class="TextLabel"/>-->
+										<!--				</l:HorizontalLayout>-->
+										<!--			</VBox>-->
+										<!--		</HBox>-->
+										<!--		<HBox height="60px">-->
+										<!--			<VBox width="40%">-->
+										<!--				<ObjectIdentifier title="Outage Alerts" text="Get status updates about power outages"/>-->
+										<!--			</VBox>-->
+										<!--			<VBox width="20%">-->
+										<!--				<CheckBox id="oa1" visible="true" selected="{OUTAGE>EMAIL_FLAG}"/>-->
+										<!--			</VBox>-->
+										<!--			<VBox width="20%">-->
+										<!--				<CheckBox id="oa2" visible="true" selected="{OUTAGE>MOBILE_FLAG}"/>-->
+										<!--			</VBox>-->
+										<!--			<VBox width="20%">-->
+										<!--				<CheckBox id="oa3" visible="true" selected="{OUTAGE>POSTAL_FLAG}"/>-->
+										<!--			</VBox>-->
+										<!--		</HBox>-->
+										<!--		<HBox>-->
+										<!--			<HorizontalDivider width="100%" type="Page" height="Small"/>-->
+										<!--		</HBox>-->
+										<!--		<HBox height="60px">-->
+										<!--			<VBox width="40%">-->
+										<!--				<ObjectIdentifier title="Account Alerts" text="Get notifications and reminders about your account"/>-->
+										<!--			</VBox>-->
+										<!--			<VBox width="20%">-->
+										<!--				<CheckBox id="aa1" visible="true" selected="{ACCOUNT>EMAIL_FLAG}"/>-->
+										<!--			</VBox>-->
+										<!--			<VBox width="20%">-->
+										<!--				<CheckBox id="aa2" visible="true" selected="{ACCOUNT>MOBILE_FLAG}"/>-->
+										<!--			</VBox>-->
+										<!--			<VBox width="20%">-->
+										<!--				<CheckBox id="aa3" visible="true" selected="{ACCOUNT>POSTAL_FLAG}"/>-->
+										<!--			</VBox>-->
+										<!--		</HBox>-->
+										<!--		<HBox height="60px">-->
+										<!--			<VBox width="42%">-->
+										<!--				<ObjectIdentifier title="Payment Reminder:"/>-->
+										<!--			</VBox>-->
+										<!--			<VBox width="40%">-->
+										<!--				<l:HorizontalLayout>-->
+										<!--					<Text text="Remind me" width="75px" class="Textpad2"/>-->
+										<!--					<Input id="reminder" width="60px" class="Inputpad"/>-->
+										<!--					<ComboBox id="Days" items="{/Days}" width="100px" class="Inputpad">-->
+										<!--						<items>-->
+										<!--							<core:Item key="{key}" text="{text}"/>-->
+										<!--						</items>-->
+										<!--					</ComboBox>-->
+										<!--					<Text text="" width="10px"/>-->
+										<!--					<Text text="days, before payment due date" class="Textpad2"/>-->
+										<!--				</l:HorizontalLayout>-->
+										<!--			</VBox>-->
+										<!--		</HBox>-->
+										<!--		<HBox height="60px">-->
+										<!--			<VBox width="42%">-->
+										<!--				<ObjectIdentifier title="High Bill Alert"/>-->
+										<!--			</VBox>-->
+										<!--			<VBox>-->
+										<!--				<l:HorizontalLayout>-->
+										<!--					<Text text="Notify me when usage exceeds $ " width="190px" class="Textpad2"/>-->
+										<!--					<Input id="notify" class="Inputpad"/>-->
+										<!--					<ComboBox id="combo3" items="{/Updates}" width="100px">-->
+										<!--					  <items>-->
+										<!--					    <core:Item key="{key}" text="{text}"/>-->
+										<!--					  </items>-->
+										<!--					</ComboBox>-->
+										<!--				</l:HorizontalLayout>-->
+										<!--			</VBox>-->
+										<!--		</HBox>-->
+										<!--		<HBox height="60px">-->
+										<!--			<VBox width="40%">-->
+										<!--				<ObjectIdentifier title="Maintenance Alerts" text="Get notifications about maintenance in your area"/>-->
+										<!--			</VBox>-->
+										<!--			<VBox width="20%">-->
+										<!--				<CheckBox id="ma1" visible="true" selected="{MAINT>EMAIL_FLAG}"/>-->
+										<!--			</VBox>-->
+										<!--			<VBox width="20%">-->
+										<!--				<CheckBox id="ma2" visible="true" selected="{MAINT>MOBILE_FLAG}"/>-->
+										<!--			</VBox>-->
+										<!--			<VBox width="20%">-->
+										<!--				<CheckBox id="ma3" visible="true" selected="{MAINT>POSTAL_FLAG}"/>-->
+										<!--			</VBox>-->
+										<!--		</HBox>-->
+										<!--		<HBox height="60px">-->
+										<!--			<VBox width="42%">-->
+										<!--				<ObjectIdentifier title="Special Updates" text="Get additional savings tips and rate change updates"/>-->
+										<!--			</VBox>-->
+										<!--			<VBox width="40%">-->
+										<!--				<l:HorizontalLayout>-->
+										<!--					<Text text="Send" width="40px" class="Textpad1"/>-->
+										<!--					<ComboBox id="combo" items="{/Updates}" width="120px" class="Inputpad">-->
+										<!--						<items>-->
+										<!--							<core:Item key="{key}" text="{text}"/>-->
+										<!--						</items>-->
+										<!--					</ComboBox>-->
+										<!--				</l:HorizontalLayout>-->
+										<!--			</VBox>-->
+										<!--		</HBox>-->
+										<!--	</VBox>-->
+										<!--</HBox>-->
+										<HBox height="10px"/>
+										<HBox height="10px" visible="false">
+											<VBox width="2%"/>
+											<VBox direction="Inherit" displayInline="true" width="10%"><Label text="Notification Timings" design="Bold"/></VBox>
+										</HBox>
+										<HBox height="10px"/>
+										<HBox height="100px" visible="false">
+											<VBox width="2%"/>
+											<VBox height="100px" direction="Inherit" width="100px" displayInline="true" fitContainer="true" alignItems="Start">
+												<l:VerticalLayout>
+													<!--<Label width="1%" />-->
+													<Label id="TM_L" text="Text Messages" textDirection="RTL" textAlign="Center" class="TmLabel"/>
+													<!--<Label />-->
+													<!--<Label/>-->
+													<!--<Label id="VM_L" text="Voice Messages" textDirection="LTR" textAlign="End"/>-->
+												</l:VerticalLayout>
+											</VBox>
+											<!--<VBox>-->
+											<!--	<l:VerticalLayout>-->
+											<!--		<HBox height="10px"/>-->
+											<!--		<Switch id="TM_TOGGLE" state="false" customTextOn="On" customTextOff="Off" change="TMToggle">-->
+											<!--<layoutData>-->
+											<!--	<FlexItemData growFactor="1"/>-->
+											<!--</layoutData>-->
+											<!--		</Switch>-->
+											<!--<HBox height="0.4px"/>-->
+											<!--<Switch id="VM_TOGGLE" state="false" customTextOn="On" customTextOff="Off" change="VMToggle">-->
+											<!--	<layoutData>-->
+											<!--		<FlexItemData growFactor="1"/>-->
+											<!--	</layoutData>-->
+											<!--</Switch>-->
+											<!--	</l:VerticalLayout>-->
+											<!--</VBox>-->
+											<VBox height="100px" fitContainer="true" alignContent="Inherit" alignItems="Inherit">
+												<l:VerticalLayout width="230px">
+													<l:FixFlex class="sapUiFixFlex_custom" minFlexSize="37">
+														<l:flexContent>
+															<RadioButtonGroup columns="2" select="TextMsg">
+																<buttons>
+																	<RadioButton text="Anytime" textAlign="End"/>
+																	<RadioButton text="Between"/>
+																</buttons>
+															</RadioButtonGroup>
+														</l:flexContent>
+													</l:FixFlex>
+													<!--<l:FixFlex class="sapUiFixFlex_custom" minFlexSize="37">-->
+													<!--<l:flexContent>-->
+													<!--<RadioButtonGroup columns="2" select="VoiceMsg" id="RG2">-->
+													<!--	<buttons>-->
+													<!--		<RadioButton id="RBV_1" text="Anytime"/>-->
+													<!--		<RadioButton id="RBV_2" text="Between"/>-->
+													<!--	</buttons>-->
+													<!--</RadioButtonGroup>-->
+													<!--	</l:flexContent>-->
+													<!--</l:FixFlex>-->
+												</l:VerticalLayout>
+											</VBox>
+											<VBox width="40%">
+												<l:VerticalLayout>
+													<HBox height="10px"/>
+													<HBox>
+														<VBox width="150px">
+															<TimePicker valueFormat="hh:mm:ss a" displayFormat="hh:mm:ss a" change="handleChangeTM1" width="145px"/>
+														</VBox>
+														<VBox fitContainer="true" direction="RowReverse" alignContent="End" justifyContent="Inherit" alignItems="Center" width="15px">
+															<Label xmlns="sap.m" text="-" textAlign="End" textDirection="LTR"/>
+														</VBox>
+														<VBox width="5%"/>
+														<VBox width="170px">
+															<TimePicker valueFormat="hh:mm:ss a" displayFormat="hh:mm:ss a" change="handleChangeTM2" width="145px"/>
+														</VBox>
+														<!--<VBox fitContainer="true" direction="RowReverse" alignContent="End" justifyContent="Inherit" alignItems="Center">-->
+														<!--	<Label xmlns="sap.m" text="EST" textDirection="LTR" textAlign="End"/>-->
+														<!--</VBox>-->
+													</HBox>
+													<!--<l:FixFlex id="FIX" class="sapUiFixFlex_custom" minFlexSize="37">-->
+													<!--	<l:flexContent id="FIX2"/>-->
+													<!--</l:FixFlex>-->
+													<!--<HBox id="VMB">-->
+													<!--	<VBox width="150px">-->
+													<!--		<TimePicker id="VM1" valueFormat="hh:mm:ss a" displayFormat="hh:mm:ss a" change="handleChangeVM1" width="145px"/>-->
+													<!--	</VBox>-->
+													<!--	<VBox fitContainer="true" direction="RowReverse" alignContent="End" justifyContent="Inherit" alignItems="Center" width="15px">-->
+													<!--		<Label xmlns="sap.m" id="VML1" text="-" textAlign="End" textDirection="LTR"/>-->
+													<!--	</VBox>-->
+													<!--	<VBox width="5%"/>-->
+													<!--	<VBox width="170px"><TimePicker id="VM2" valueFormat="hh:mm:ss a" displayFormat="hh:mm:ss a" change="handleChangeVM2" width="145px"/></VBox>-->
+													<!--<VBox fitContainer="true" direction="RowReverse" alignContent="End" justifyContent="Inherit" alignItems="Center">-->
+													<!--	<Label xmlns="sap.m" text="EST" textDirection="LTR" textAlign="End"/>-->
+													<!--</VBox>-->
+													<!--</HBox>-->
+												</l:VerticalLayout>
+											</VBox>
+										</HBox>
+										<!--<HBox height="30px">-->
+										<!--	<VBox width="5%"/>-->
+										<!--	<VBox direction="Inherit" displayInline="true" width="10%">-->
+										<!--		<Button icon="sap-icon://save" id="AS1" press="AlertsSave" text="Save Alerts"/>-->
+										<!--	</VBox>-->
+										<!--</HBox>-->
+									</Panel>
+								</content>
+							</Page>
+						</detailPages>
+					</SplitApp>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,34 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Add New Contact" contentWidth="auto" contentHeight="auto" class="flexItemCls">
+		<beginButton>
+			<Button text="SAVE" press="onContSave"/>
+		</beginButton>
+		<endButton>
+			<Button text="CANCEL" press="onContCancel"/>
+		</endButton>
+		<VBox class="sapUiSmallMarginTop sapUiSmallMarginBeginEnd" height="auto">
+			<HBox justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
+				<VBox class="sapUiSmallMarginEnd">
+					<Label text="First Name"></Label>
+					<Input value="{oContModel>/sFname}" width="10rem"></Input>
+				</VBox>
+				<VBox class="sapUiSmallMarginEnd">
+					<Label text="Last Name"></Label>
+					<Input value="{oContModel>/sLName}" width="10rem"></Input>
+				</VBox>
+				<VBox class="sapUiSmallMarginEnd">
+					<Label text="Email"></Label>
+					<Input value="{oContModel>/sEmail}" width="10rem"></Input>
+				</VBox>
+				<VBox class="sapUiSmallMarginEnd">
+					<Label text="Phone"></Label>
+					<Input value="{oContModel>/sPhone}" width="10rem"></Input>
+				</VBox>
+				<VBox class="sapUiSmallMarginEnd">
+					<Label text="Relation Type"></Label>
+					<Input value="{oContModel>/SRelType}" width="10rem"></Input>
+				</VBox>
+			</HBox>
+		</VBox>
+	</Dialog>
+</core:FragmentDefinition>

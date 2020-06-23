@@ -1,0 +1,425 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ZPREFCNTR_v2.controller.Search"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Title">
+				<content>
+					<FlexBox id="searchForm" width="95%" class="columns" alignItems="Stretch">
+						<items>
+							<VBox class="vbox_searchform sapUiSizeCompact">
+								<f:Form class="sapUiSizeCompact" binding="{searchModel>/}" width="100%" editable="true">
+									<f:title>
+										<core:Title text="Search Contract Account"/>
+									</f:title>
+									<f:layout>
+										<!--<f:ResponsiveGridLayout labelSpanXL="6" labelSpanL="6" labelSpanM="6" labelSpanS="6" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"-->
+										<!--	emptySpanM="4" emptySpanS="4" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>-->
+										<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="8"
+											emptySpanM="8" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+									</f:layout>
+									<f:formContainers>
+										<f:FormContainer>
+											<f:formElements>
+												<!--<f:FormElement label="{i18n>SEARCH_FOR}">-->
+												<!--	<f:fields>-->
+												<!--		<ActionSelect selectedKey="{searchModel>SelectedTypeofSearch}" change="changeSearchForOption" id="searchForActionSelect" items="">-->
+												<!--			<layoutData>-->
+												<!--				<l:GridData span="XL6 L6 M6 S6"/>-->
+												<!--			</layoutData>-->
+												<!--			<items>-->
+												<!--				<core:Item key="bp" text="Find by BP/CA"/>-->
+												<!--<core:Item key="ca" text="Find by Contract Account"/>-->
+												<!--				<core:Item key="la" text="Find by Legacy Account"/>-->
+												<!--				<core:Item key="pr" text="Find by Premise"/>-->
+												<!--			</items>-->
+												<!--		</ActionSelect>-->
+												<!--	</f:fields>-->
+												<!--</f:FormElement>-->
+												<f:FormElement id="businessPartnerIdFE" label="Customer Number">
+													<f:fields>
+														<Input id="businessPartnerIdInput" value="{searchModel>BusinessPartnerID}" type="Text" textFormatMode="ValueKey"
+															placeholder="Enter BP/CA ..." showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows=""
+															suggestionItemSelected="suggestionItemSelected">
+															<layoutData>
+																<l:GridData span="XL8 L8 M8 S8"/>
+															</layoutData>
+															<suggestionColumns class="sapUiSizeCompact">
+																<!--<Column hAlign="Begin" popinDisplay="Inline" demandPopin="true">-->
+																<!--	<Label text="Select"/>-->
+																<!--</Column>-->
+																<Column hAlign="Begin" popinDisplay="Inline" demandPopin="true">
+																	<Label text="Name"/>
+																</Column>
+																<Column hAlign="Center" popinDisplay="Inline" demandPopin="true" minScreenWidth="Tablet">
+																	<Label text="Product ID"/>
+																</Column>
+																<Column hAlign="Center" popinDisplay="Inline" demandPopin="false" minScreenWidth="Tablet">
+																	<Label text="Supplier Name"/>
+																</Column>
+																<Column hAlign="End" popinDisplay="Inline" demandPopin="true">
+																	<Label text="Price"/>
+																</Column>
+															</suggestionColumns>
+															<suggestionRows>
+																<ColumnListItem class="sapUiSizeCompact">
+																	<cells>
+																		<!--<RadioButton/>-->
+																		<Label text="{Name}"/>
+																		<Label text="{ProductId}"/>
+																		<Label text="{SupplierName}"/>
+																		<Label text="{ parts:[{path:'Price'},{path:'CurrencyCode'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: true} }"/>
+																	</cells>
+																</ColumnListItem>
+															</suggestionRows>
+														</Input>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement id="phoneNumFE" label="{i18n>PHONE_NUMBER}">
+													<f:fields>
+														<MaskInput id="phonenumInput" value="{searchModel>PhoneNum}" mask="999-999-9999">
+															<layoutData>
+																<l:GridData span="XL8 L8 M8 S8"/>
+															</layoutData>
+														</MaskInput>
+													</f:fields>
+												</f:FormElement>
+												<!--<f:FormElement id="contractAccountIdFE" visible="false" label="{i18n>CONTRACT_ACCOUNT}">-->
+												<!--	<f:fields>-->
+												<!--		<Input id="contractAccountIdInput" value="{searchModel>ContractAccount}">-->
+												<!--			<layoutData>-->
+												<!--				<l:GridData span="XL6 L6 M6 S6"/>-->
+												<!--			</layoutData>-->
+												<!--		</Input>-->
+												<!--	</f:fields>-->
+												<!--</f:FormElement>-->
+												<!--<Sunil changes Begin>-->
+												<!--<f:FormElement id="legacyAccountFE" visible="false" label="Legacy Account">-->
+												<!--	<f:fields>-->
+												<!--		<Input id="legacyAccountInput" value="{searchModel>LegacyAccount}">-->
+												<!--			<layoutData>-->
+												<!--				<l:GridData span="XL6 L6 M6 S6"/>-->
+												<!--			</layoutData>-->
+												<!--		</Input>-->
+												<!--	</f:fields>-->
+												<!--</f:FormElement>-->
+												<f:FormElement id="emailFE" label="{i18n>EMAIL}">
+													<f:fields>
+														<Input id="emailInput" value="{searchModel>Email}">
+															<layoutData>
+																<l:GridData span="XL8 L8 M8 S8"/>
+															</layoutData>
+														</Input>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement id="firstNameFE" label="{i18n>FIRST_NAME_ORGNAME2}">
+													<f:fields>
+														<Input id="firstnameInput" value="{searchModel>FirstName}">
+															<layoutData>
+																<l:GridData span="XL8 L8 M8 S8"/>
+															</layoutData>
+														</Input>
+													</f:fields>
+												</f:FormElement>
+												<!--<f:FormElement id="lastNameFE" label="{i18n>LAST_NAME_ORGNAME1}">-->
+												<!--	<f:fields>-->
+												<!--		<Input id="lastnameInput" value="{searchModel>LastName}">-->
+												<!--			<layoutData>-->
+												<!--				<l:GridData span="XL6 L6 M6 S6"/>-->
+												<!--			</layoutData>-->
+												<!--		</Input>-->
+												<!--	</f:fields>-->
+												<!--</f:FormElement>-->
+												<!--<f:FormElement id="houseNumFE" label="{i18n>HOUSE_NUMBER_STREET}">-->
+												<!--	<f:fields>-->
+												<!--		<Input id="houseNumInput" value="{searchModel>HouseNum}">-->
+												<!--			<layoutData>-->
+												<!--				<l:GridData span="XL3 L3 M3 S3"/>-->
+												<!--			</layoutData>-->
+												<!--		</Input>-->
+												<!--		<Input id="streetInput" value="{searchModel>Street}">-->
+												<!--			<layoutData>-->
+												<!--				<l:GridData span="XL3 L3 M3 S3"/>-->
+												<!--			</layoutData>-->
+												<!--		</Input>-->
+												<!--	</f:fields>-->
+												<!--</f:FormElement>-->
+												<!--<f:FormElement id="cityStateFE" label="{i18n>CITY_STATE_POSTALCODE}">-->
+												<!--	<f:fields>-->
+												<!--		<Input id="cityInput" value="{searchModel>City}">-->
+												<!--			<layoutData>-->
+												<!--				<l:GridData span="XL2 L2 M2 S2"/>-->
+												<!--			</layoutData>-->
+												<!--		</Input>-->
+												<!--		<Input id="stateInput" value="{searchModel>State}">-->
+												<!--			<layoutData>-->
+												<!--				<l:GridData span="XL2 L2 M2 S2"/>-->
+												<!--			</layoutData>-->
+												<!--		</Input>-->
+												<!--		<Input id="postalcodeInput" value="{searchModel>PostalCode}">-->
+												<!--			<layoutData>-->
+												<!--				<l:GridData span="XL2 L2 M2 S2"/>-->
+												<!--			</layoutData>-->
+												<!--		</Input>-->
+												<!--	</f:fields>-->
+												<!--</f:FormElement>-->
+												<!--<f:FormElement id="emailFE" label="{i18n>EMAIL}">-->
+												<!--	<f:fields>-->
+												<!--		<Input id="emailInput" value="{searchModel>Email}">-->
+												<!--			<layoutData>-->
+												<!--				<l:GridData span="XL6 L6 M6 S6"/>-->
+												<!--			</layoutData>-->
+												<!--		</Input>-->
+												<!--	</f:fields>-->
+												<!--</f:FormElement>-->
+												<!--<f:FormElement id="phoneNumFE" label="{i18n>PHONE_NUMBER}">-->
+												<!--	<f:fields>-->
+												<!--		<MaskInput id="phonenumInput" value="{searchModel>PhoneNum}" mask="999-999-9999">-->
+												<!--			<layoutData>-->
+												<!--				<l:GridData span="XL6 L6 M6 S6"/>-->
+												<!--			</layoutData>-->
+												<!--		</MaskInput>-->
+												<!--	</f:fields>-->
+												<!--</f:FormElement>-->
+												<!--Sunil changes end >-->
+												<f:FormElement id="idTypeFE" label="{i18n>IDENTIFICATION_TYPE_NUMBER}">
+													<f:fields>
+														<ActionSelect id="idTypeActionSelect" items="">
+															<layoutData>
+																<l:GridData span="XL4 L4 M4 S3"/>
+															</layoutData>
+															<items>
+																<core:Item key="ssn" text="Social Security Number"/>
+																<core:Item key="ti" text="Tax ID"/>
+																<core:Item key="pp" text="Passport"/>
+															</items>
+														</ActionSelect>
+														<Input id="identificationtypeInput" value="{searchModel>IdentificationType}">
+															<layoutData>
+																<l:GridData span="XL3 L4 M4 S3"/>
+															</layoutData>
+														</Input>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="Address">
+													<f:fields>
+														<!--<Input id="Adress1" liveChange="handleUserInput" value="{searchModel>Adress1}">-->
+														<!--	<layoutData>-->
+														<!--		<l:GridData span="XL8 L8 M8 S8"/>-->
+														<!--	</layoutData>-->
+														<!--</Input>-->
+														<Input id="Adress1" liveChange="handleUserInput" type="Text" textFormatMode="ValueKey" showSuggestion="true"
+															showTableSuggestionValueHelp="false" suggestionRows="{smodel>/results}" suggestionItemSelected="suggestionItemSelected" suggest="onSuggest">
+															<layoutData>
+																<l:GridData span="XL8 L8 M8 S8"/>
+															</layoutData>
+															<suggestionColumns class="sapUiSizeCompact">
+																<!--<Column hAlign="Begin" popinDisplay="Inline" demandPopin="true">-->
+																<!--	<Label text="Select"/>-->
+																<!--</Column>-->
+																<!--<Column hAlign="Begin" popinDisplay="Inline" demandPopin="true">-->
+																<!--<Label text="Partner"/>-->
+																<!--	<RadioButton/>-->
+																<!--</Column>-->
+																<Column hAlign="Center" popinDisplay="Inline" demandPopin="true" minScreenWidth="Tablet">
+																	<Label text="Contract"/>
+																</Column>
+																<Column hAlign="Center" popinDisplay="Inline" demandPopin="false" minScreenWidth="Tablet">
+																	<Label text="Partner"/>
+																</Column>
+																<Column hAlign="End" popinDisplay="Inline" demandPopin="true">
+																	<Label text="House"/>
+																</Column>
+																<Column hAlign="End" popinDisplay="Inline" demandPopin="true">
+																	<Label text="Street"/>
+																</Column>
+																<Column hAlign="End" popinDisplay="Inline" demandPopin="true">
+																	<Label text="Country"/>
+																</Column>
+																<!--</Column>-->
+																<!--<Column hAlign="End" popinDisplay="Inline" demandPopin="true">-->
+																<!--	<Label text="Email ID"/>-->
+																<!--</Column>-->
+																<!--</Column>-->
+																<!--<Column hAlign="End" popinDisplay="Inline" demandPopin="true">-->
+																<!--	<Label text="Service Type"/>-->
+																<!--</Column>-->
+															</suggestionColumns>
+															<suggestionRows>
+																<ColumnListItem class="sapUiSizeCompact">
+																	<cells>
+																		<!--<RadioButton/>-->
+																		<Label text="{smodel>Vkont}"/>
+																		<Label text="{smodel>Partner}"/>
+																		<Label text="{smodel>HouseNum1}"/>
+																		<Label text="{smodel>Street}"/>
+																		<Label text="{smodel>Country}"/>
+																		<!--<Label text="{smodel>Name2}"/>-->
+																		<!--<Label text="{smodel>Name2}"/>-->
+																		<!--<Label text="{smodel>Name2}"/>-->
+																	</cells>
+																</ColumnListItem>
+															</suggestionRows>
+														</Input>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="">
+													<f:fields>
+														<Label text="House No:">
+															<layoutData>
+																<l:GridData span="XL2 L2 M2 S6"/>
+															</layoutData>
+														</Label>
+														<Input id="Home">
+															<layoutData>
+																<l:GridData span="XL2 L2 M2 S2"/>
+															</layoutData>
+														</Input>
+														<Label text="Street:">
+															<layoutData>
+																<l:GridData span="XL2 L2 M2 S2"/>
+															</layoutData>
+														</Label>
+														<Input id="Street" liveChange="handleUserInput" value="{searchModel>Street}">
+															<layoutData>
+																<l:GridData span="XL2 L2 M2 S2"/>
+															</layoutData>
+														</Input>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="">
+													<f:fields>
+														<Label text="City:">
+															<layoutData>
+																<l:GridData span="XL2 L2 M2 S2"/>
+															</layoutData>
+														</Label>
+														<Input id="City" value="{searchModel>City}">
+															<layoutData>
+																<l:GridData span="XL2 L2 M2 S6"/>
+															</layoutData>
+														</Input>
+														<Label text="State:">
+															<layoutData>
+																<l:GridData span="XL2 L2 M2 S2"/>
+															</layoutData>
+														</Label>
+														<Input id="State" value="{searchModel>State}">
+															<layoutData>
+																<l:GridData span="XL2 L2 M2 S2"/>
+															</layoutData>
+														</Input>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="">
+													<f:fields>
+														<Label text="Postal Code:">
+															<layoutData>
+																<l:GridData span="XL2 L2 M2 S2"/>
+															</layoutData>
+														</Label>
+														<Input id="Postcode" liveChange="handleUserInput" value="{searchModel>PostalCode}">
+															<layoutData>
+																<l:GridData span="XL2 L3 M3 S2"/>
+															</layoutData>
+														</Input>
+													</f:fields>
+												</f:FormElement>
+												<f:FormElement label="">
+													<f:fields>
+														<Button type="Emphasized" text="Search" press="onSearch1">
+															<layoutData>
+																<l:GridData span="XL2 L3 M3 S2"/>
+															</layoutData>
+														</Button>
+													</f:fields>
+												</f:FormElement>
+											</f:formElements>
+										</f:FormContainer>
+									</f:formContainers>
+								</f:Form>
+							</VBox>
+							<VBox class="sapUiSizeCompact">
+								<Title id="txtSearchCount" class="sapUiTinyMarginTop" text="" visible="false"></Title>
+								<SearchField width="100%" class="sapUiTinyMarginTop" liveChange="onSearchResults"/>
+								<ScrollContainer height="20rem" vertical="true">
+									<Table width="100%" id="tableBps" class="resp_table sapUiTinyMarginTop" visible="false" growingThreshold="10"
+										noDataText="No Business Partners Found" items="{businessPartnersModel>/}">
+										<ColumnListItem type="Navigation" press="onPressBpRecord">
+											<cells>
+												<ObjectIdentifier title="{businessPartnersModel>Partner}" text="{businessPartnersModel>Name}"/>
+												<Text text="{businessPartnersModel>Address}"/>
+												<Text text="{businessPartnersModel>Email}"/>
+												<Text text="{businessPartnersModel>PhoneNum}"/>
+											</cells>
+										</ColumnListItem>
+										<columns>
+											<Column >
+												<header>
+													<Text text="Account ID"/>
+												</header>
+											</Column>
+											<Column minScreenWidth="Tablet" demandPopin="true">
+												<header>
+													<Text text="Address"/>
+												</header>
+											</Column>
+											<Column minScreenWidth="Tablet" demandPopin="true">
+												<header>
+													<Text text="Email"/>
+												</header>
+											</Column>
+											<Column minScreenWidth="Tablet" demandPopin="true">
+												<header>
+													<Text text="Phone Number"/>
+												</header>
+											</Column>
+										</columns>
+									</Table>
+									<Table id="tableCas" class="resp_table sapUiSmallMarginTop" visible="false" growingThreshold="10" noDataText="No Contract Accounts found"
+										items="{contractAccountsModel>/}">
+										<ColumnListItem type="Navigation" press="onPressCaRecord">
+											<cells>
+												<ObjectIdentifier title="{contractAccountsModel>Vkont}" text="{contractAccountsModel>VKBEZ}"/>
+												<Text text="{contractAccountsModel>NAME_CO}"/>
+												<Text text="{contractAccountsModel>ADDRESS}"/>
+												<Text text="{contractAccountsModel>CONTRACTTYPE}"/>
+												<Text text="{contractAccountsModel>Gpart}"/>
+											</cells>
+										</ColumnListItem>
+										<columns>
+											<Column >
+												<header>
+													<Text text="Contract Account"/>
+												</header>
+											</Column>
+											<Column >
+												<header>
+													<Text text="C/O Name"/>
+												</header>
+											</Column>
+											<Column >
+												<header>
+													<Text text="Address"/>
+												</header>
+											</Column>
+											<Column minScreenWidth="Tablet" demandPopin="true">
+												<header>
+													<Text text="Contract Type"/>
+												</header>
+											</Column>
+											<Column minScreenWidth="Tablet" demandPopin="true">
+												<header>
+													<Text text="Business Partner"/>
+												</header>
+											</Column>
+										</columns>
+									</Table>
+								</ScrollContainer>
+							</VBox>
+						</items>
+					</FlexBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

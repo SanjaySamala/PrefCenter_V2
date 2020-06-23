@@ -1,0 +1,60 @@
+{
+    "resources": [
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "model/Objects1.json"
+        },
+        {
+            "name": "model/PrefList.json"
+        },
+        {
+            "name": "model/Objects.json"
+        },
+        {
+            "name": "controller/View1.controller.js"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "view/View1.view.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "images/Deloitte.JPG"
+        },
+        {
+            "name": "extended_runnable_file.html"
+        },
+        {
+            "name": "localService/metadata.xml"
+        },
+        {
+            "name": "localService/ZPC_GET_ADDRESS_SRV/metadata.xml"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "neo-app.json"
+        }
+    ]
+}

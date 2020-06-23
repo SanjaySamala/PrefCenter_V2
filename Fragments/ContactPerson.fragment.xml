@@ -1,0 +1,53 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Communication Preferences" contentWidth="500px" class="sapUiSizeCompact">
+		<beginButton>
+			<Button text="SAVE" press="onContCommPrefSave" enabled="{oPrefModel>/bEnableEdit}"/>
+		</beginButton>
+		<endButton>
+			<Button text="CANCEL" press="onContCommPrefSaveCancel"/>
+		</endButton>
+		<ScrollContainer horizontal="true" vertical="true" focusable="true" height="10.5em" width="100%">
+			<Table class="sapUiTinyMarginEnd" showNoData="true" items="{oPrefModel>/aPrefData}" id="contPref">
+				<headerToolbar>
+					<Toolbar height="3.5rem" class="sapUiTinyMarginBottom cpToolbar">
+						<VBox class="sapUiTinyMarginBottom">
+							<HBox class="sapUiSmallMarginBottom">
+								<ObjectStatus icon="sap-icon://sys-cancel-2" text="Please select atleast one Recipient" state="Error" id="cpPrefError"></ObjectStatus>
+							</HBox>
+							<HBox class="sapUiSmallMarginBottom sapUiTinyMarginTop" alignItems="Center" alignContent="Center">
+								<Switch id="cpToggle" state="{oPrefModel>/bOn}" customTextOn="On" customTextOff="Off" change="onCPToggle"
+									enabled="{oPrefModel>/bEnableEdit}" type="Default" class="sapUiSmallMarginEnd"/>
+								<Label text="Only send to additional recipients" class="sapUiTinyMarginEnd sapUiTinyMarginTop"></Label>
+								<ToolbarSpacer/>
+							</HBox>
+						</VBox>
+					</Toolbar>
+				</headerToolbar>
+				<columns >
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Label text="Name" wrapping="true" design="Bold" class="sapUiSmallMarginBegin"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Label id="columnLabel" text="Rel. Comm." wrapping="true" design="Bold" class="sapUiTinyMarginBegin"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Label text="Want to be notified" wrapping="true" design="Bold" class="sapUiSmallMarginBegin"/>
+					</Column>
+					<!--<Column minScreenWidth="Tablet" demandPopin="true">
+					<Label text="Only Send to CP" wrapping="true" design="Bold" />
+				</Column>-->
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{oPrefModel>sFullName}"></Text>
+							<Text text="{oPrefModel>sCommType}"/>
+							<CheckBox selected="{oPrefModel>sPreference}" enabled="{oPrefModel>bEnabled}" select="onRelPrefSel"/>
+							<Text text=""></Text>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</ScrollContainer>
+	</Dialog>
+</core:FragmentDefinition>

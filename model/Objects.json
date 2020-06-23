@@ -1,0 +1,17 @@
+{
+"Updates": [
+
+  {
+    "key": "MONTHLY",
+    "text": "MONTHLY"
+  },
+  {
+    "key": "WEEKLY",
+    "text": "WEEKLY"
+  },
+  {
+    "key": "DAILY",
+    "text": "DAILY"
+  }
+]
+}
