@@ -4,6 +4,7 @@
 	displayBlock="true">
 	<App>
 		<pages>
+		
 			<Page>
 				<headerContent>
 					<HBox class="hBox" height="60px" width="100%">
@@ -110,7 +111,7 @@
 							</ColumnListItem>
 						</items>-->
 									<!--</VBox>-->
-									<VBox class="flexItemCls sapUiTinyMarginTop">
+									<VBox class="flexItemCls sapUiTinyMarginTop sapUiSmallMarginBeginEnd">
 										<Toolbar class="cust_toolbar">
 											<!--masterTB-->
 											<core:Icon src="sap-icon://discussion-2" class="sapUiTinyMarginBegin"></core:Icon>
@@ -120,15 +121,15 @@
 											<Label text="Mail:" width="7rem"></Label>
 											<Text class="CustomAdrs" text="{POSTADR>/0/value}"></Text>
 											<!--<TextArea id="id_mail" class="CustomAdrs" enabled="{POSTADR>/0/enabled}" liveChange="onChangePhone" value="{POSTADR>/0/value}" rows="4"></TextArea>-->
-											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
-												tooltip="Mail"/>
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin sapUiSmallMarginEnd"
+												color="dimgray" tooltip="Mail"/>
 											<!--<Text class="txt_formelement" text="{POSTADR>/0/value}"></Text>-->
 										</HBox>
 										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center" justifyContent="SpaceBetween">
 											<Label text="Telephone:" width="7rem"></Label>
 											<Text class="CustomAdrs" text="{POSTADR>/1/value}"></Text>
 											<!--<Input id="id_telephone" class="CustomAdrs" enabled="{POSTADR>/1/enabled}" liveChange="onChangePhone" value="{POSTADR>/1/value}"></Input>-->
-											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon  sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
 												tooltip="Telephone"/>
 											<!--<Text class="txt_formelement" text="{POSTADR>/1/value}"></Text>-->
 										</HBox>
@@ -136,7 +137,7 @@
 											<Label text="Mobile:" width="7rem"></Label>
 											<Text class="CustomAdrs" text="{POSTADR>/2/value}"></Text>
 											<!--<Input id="id_mobile" class="CustomAdrs" enabled="{POSTADR>/2/enabled}" liveChange="onChangePhone" value="{POSTADR>/2/value}"></Input>-->
-											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon  sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
 												tooltip="Mobile"/>
 											<!--<Text class="txt_formelement" text="{POSTADR>/2/value}"></Text>-->
 										</HBox>
@@ -144,7 +145,7 @@
 											<Label text="Email:" width="7rem"></Label>
 											<Text class="CustomAdrs" text="{POSTADR>/3/value}"></Text>
 											<!--<Input id="id_email" class="CustomAdrs" enabled="{POSTADR>/3/enabled}" liveChange="onChangePhone" value="{POSTADR>/3/value}"></Input>-->
-											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon  sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
+											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
 												tooltip="Email"/>
 											<!--<Text class="txt_formelement" text="{POSTADR>/3/value}"></Text>-->
 										</HBox>
@@ -157,7 +158,7 @@
 											<!--<Text class="txt_formelement" text="{POSTADR>/4/value}"></Text>-->
 										</HBox>
 									</VBox>
-									<VBox class="flexItemCls sapUiSmallMarginTop">
+									<VBox class="flexItemCls sapUiSmallMarginTop sapUiSmallMarginBeginEnd">
 										<Toolbar class="cust_toolbar">
 											<core:Icon src="sap-icon://bell" class="sapUiTinyMarginBegin"></core:Icon>
 											<Text class="sapUiTinyMarginBegin TextLabel" text="Notification Timings"></Text>
@@ -196,20 +197,20 @@
 												<Table id="CA" items="{CA_LIST>/}" showNoData="false" growing="true" growingThreshold="100" growingScrollToLoad="true" width="95%"
 													class="sapUiSmallMarginBegin">
 													<columns>
-														<Column>
+														<Column width="9rem">
 															<l:HorizontalLayout>
-																<core:Icon src="sap-icon://account" class="size1" tooltip="Contract Account" color="#ffffff"/>
+																<core:Icon src="sap-icon://account" class="size1" tooltip="Contract Account" color="#ffffff" visible="false"/>
 																<Text width="5px"/>
 																<Text text="Contract Account" class="TextLabel"/>
 															</l:HorizontalLayout>
 														</Column>
-														<Column>
+														<Column width="11rem">
 															<l:HorizontalLayout>
 																<Text width="5px"/>
 																<Text text=" Address" class="TextLabel"/>
 															</l:HorizontalLayout>
 														</Column>
-														<Column>
+														<Column width="8rem">
 															<l:HorizontalLayout>
 																<Text width="5px"/>
 																<Text text="CA Type" class="TextLabel"/>

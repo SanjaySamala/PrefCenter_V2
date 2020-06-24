@@ -276,7 +276,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3d9ff', end
 .sapMLIB.sapMListTblRow {
     /* border-bottom: 0; */
     /* padding: initial; */
-    height: 0.5px;
+   /* height: 0.5px;*/
 }
 /*.InputClass{*/
 /*	padding-bottom: 0.1px;*/
