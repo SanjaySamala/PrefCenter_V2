@@ -14,6 +14,24 @@ sap.ui.define([
 
 		},
 
+		onSearch1: function (oEvent) {
+			var oBpCa = this.getView().byId("businessPartnerIdInput").getValue();
+			if (oBpCa.trim().length === 10 || oBpCa.trim().length === 12) {
+				this.getView().getModel("oGlobalModel").setProperty("/bpCa", oBpCa.trim());
+				this.getOwnerComponent().getRouter().navTo("View1");
+			} else {
+				sap.m.MessageToast.show("Please enter a valid BP/CA number");
+			}
+		},
+
+		validateBpCa: function (oEvent) {
+			var enteredvalue = oEvent.getParameters().value;
+			var numericvalue = Number(enteredvalue);
+			if (!(!(isNaN(numericvalue)) && (numericvalue > 0) && !(enteredvalue.includes(".")))) {
+				oEvent.getSource().setValue(enteredvalue.substr(0, enteredvalue.length - 1));
+			}
+		}
+
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 		 * (NOT before the first rendering! onInit() is used for that one!).

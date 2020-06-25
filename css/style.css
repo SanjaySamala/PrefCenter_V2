@@ -125,12 +125,11 @@
 /*.MyCombo.sapMComboBoxTextField {*/
 /*padding-bottom: 0.2rem;*/
 /*}*/
-div[class*="sapUiRespGrid"]>div[class*="sapUiRespGridSpan"] {
+/*div[class*="sapUiRespGrid"]>div[class*="sapUiRespGridSpan"] {
     float: left;
     overflow: hidden;
-    /* min-height: 5em; */
     height: 1.5em;
-}
+}*/
 /*.AdrsIcon{*/
 /*.sapMListTbl .sapUiIcon:not(.sapMLIBImgNav):not(.sapMBtnIcon) {*/
 /*    font-size: 1.5rem;*/
@@ -182,7 +181,7 @@ div[class*="sapUiRespGrid"]>div[class*="sapUiRespGridSpan"] {
 
 span.sapMBtnInner.sapMBtnEmphasized {
     background-image: none;
-    text-align: justify;
+    text-align: unset;
     height: 1.5rem;
     background-color: #5496cd;
     border-color: #418ac7;
@@ -835,7 +834,7 @@ font-size: 1rem;
 }
 .vbox_searchform
 {
-	min-width:50%;
+	min-width:100%;
 }
 
 .padding_1rem
@@ -1179,4 +1178,9 @@ font-size: 1rem;
 
 .ttlColor{
 	color: #ffffff;
+}
+
+.pageHeader .sapMBarLeft, .sapMBarRight {
+     position: initial; 
+     height: auto; 
 }

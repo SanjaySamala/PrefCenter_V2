@@ -94,8 +94,9 @@
 	},
 	"sap.ui5": {
 		"rootView": {
-			"viewName": "ZPREFCNTR_v2.view.View1",
-			"type": "XML"
+			"viewName": "ZPREFCNTR_v2.view.Search",
+			"type": "XML",
+			"async": true
 		},
 		"dependencies": {
 			"minUI5Version": "1.30.0",
@@ -122,17 +123,41 @@
 			}
 		},
 		"resources": {
-			"css": [
-				{
-					"uri": "css/style.css"
-				}
-			]
+			"css": [{
+				"uri": "css/style.css"
+			}]
 		},
 		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "ZPREFCNTR_v2.view",
+				"controlAggregation": "pages",
+				"controlId": "app",
+				"clearControlAggregation": false
+			},
+			"routes": [{
+				"name": "Search",
+				"pattern": "",
+				"target": "Search"
+			}, {
+				"name": "View1",
+				"pattern": "View1",
+				"target": "View1"
+			}],
 			"targets": {
+				"View1": {
+					"viewType": "XML",
+					"viewName": "View1",
+					"controlAggregation": "pages",
+					"viewLevel": 1
+				},
 				"Search": {
 					"viewType": "XML",
-					"viewName": "Search"
+					"viewName": "Search",
+					"controlAggregation": "pages",
+					"viewLevel": 2
 				}
 			}
 		}

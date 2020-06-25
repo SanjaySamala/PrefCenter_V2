@@ -71,7 +71,7 @@
 				<content>
 					<SplitApp id="idApp" visible="{=${oBpCaModel>/sBpCa}.length > 0}" initialDetail="detail" initialMaster="master">
 						<masterPages>
-							<Page>
+							<Page showHeader="true" showNavButton="true" navButtonPress="onBackPress">
 								<content>
 									<!--<VBox id="CD">-->
 									<!--<HBox>

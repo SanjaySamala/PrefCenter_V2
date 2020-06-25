@@ -1,8 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"ZPREFCNTR_v2/model/models"
-], function(UIComponent, Device, models) {
+	"ZPREFCNTR_v2/model/models",
+	"sap/ui/model/json/JSONModel"
+], function(UIComponent, Device, models, JSONModel) {
 	"use strict";
 
 	return UIComponent.extend("ZPREFCNTR_v2.Component", {
@@ -22,6 +23,13 @@ sap.ui.define([
 
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
+			
+			this.setModel(new JSONModel({
+				bpCa: ""
+			}),"oGlobalModel");
+			
+			// enable routing
+			this.getRouter().initialize();
 		}
 	});
 });

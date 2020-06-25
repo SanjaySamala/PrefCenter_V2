@@ -113,6 +113,15 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					sIcon: ""
 				}), "oBpCaModel");
 
+				this.getOwnerComponent().getRouter().attachRouteMatched(this._onRouteMatched, this);
+
+			},
+
+			_onRouteMatched: function (oEvent) {
+				if (oEvent.getParameter("name") === "View1") {
+					this.getView().byId("BP").setValue(this.getView().getModel("oGlobalModel").getProperty("/bpCa"));
+					this.BpClick();
+				}
 			},
 
 			// Start of change by Hemant, Handle Add phone button
@@ -2568,11 +2577,10 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					this._commEditPopup.close();
 					break;
 				}
-				
-				
+
 			},
-			
-			onEditCommCancel: function(){
+
+			onEditCommCancel: function () {
 				this._commEditPopup.close();
 			},
 
@@ -3171,6 +3179,10 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 			onAddPrefCancel: function () {
 				this._prefAdd.close();
+			},
+			
+			onBackPress: function(oEvent){
+				this.getOwnerComponent().getRouter().navTo("Search");
 			}
 		});
 	});
