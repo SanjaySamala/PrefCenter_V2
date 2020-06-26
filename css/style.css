@@ -20,7 +20,7 @@
 .sapMTB-Transparent-CTX>.sapMTitleTB.sapMTitleStyleAuto {
     font-size: 0.9rem;
 }
-.sapMComboBoxTextFieldArrow {
+/*.sapMComboBoxTextFieldArrow {
     display: inline-block;
     position: absolute;
     top: 0;
@@ -38,7 +38,7 @@
     color: #346187;
     width: 2.5rem;
     line-height: 0.8rem;
-}
+}*/
 .TextLabel.sapMText{
 
     font-size: 0.9rem !important;
@@ -1183,4 +1183,8 @@ font-size: 1rem;
 .pageHeader .sapMBarLeft, .sapMBarRight {
      position: initial; 
      height: auto; 
+}
+
+.regionCls {
+	outline: 1px solid #bfbfbf;
 }

@@ -8,8 +8,34 @@
 		</endButton>
 		<VBox class="sapUiSmallMarginTop sapUiSmallMarginBeginEnd" height="auto">
 			<VBox visible="{=${oCommEditModel>/sError}.length > 0}">
-				<ObjectStatus text="{oCommEditModel>/sError}" state="Error"
-					icon="sap-icon://error"/>
+				<ObjectStatus text="{oCommEditModel>/sError}" state="Error" icon="sap-icon://error"/>
+			</VBox>
+			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
+				<Label text="House No.:"></Label>
+				<Input class="CustomAdrs" value="{oCommEditModel>/houseNo}"></Input>
+			</VBox>
+			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
+				<Label text="Street:"></Label>
+				<Input class="CustomAdrs" value="{oCommEditModel>/street}"></Input>
+			</VBox>
+			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
+				<Label text="City:"></Label>
+				<Input class="CustomAdrs" value="{oCommEditModel>/city}"></Input>
+			</VBox>
+			<VBox class="sapUiTinyMarginTopBottom sapUiSizeCompact" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
+				<Label text="State:"></Label>
+				
+				<Select forceSelection="false" selectedKey="{oCommEditModel>/region}" items="{oCommEditModel>/aRegions}" enabled="true" class="sapUiSizeCompact regionCls" width="100%">
+					<core:Item key="{oCommEditModel>Bland}" text="{oCommEditModel>Bezei}"/>
+				</Select>
+			</VBox>
+			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
+				<Label text="Country:"></Label>
+				<Input class="CustomAdrs" value="{oCommEditModel>/country}"></Input>
+			</VBox>
+			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
+				<Label text="PostalCode:"></Label>
+				<Input class="CustomAdrs" value="{oCommEditModel>/postalCode}"></Input>
 			</VBox>
 			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} !== 'Mail'}">
 				<Label text="{oCommEditModel>/selComm}:"></Label>

@@ -2137,6 +2137,9 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					var path_post = "/PostAddressSet?$filter=ImInput eq '" + bp + "'";
 					var address = [];
 					oModel2.read(path_post, {
+						urlParameters: {
+							"$expand": "PostalRegionsNav"
+						},
 						async: false,
 						success: function (data) {
 							var oModel_Temp = new sap.ui.model.json.JSONModel();
@@ -2156,6 +2159,13 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 										obj.src = "sap-icon://building"; //Address
 										obj.text = "Mail";
 										obj.value = data.results[i].PostalAddress;
+										obj.houseNo = data.results[i].HouseNum1;
+										obj.street = data.results[i].Street;
+										obj.city = data.results[i].City1;
+										obj.region = data.results[i].Region;
+										obj.country = data.results[i].Country;
+										obj.postalCode = data.results[i].PostCode1;
+										obj.aRegions = data.results[i].PostalRegionsNav.results;
 										var name = obj.value.split(',')[0];
 										that.getView().byId("name").setText(name);
 										address.push(obj);
@@ -2408,19 +2418,24 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				this.selCommMode = oEvent.getSource().getTooltip();
 				switch (this.selCommMode) {
 				case "Mail":
-					/*if (!this._commEditPopup) {
+					if (!this._commEditPopup) {
 						this._commEditPopup = sap.ui.xmlfragment(this.getView().getId(),
 							"ZPREFCNTR_v2.Fragments.EditCommunication", this);
 
 					}
 					this.getView().setModel(new JSONModel({
-						selCommValue: this.getView().getModel("POSTADR").getProperty("/0/value")
+						houseNo: this.getView().getModel("POSTADR").getProperty("/0/houseNo"),
+						street: this.getView().getModel("POSTADR").getProperty("/0/street"),
+						city: this.getView().getModel("POSTADR").getProperty("/0/city"),
+						region: this.getView().getModel("POSTADR").getProperty("/0/region"),
+						country: this.getView().getModel("POSTADR").getProperty("/0/country"),
+						postalCode: this.getView().getModel("POSTADR").getProperty("/0/postalCode"),
+						aRegions: this.getView().getModel("POSTADR").getProperty("/0/aRegions"),
 						selComm: this.selCommMode,
 						sError: ""
 					}), "oCommEditModel");
 					this.getView().addDependent(this._commEditPopup);
-					this._commEditPopup.open();*/
-					// selRow = this.getView().getModel("POSTADR").getProperty("/0");
+					this._commEditPopup.open();
 					break;
 				case "Telephone":
 					if (!this._commEditPopup) {
@@ -3180,8 +3195,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 			onAddPrefCancel: function () {
 				this._prefAdd.close();
 			},
-			
-			onBackPress: function(oEvent){
+
+			onBackPress: function (oEvent) {
 				this.getOwnerComponent().getRouter().navTo("Search");
 			}
 		});
