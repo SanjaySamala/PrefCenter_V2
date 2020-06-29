@@ -213,7 +213,7 @@
 														<Column width="8rem">
 															<l:HorizontalLayout>
 																<Text width="5px"/>
-																<Text text="CA Type" class="TextLabel"/>
+																<Text text="Account Type" class="TextLabel"/>
 															</l:HorizontalLayout>
 														</Column>
 														<Column/>

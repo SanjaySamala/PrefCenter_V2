@@ -19,7 +19,7 @@
 				<Label text="Allowed Mode of Communication" class="sapUiTinyMarginTop"></Label>
 				<HBox>
 					<CheckBox text="Email" selected="{oAddPrefModel>/bEmail}"></CheckBox>
-					<CheckBox text="Mobile" selected="{oAddPrefModel>/bMobile}"></CheckBox>
+					<CheckBox text="Text" selected="{oAddPrefModel>/bMobile}"></CheckBox>
 					<CheckBox text="Mail" selected="{oAddPrefModel>/bMail}"></CheckBox>
 				</HBox>
 			</VBox>

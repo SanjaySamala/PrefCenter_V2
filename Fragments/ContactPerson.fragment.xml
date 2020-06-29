@@ -25,13 +25,13 @@
 				</headerToolbar>
 				<columns >
 					<Column minScreenWidth="Tablet" demandPopin="true">
-						<Label text="Name" wrapping="true" design="Bold" class="sapUiSmallMarginBegin"/>
+						<Text text="Name" wrapping="true" class="sapUiSmallMarginBegin TextLabel"/>
 					</Column>
 					<Column minScreenWidth="Tablet" demandPopin="true">
-						<Label id="columnLabel" text="Rel. Comm." wrapping="true" design="Bold" class="sapUiTinyMarginBegin"/>
+						<Text id="columnLabel" text="Rel. Comm." wrapping="true" class="sapUiTinyMarginBegin TextLabel"/>
 					</Column>
 					<Column minScreenWidth="Tablet" demandPopin="true">
-						<Label text="Want to be notified" wrapping="true" design="Bold" class="sapUiSmallMarginBegin"/>
+						<Text text="Want to be notified" wrapping="true" class="sapUiSmallMarginBegin TextLabel"/>
 					</Column>
 					<!--<Column minScreenWidth="Tablet" demandPopin="true">
 					<Label text="Only Send to CP" wrapping="true" design="Bold" />

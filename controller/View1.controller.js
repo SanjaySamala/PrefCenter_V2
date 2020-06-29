@@ -956,7 +956,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					this.getView().byId("id_telephone").setValueStateText("Invalid Telephone");
 
 					//return false;
-					errorMessages.push("Please maintain valid Telephone number");
+					errorMessages.push("Please maintain valid 10 digit Telephone number");
 					errorCount = errorCount + 1;
 				}
 				if (mobile !== "" && !phnNumPattern.test(mobile)) {
@@ -2432,7 +2432,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						postalCode: this.getView().getModel("POSTADR").getProperty("/0/postalCode"),
 						aRegions: this.getView().getModel("POSTADR").getProperty("/0/aRegions"),
 						selComm: this.selCommMode,
-						sError: ""
+						sError: "",
+						sTitle: "Change Mailing Address"
 					}), "oCommEditModel");
 					this.getView().addDependent(this._commEditPopup);
 					this._commEditPopup.open();
@@ -2446,7 +2447,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					this.getView().setModel(new JSONModel({
 						selCommValue: this.getView().getModel("POSTADR").getProperty("/1/value"),
 						selComm: this.selCommMode,
-						sError: ""
+						sError: "",
+						sTitle: "Change Telephone Number"
 					}), "oCommEditModel");
 					this.getView().addDependent(this._commEditPopup);
 					this._commEditPopup.open();
@@ -2461,7 +2463,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					this.getView().setModel(new JSONModel({
 						selCommValue: this.getView().getModel("POSTADR").getProperty("/2/value"),
 						selComm: this.selCommMode,
-						sError: ""
+						sError: "",
+						sTitle: "Change Mobile Number"
 					}), "oCommEditModel");
 					this.getView().addDependent(this._commEditPopup);
 					this._commEditPopup.open();
@@ -2476,7 +2479,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					this.getView().setModel(new JSONModel({
 						selCommValue: this.getView().getModel("POSTADR").getProperty("/3/value"),
 						selComm: this.selCommMode,
-						sError: ""
+						sError: "",
+						sTitle: "Change Email ID"
 					}), "oCommEditModel");
 					this.getView().addDependent(this._commEditPopup);
 					this._commEditPopup.open();
@@ -2491,7 +2495,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					this.getView().setModel(new JSONModel({
 						selCommValue: this.getView().getModel("POSTADR").getProperty("/4/value"),
 						selComm: this.selCommMode,
-						sError: ""
+						sError: "",
+						sTitle: "Change Fax Number"
 					}), "oCommEditModel");
 					this.getView().addDependent(this._commEditPopup);
 					this._commEditPopup.open();
@@ -2533,8 +2538,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					if (telephone !== "" && !phnNumPattern.test(telephone)) {
 
 						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueState("Error");
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueStateText("Invalid Telephone");
-						this.getView().getModel("oCommEditModel").setProperty("/sError", "Please maintain valid Telephone number");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueStateText("Invalid Telephone Number");
+						this.getView().getModel("oCommEditModel").setProperty("/sError", "Please maintain valid 10 digit Telephone number");
 
 						//return false;
 						// errorMessages.push("Please maintain valid Telephone number");
@@ -2553,8 +2558,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					if (mobile !== "" && !phnNumPattern.test(mobile)) {
 
 						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueState("Error");
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueStateText("Invalid Telephone");
-						this.getView().getModel("oCommEditModel").setProperty("/sError", "Please maintain valid Mobile number");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueStateText("Invalid Mobile Number");
+						this.getView().getModel("oCommEditModel").setProperty("/sError", "Please maintain valid 10 digit Mobile number");
 
 						//return false;
 						// errorMessages.push("Please maintain valid Telephone number");
@@ -2573,7 +2578,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					if (!mailPattern.test(email)) {
 
 						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueState("Error");
-						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueStateText("Invalid Telephone");
+						sap.ui.core.Fragment.byId(this.getView().getId(), "id_commInp").setValueStateText("Invalid Email ID");
 						this.getView().getModel("oCommEditModel").setProperty("/sError", "Please maintain valid Email");
 
 						//return false;
@@ -3171,7 +3176,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					EmailFlag: aNewPrefData.bEmail,
 					SmsFlag: aNewPrefData.bMobile,
 					PostFlag: aNewPrefData.bMail
-				}
+				};
 				var addNewPrefSet = "/CreatePreferenceSet";
 				var oManifestEntryAddNewPref = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_GET_ADDRESS_SRV.uri;
 				var oModelAddNewPref = new sap.ui.model.odata.ODataModel(oManifestEntryAddNewPref, {

@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Dialog title="Edit Communication Data" contentWidth="auto" contentHeight="auto" class="flexItemCls">
+	<Dialog title="{oCommEditModel>/sTitle}" contentWidth="auto" contentHeight="auto" class="flexItemCls">
 		<beginButton>
 			<Button text="SAVE" press="onEditCommSave"/>
 		</beginButton>
