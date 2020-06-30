@@ -28,7 +28,7 @@
 				<RadioButtonGroup id="rbg1" selectedIndex="{oAddPrefModel>/iDefaultPrefSel}" columns="3">
 					<buttons>
 						<RadioButton text="Email"></RadioButton>
-						<RadioButton text="Mobile"></RadioButton>
+						<RadioButton text="Text"></RadioButton>
 						<RadioButton text="Mail"></RadioButton>
 					</buttons>
 				</RadioButtonGroup>

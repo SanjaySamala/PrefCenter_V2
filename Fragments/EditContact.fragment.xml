@@ -26,7 +26,7 @@
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="Relation Type"></Label>
-					<Input value="{oContEditModel>/SRelType}" width="10rem"></Input>
+					<Input value="{oContEditModel>/sRelType}" width="10rem"></Input>
 				</VBox>
 			</HBox>
 		</VBox>

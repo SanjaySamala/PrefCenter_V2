@@ -3168,29 +3168,36 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						"ZPREFCNTR_v2.Fragments.AddNewContact", this);
 
 				}
+				this.getView().setModel(new JSONModel({
+					sFname: "",
+					sLName: "",
+					sPhone: "",
+					sEmail: "",
+					sRelType: "",
+					sHouseNo: this.getView().getModel("POSTADR").getProperty("/0/houseNo"),
+					sStreet: this.getView().getModel("POSTADR").getProperty("/0/street"),
+					sCity: this.getView().getModel("POSTADR").getProperty("/0/city"),
+					sRegion: this.getView().getModel("POSTADR").getProperty("/0/region"),
+					sCountry: this.getView().getModel("POSTADR").getProperty("/0/country"),
+					sPostalCode: this.getView().getModel("POSTADR").getProperty("/0/postalCode"),
+					aRegions: this.getView().getModel("POSTADR").getProperty("/0/aRegions")
+				}), "oContModel");
 				this.getView().addDependent(this._contAdd);
 				this._contAdd.open();
 			},
 
 			onContSave: function () {
-				this.getView().setModel(new JSONModel({
-					sFname: "",
-					sLName: "",
-					sPhone: "",
-					sEmail: "",
-					SRelType: ""
-				}), "oContModel");
+				// this.getView().setModel(new JSONModel({
+				// 	sFname: "",
+				// 	sLName: "",
+				// 	sPhone: "",
+				// 	sEmail: "",
+				// 	sRelType: ""
+				// }), "oContModel");
 				this._contAdd.close();
 			},
 
 			onContCancel: function () {
-				this.getView().setModel(new JSONModel({
-					sFname: "",
-					sLName: "",
-					sPhone: "",
-					sEmail: "",
-					SRelType: ""
-				}), "oContModel");
 				this._contAdd.close();
 			},
 			onChangePhone: function (oEvent) {
@@ -3206,7 +3213,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					sLName: selRow.ContactLastName,
 					sPhone: selRow.Email,
 					sEmail: selRow.Phone,
-					SRelType: selRow.Relationship
+					sRelType: selRow.Relationship
 				}), "oContEditModel");
 				if (!this._contEdit) {
 					this._contEdit = sap.ui.xmlfragment(this.getView().getId(),

@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Dialog title="Add New Contact" contentWidth="auto" contentHeight="auto" class="flexItemCls">
+	<Dialog title="Add New Contact" contentWidth="auto" contentHeight="auto" class="flexItemCls sapUiSizeCompact">
 		<beginButton>
 			<Button text="SAVE" press="onContSave"/>
 		</beginButton>
@@ -9,26 +9,50 @@
 		<VBox class="sapUiSmallMarginTop sapUiSmallMarginBeginEnd" height="auto">
 			<HBox justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
 				<VBox class="sapUiSmallMarginEnd">
-					<Label text="First Name"></Label>
+					<Label text="First Name" design="Bold"></Label>
 					<Input value="{oContModel>/sFname}" width="10rem"></Input>
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
-					<Label text="Last Name"></Label>
+					<Label text="Last Name" design="Bold"></Label>
 					<Input value="{oContModel>/sLName}" width="10rem"></Input>
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
-					<Label text="Email"></Label>
+					<Label text="Email" design="Bold"></Label>
 					<Input value="{oContModel>/sEmail}" width="10rem"></Input>
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
-					<Label text="Phone"></Label>
+					<Label text="Phone" design="Bold"></Label>
 					<Input value="{oContModel>/sPhone}" width="10rem"></Input>
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
-					<Label text="Relation Type"></Label>
-					<Input value="{oContModel>/SRelType}" width="10rem"></Input>
+					<Label text="Relation Type" design="Bold"></Label>
+					<Input value="{oContModel>/sRelType}" width="10rem"></Input>
 				</VBox>
 			</HBox>
+			<VBox class="sapUiTinyMarginTopBottom">
+				<HBox alignItems="Center">
+					<Label text="House Number / Street" class="sapUiSmallMarginEnd" width="10rem" design="Bold"></Label>
+					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oContModel>/sHouseNo}" width="8rem"></Input>
+					<Input class="CustomAdrs" value="{oContModel>/sStreet}" width="20.5rem"></Input>
+				</HBox>
+			</VBox>
+			<VBox class="sapUiTinyMarginTopBottom">
+				<HBox alignItems="Center">
+					<Label text="City / State / ZIP Code" class="sapUiSmallMarginEnd" width="10rem" design="Bold"></Label>
+					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oContModel>/sCity}" width="8rem"></Input>
+					<Select forceSelection="false" selectedKey="{oContModel>/sRegion}" items="{oContModel>/aRegions}" enabled="true"
+						class="regionCls sapUiTinyMarginEnd sapUiSizeCompact" width="12rem">
+						<core:Item key="{oContModel>Bland}" text="{oContModel>Bezei}"/>
+					</Select>
+					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oContModel>/sPostalCode}" width="8rem"></Input>
+				</HBox>
+			</VBox>
+			<VBox class="sapUiTinyMarginTopBottom">
+				<HBox alignItems="Center">
+					<Label text="Country:" class="sapUiSmallMarginEnd" width="10rem" design="Bold"></Label>
+					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oContModel>/sCountry}" enabled="false" width="8rem"></Input>
+				</HBox>
+			</VBox>
 		</VBox>
 	</Dialog>
 </core:FragmentDefinition>
