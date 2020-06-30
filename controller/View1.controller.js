@@ -2159,6 +2159,9 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 										obj.src = "sap-icon://building"; //Address
 										obj.text = "Mail";
 										obj.value = data.results[i].PostalAddress;
+										// obj.suffix = data.results[i].Suffix;
+										obj.fName = data.results[i].FirstName;
+										obj.lName = data.results[i].LastName;
 										obj.houseNo = data.results[i].HouseNum1;
 										obj.street = data.results[i].Street;
 										obj.city = data.results[i].City1;
@@ -2431,6 +2434,9 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						country: this.getView().getModel("POSTADR").getProperty("/0/country"),
 						postalCode: this.getView().getModel("POSTADR").getProperty("/0/postalCode"),
 						aRegions: this.getView().getModel("POSTADR").getProperty("/0/aRegions"),
+						// suffix: this.getView().getModel("POSTADR").getProperty("/0/suffix"),
+						fName: this.getView().getModel("POSTADR").getProperty("/0/fName"),
+						lName: this.getView().getModel("POSTADR").getProperty("/0/lName"),
 						selComm: this.selCommMode,
 						sError: "",
 						sTitle: "Change Mailing Address"
@@ -2531,6 +2537,30 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				var mailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 				switch (selCommMode) {
 				case "Mail":
+					var commEntitySet = "/CommunicationDataSet";
+					var updateData = {
+						PartnerCa: this.getView().getModel("POSTADR").getData()[0].BpNum,
+						CommunicationNav: [{
+							HouseNum1: this.getView().getModel("oCommEditModel").getProperty("/houseNo"),
+							Street: this.getView().getModel("oCommEditModel").getProperty("/street"),
+							City1: this.getView().getModel("oCommEditModel").getProperty("/city"),
+							Region: this.getView().getModel("oCommEditModel").getProperty("/region"),
+							Country: this.getView().getModel("oCommEditModel").getProperty("/country"),
+							PostCode1: this.getView().getModel("oCommEditModel").getProperty("/postalCode"),
+							// suffix: this.getView().getModel("oCommEditModel").getProperty("/suffix"),
+							Firstname: this.getView().getModel("oCommEditModel").getProperty("/fName"),
+							Lastname: this.getView().getModel("oCommEditModel").getProperty("/lName"),
+							PartnerCa: this.getView().getModel("POSTADR").getData()[0].BpNum
+						}]
+					};
+					var oManifestEntry2 = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_GET_ADDRESS_SRV.uri;
+					var oModel2 = new sap.ui.model.odata.ODataModel(oManifestEntry2, {
+						async: true
+					});
+					oModel2.create(commEntitySet, updateData, {
+						success: jQuery.proxy(this.postalAddressSaveResults, this),
+						error: jQuery.proxy(this.oError, this)
+					});
 					this._commEditPopup.close();
 					break;
 				case "Telephone":
@@ -2602,6 +2632,103 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 			onEditCommCancel: function () {
 				this._commEditPopup.close();
+			},
+
+			postalAddressSaveResults: function (oData, oResponse) {
+
+				var newAddressData = this.getView().getModel("oCommEditModel").getData();
+
+				// var Suffix = newAddressData.suffix;
+				var FName = newAddressData.fName;
+				var LName = newAddressData.lName;
+				var fullName = "";
+				/*if (Suffix) {
+					fullName = fullName + Suffix;
+				}*/
+
+				if (FName) {
+					if (fullName) {
+						fullName = fullName + " " + FName;
+					} else {
+						fullName = fullName + FName;
+					}
+				}
+
+				if (LName) {
+					if (fullName) {
+						fullName = fullName + " " + LName;
+					} else {
+						fullName = fullName + LName;
+					}
+				}
+
+				var HouseNum = newAddressData.houseNo;
+				var Street = newAddressData.street;
+				var City = newAddressData.city;
+				var State = newAddressData.region;
+				var Country = newAddressData.country;
+				var Zip = newAddressData.postalCode;
+				var sAddress = "";
+				if (fullName) {
+					sAddress = fullName;
+				}
+
+				if (HouseNum) {
+					if (sAddress) {
+						sAddress = sAddress + ", " + HouseNum;
+					} else {
+						sAddress = sAddress + HouseNum;
+					}
+
+				}
+				if (Street) {
+					if (sAddress === "") {
+						sAddress = sAddress + Street;
+					} else {
+						sAddress = sAddress + ", " + Street;
+					}
+				}
+				if (City) {
+					if (sAddress === "") {
+						sAddress = sAddress + City;
+					} else {
+						sAddress = sAddress + ", " + City;
+					}
+				}
+				if (State) {
+					if (sAddress === "") {
+						sAddress = sAddress + State;
+					} else {
+						sAddress = sAddress + ", " + State;
+					}
+				}
+				if (Zip) {
+					if (sAddress === "") {
+						sAddress = sAddress + Zip;
+					} else {
+						sAddress = sAddress + ", " + Zip;
+					}
+				}
+				if (Country) {
+					if (sAddress === "") {
+						sAddress = sAddress + Country;
+					} else {
+						sAddress = sAddress + ", " + Country;
+					}
+				}
+
+				this.getView().getModel("POSTADR").setProperty("/0/value", sAddress);
+
+				this.getView().getModel("POSTADR").setProperty("/0/houseNo", HouseNum);
+				this.getView().getModel("POSTADR").setProperty("/0/street", Street);
+				this.getView().getModel("POSTADR").setProperty("/0/city", City);
+				this.getView().getModel("POSTADR").setProperty("/0/region", State);
+				this.getView().getModel("POSTADR").setProperty("/0/country", Country);
+				this.getView().getModel("POSTADR").setProperty("/0/postalCode", Zip);
+				// this.getView().getModel("POSTADR").setProperty("/0/suffix", Suffix);
+				this.getView().getModel("POSTADR").setProperty("/0/fName", FName);
+				this.getView().getModel("POSTADR").setProperty("/0/lName", LName);
+
 			},
 
 			commDataSave: function (oEvent) {

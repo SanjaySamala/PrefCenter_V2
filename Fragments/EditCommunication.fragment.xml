@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Dialog title="{oCommEditModel>/sTitle}" contentWidth="auto" contentHeight="auto" class="flexItemCls">
+	<Dialog title="{oCommEditModel>/sTitle}" contentWidth="auto" contentHeight="auto" class="flexItemCls sapUiSizeCompact">
 		<beginButton>
 			<Button text="SAVE" press="onEditCommSave"/>
 		</beginButton>
@@ -11,34 +11,59 @@
 				<ObjectStatus text="{oCommEditModel>/sError}" state="Error" icon="sap-icon://error"/>
 			</VBox>
 			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
-				<Label text="House No.:"></Label>
-				<Input class="CustomAdrs" value="{oCommEditModel>/houseNo}"></Input>
+				<HBox alignItems="Center">
+					<Label text="Suffix / First Name / Last Name" width="13rem" class="sapUiLargeMarginEnd" design="Bold"></Label>
+					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oCommEditModel>/siffix}" enabled="false" width="8rem"></Input>
+					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oCommEditModel>/fName}" width="10rem"></Input>
+					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oCommEditModel>/lName}" width="10rem"></Input>
+				</HBox>
+			</VBox>
+			<!--<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
+				<Label text="First Name:"></Label>
+				<Input class="CustomAdrs" value="{oCommEditModel>/fName}"></Input>
 			</VBox>
 			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
-				<Label text="Street:"></Label>
-				<Input class="CustomAdrs" value="{oCommEditModel>/street}"></Input>
+				<Label text="Last Name:"></Label>
+				<Input class="CustomAdrs" value="{oCommEditModel>/lName}"></Input>
+			</VBox>-->
+			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
+				<HBox alignItems="Center">
+					<Label text="House Number / Street" class="sapUiLargeMarginEnd" width="13rem" design="Bold"></Label>
+					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oCommEditModel>/houseNo}" width="8rem"></Input>
+					<Input class="CustomAdrs" value="{oCommEditModel>/street}" width="20.5rem"></Input>
+				</HBox>
+			</VBox>
+			<!--<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">-->
+			<!--	<Label text="Street:"></Label>-->
+			<!--	<Input class="CustomAdrs" value="{oCommEditModel>/street}"></Input>-->
+			<!--</VBox>-->
+			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
+				<HBox alignItems="Center">
+					<Label text="City / State / ZIP Code" class="sapUiLargeMarginEnd" width="13rem" design="Bold"></Label>
+					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oCommEditModel>/city}" width="8rem"></Input>
+					<Select forceSelection="false" selectedKey="{oCommEditModel>/region}" items="{oCommEditModel>/aRegions}" enabled="true"
+						class="regionCls sapUiTinyMarginEnd sapUiSizeCompact" width="12rem">
+						<core:Item key="{oCommEditModel>Bland}" text="{oCommEditModel>Bezei}"/>
+					</Select>
+					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oCommEditModel>/postalCode}" width="8rem"></Input>
+				</HBox>
 			</VBox>
 			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
-				<Label text="City:"></Label>
-				<Input class="CustomAdrs" value="{oCommEditModel>/city}"></Input>
+				<HBox alignItems="Center">
+					<Label text="Country:" class="sapUiLargeMarginEnd" width="13rem" design="Bold"></Label>
+					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oCommEditModel>/country}" enabled="false" width="8rem"></Input>
+				</HBox>
 			</VBox>
-			<VBox class="sapUiTinyMarginTopBottom sapUiSizeCompact" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
+			<!--<VBox class="sapUiTinyMarginTopBottom sapUiSizeCompact" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
 				<Label text="State:"></Label>
-				
-				<Select forceSelection="false" selectedKey="{oCommEditModel>/region}" items="{oCommEditModel>/aRegions}" enabled="true" class="sapUiSizeCompact regionCls" width="100%">
-					<core:Item key="{oCommEditModel>Bland}" text="{oCommEditModel>Bezei}"/>
-				</Select>
 			</VBox>
-			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
-				<Label text="Country:"></Label>
-				<Input class="CustomAdrs" value="{oCommEditModel>/country}"></Input>
-			</VBox>
+
 			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
 				<Label text="PostalCode:"></Label>
 				<Input class="CustomAdrs" value="{oCommEditModel>/postalCode}"></Input>
-			</VBox>
+			</VBox>-->
 			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} !== 'Mail'}">
-				<Label text="{oCommEditModel>/selComm}:"></Label>
+				<Label text="{oCommEditModel>/selComm}:" design="Bold"></Label>
 				<Input id="id_commInp" class="CustomAdrs" liveChange="onChangePhone" value="{oCommEditModel>/selCommValue}"></Input>
 			</VBox>
 		</VBox>
