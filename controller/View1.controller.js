@@ -114,9 +114,9 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				}), "oBpCaModel");
 
 				this.getOwnerComponent().getRouter().attachRouteMatched(this._onRouteMatched, this);
-				
+
 				this._BusyDialogSave = new sap.m.BusyDialog({
-					title:"Saving..."
+					title: "Saving..."
 				});
 
 			},
@@ -936,19 +936,16 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					});
 				}
 			},
-			
-			openBusyDialogForSave: function()
-			{
+
+			openBusyDialogForSave: function () {
 				this._BusyDialogSave.open();
-				
+
 				var that = this;
-				
-				jQuery.sap.delayedCall(500, this, function() {
+
+				jQuery.sap.delayedCall(500, this, function () {
 					that.SaveAll();
 				});
-				
-			
-				
+
 			},
 			SaveAll: function (evt) {
 				// var oTable = this.getView().byId("T1");
@@ -958,8 +955,6 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				// var oPhoneNumberInp = oTable.getItems()[2].getCells()[2];
 				// var oEmailInp = oTable.getItems()[3].getCells()[2];
 				//sap.ui.core.BusyIndicator.show();
-				
-				
 
 				var telephone = this.getView().getModel("POSTADR").getProperty("/1/value");
 				var mobile = this.getView().getModel("POSTADR").getProperty("/2/value");
@@ -1363,7 +1358,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 			},
 
 			resetDefaultPrefs: function () {
-				
+
 				this._BusyDialogSave.close();
 				sap.m.MessageToast.show("Data saved successfully!");
 			},
@@ -2184,7 +2179,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 										obj.src = "sap-icon://building"; //Address
 										obj.text = "Mail";
 										obj.value = data.results[i].PostalAddress;
-										// obj.suffix = data.results[i].Suffix;
+										obj.title = data.results[i].Title;
 										obj.fName = data.results[i].FirstName;
 										obj.lName = data.results[i].LastName;
 										obj.houseNo = data.results[i].HouseNum1;
@@ -2459,7 +2454,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						country: this.getView().getModel("POSTADR").getProperty("/0/country"),
 						postalCode: this.getView().getModel("POSTADR").getProperty("/0/postalCode"),
 						aRegions: this.getView().getModel("POSTADR").getProperty("/0/aRegions"),
-						// suffix: this.getView().getModel("POSTADR").getProperty("/0/suffix"),
+						title: this.getView().getModel("POSTADR").getProperty("/0/title"),
 						fName: this.getView().getModel("POSTADR").getProperty("/0/fName"),
 						lName: this.getView().getModel("POSTADR").getProperty("/0/lName"),
 						selComm: this.selCommMode,
@@ -2562,7 +2557,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				var mailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 				switch (selCommMode) {
 				case "Mail":
-					var commEntitySet = "/CommunicationDataSet";
+					/*var commEntitySet = "/CommunicationDataSet";
 					var updateData = {
 						PartnerCa: this.getView().getModel("POSTADR").getData()[0].BpNum,
 						CommunicationNav: [{
@@ -2572,7 +2567,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 							Region: this.getView().getModel("oCommEditModel").getProperty("/region"),
 							Country: this.getView().getModel("oCommEditModel").getProperty("/country"),
 							PostCode1: this.getView().getModel("oCommEditModel").getProperty("/postalCode"),
-							// suffix: this.getView().getModel("oCommEditModel").getProperty("/suffix"),
+							Title: this.getView().getModel("oCommEditModel").getProperty("/title"),
 							Firstname: this.getView().getModel("oCommEditModel").getProperty("/fName"),
 							Lastname: this.getView().getModel("oCommEditModel").getProperty("/lName"),
 							PartnerCa: this.getView().getModel("POSTADR").getData()[0].BpNum
@@ -2585,7 +2580,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					oModel2.create(commEntitySet, updateData, {
 						success: jQuery.proxy(this.postalAddressSaveResults, this),
 						error: jQuery.proxy(this.oError, this)
-					});
+					});*/
+					this.postalAddressSaveResults();
 					this._commEditPopup.close();
 					break;
 				case "Telephone":
@@ -2663,13 +2659,13 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 				var newAddressData = this.getView().getModel("oCommEditModel").getData();
 
-				// var Suffix = newAddressData.suffix;
+				var Title = newAddressData.title;
 				var FName = newAddressData.fName;
 				var LName = newAddressData.lName;
 				var fullName = "";
-				/*if (Suffix) {
-					fullName = fullName + Suffix;
-				}*/
+				if (Title) {
+					fullName = fullName + Title;
+				}
 
 				if (FName) {
 					if (fullName) {
@@ -2750,7 +2746,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				this.getView().getModel("POSTADR").setProperty("/0/region", State);
 				this.getView().getModel("POSTADR").setProperty("/0/country", Country);
 				this.getView().getModel("POSTADR").setProperty("/0/postalCode", Zip);
-				// this.getView().getModel("POSTADR").setProperty("/0/suffix", Suffix);
+				this.getView().getModel("POSTADR").setProperty("/0/title", Title);
 				this.getView().getModel("POSTADR").setProperty("/0/fName", FName);
 				this.getView().getModel("POSTADR").setProperty("/0/lName", LName);
 
@@ -2761,12 +2757,20 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				var updateData = {
 					PartnerCa: this.getView().getModel("POSTADR").getData()[0].BpNum,
 					CommunicationNav: [{
-						Country: "",
 						Telephone: this.getView().getModel("POSTADR").getData()[1].value,
 						Mobile: this.getView().getModel("POSTADR").getData()[2].value,
 						Email: this.getView().getModel("POSTADR").getData()[3].value,
 						Fax: this.getView().getModel("POSTADR").getData()[4].value,
-						PartnerCa: this.getView().getModel("POSTADR").getData()[0].BpNum
+						PartnerCa: this.getView().getModel("POSTADR").getData()[0].BpNum,
+						HouseNum1: this.getView().getModel("POSTADR").getData()[0].houseNo,
+						Street: this.getView().getModel("POSTADR").getData()[0].street,
+						City1: this.getView().getModel("POSTADR").getData()[0].city,
+						Region: this.getView().getModel("POSTADR").getData()[0].region,
+						Country: this.getView().getModel("POSTADR").getData()[0].country,
+						PostCode1: this.getView().getModel("POSTADR").getData()[0].postalCode,
+						// Title: this.getView().getModel("POSTADR").getData()[0].title,
+						Firstname: this.getView().getModel("POSTADR").getData()[0].fName,
+						Lastname: this.getView().getModel("POSTADR").getData()[0].lName
 
 					}]
 				};
@@ -2776,7 +2780,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				});
 				oModel2.create(commEntitySet, updateData, {
 					success: jQuery.proxy(this.commResults, this),
-					error: jQuery.proxy(this.oError, this)
+					error: jQuery.proxy(this.commError, this)
 				});
 			},
 
@@ -2802,6 +2806,10 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					that.tempAdrs = JSON.stringify(aTempCommData);
 				}
 				this.getView().getModel("POSTADR").refresh(true);
+			},
+
+			commError: function (Data, oResponse) {
+				this._BusyDialogSave.close();
 			},
 
 			oError: function (oData, oResponse) {

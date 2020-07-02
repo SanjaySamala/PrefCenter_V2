@@ -19,7 +19,7 @@
 						</VBox>
 						<VBox width="10%" alignContent="Center" alignItems="Center" direction="Column" justifyContent="Center">
 							<core:Icon src="sap-icon://save" class="size2 sapUiMediumMarginEnd" id="ALL" press="SaveAll" tooltip="Save your preferences"/>
-							<Text text="V1.19" class="versionText sapUiMediumMarginBegin"></Text>
+							<Text text="V2.0" class="versionText sapUiMediumMarginBegin"></Text>
 						</VBox>
 					</HBox>
 				</headerContent>
@@ -299,7 +299,7 @@
 																<ObjectStatus text="{oContactPersonData>ObjectType}" state="{= ${oContactPersonData>ObjectType} === 'BP' ? 'Warning' : 'Success' }"
 																	icon="sap-icon://customer"/>
 																<!--<core:Icon src="sap-icon://edit" color="dimgray" press="onEditContactPersonData"></core:Icon>-->
-																<core:Icon src="sap-icon://edit" class="AdrsIcon" color="dimgray" press="onContactEdit"/>
+																<core:Icon src="sap-icon://edit" class="AdrsIcon" color="dimgray" press="onContactEdit" visible="{=${oBpCaModel>/sBpCa} === 'BP' &amp;&amp; ${oContactPersonData>ObjectType} === 'BP' || ${oBpCaModel>/sBpCa} === 'CA' &amp;&amp; ${oContactPersonData>ObjectType} !== 'BP'}"/>
 															</cells>
 														</ColumnListItem>
 													</items>
