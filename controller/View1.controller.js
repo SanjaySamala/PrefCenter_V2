@@ -114,6 +114,10 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				}), "oBpCaModel");
 
 				this.getOwnerComponent().getRouter().attachRouteMatched(this._onRouteMatched, this);
+				
+				this._BusyDialogSave = new sap.m.BusyDialog({
+					title:"Saving..."
+				});
 
 			},
 
@@ -932,7 +936,20 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					});
 				}
 			},
-
+			
+			openBusyDialogForSave: function()
+			{
+				this._BusyDialogSave.open();
+				
+				var that = this;
+				
+				jQuery.sap.delayedCall(500, this, function() {
+					that.SaveAll();
+				});
+				
+			
+				
+			},
 			SaveAll: function (evt) {
 				// var oTable = this.getView().byId("T1");
 				//Validation of Phone Number
@@ -940,6 +957,9 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				// var oTelephoneInp = oTable.getItems()[1].getCells()[2];
 				// var oPhoneNumberInp = oTable.getItems()[2].getCells()[2];
 				// var oEmailInp = oTable.getItems()[3].getCells()[2];
+				//sap.ui.core.BusyIndicator.show();
+				
+				
 
 				var telephone = this.getView().getModel("POSTADR").getProperty("/1/value");
 				var mobile = this.getView().getModel("POSTADR").getProperty("/2/value");
@@ -1126,7 +1146,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						if (typeof (seq_no) === "undefined") {
 							sequence = "000";
 						}
-
+						//sap.ui.core.BusyIndicator.show();
 						oModel1.update("/PrefUserDataSet(CA_BP_NUM='" + bp + "',ADDRESS_NUM='" + address.AddressNumber + "',PREF_ID='" + data.PREF_ID +
 							"',CONSNUMBER='" + sequence + "')",
 							obj, {
@@ -1142,6 +1162,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 								},
 								error: function (oError) {
+									that._BusyDialogSave.close();
 									// var err = JSON.parse(oError.responseText);
 									// var msg;
 									// if (err.error.message.value === "") {
@@ -1288,6 +1309,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 							MessageToast.show(message);*/
 						},
 						error: function (oError) {
+							that._BusyDialogSave.close();
 							// var err = JSON.parse(oError.responseText);
 							var msg;
 							// if (err.error.message.value === "") {
@@ -1341,6 +1363,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 			},
 
 			resetDefaultPrefs: function () {
+				
+				this._BusyDialogSave.close();
 				sap.m.MessageToast.show("Data saved successfully!");
 			},
 
@@ -1836,6 +1860,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						MessageToast.show(message);*/
 					},
 					error: function (oError) {
+						//sap.ui.core.BusyIndicator.hide();
 						// var err = JSON.parse(oError.responseText);
 						// var msg;
 						// if (err.error.message.value === "") {
@@ -2780,6 +2805,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 			},
 
 			oError: function (oData, oResponse) {
+				this._BusyDialogSave.close();
 				sap.m.MessageToast.show("Error");
 			},
 
