@@ -19,7 +19,7 @@
 						</VBox>
 						<VBox width="10%" alignContent="Center" alignItems="Center" direction="Column" justifyContent="Center">
 							<core:Icon src="sap-icon://save" class="size2 sapUiMediumMarginEnd" id="ALL" press="openBusyDialogForSave" tooltip="Save your preferences"/>
-							<Text text="V2.0" class="versionText sapUiMediumMarginBegin"></Text>
+							<Text text="V2.1" class="versionText sapUiMediumMarginBegin"></Text>
 						</VBox>
 					</HBox>
 				</headerContent>
