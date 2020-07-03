@@ -2384,30 +2384,43 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 							}
 						});
 					}
-					var contPersonEntitySet = "/ContactPersonSet",
-						aFilter = [],
-						oCPManifestEntry = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_GET_ADDRESS_SRV.uri;
-					var oCPModel = new sap.ui.model.odata.v2.ODataModel(oCPManifestEntry, {
-						json: true,
-						loadMetadataAsync: true
-					});
-					var sBpCa = new Filter("BpCa", "EQ", this.getView().byId("BP").getValue());
-					aFilter.push(sBpCa);
 
-					oCPModel.read(contPersonEntitySet, {
-						async: true,
-						filters: aFilter,
-						success: jQuery.proxy(this.contactPersonData, this),
-						error: jQuery.proxy(this.oError, this)
-					});
+					this.getContactPersonData();
+
 				}
 
 			},
 
+			getContactPersonData: function () {
+				var contPersonEntitySet = "/ContactPersonSet",
+					aFilter = [],
+					oCPManifestEntry = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_GET_ADDRESS_SRV.uri;
+				var oCPModel = new sap.ui.model.odata.v2.ODataModel(oCPManifestEntry, {
+					json: true,
+					loadMetadataAsync: true
+				});
+				var sBpCa = new Filter("BpCa", "EQ", this.getView().byId("BP").getValue());
+				aFilter.push(sBpCa);
+
+				oCPModel.read(contPersonEntitySet, {
+					async: true,
+					filters: aFilter,
+					urlParameters: {
+						"$expand": "CPERSONNAV,ContactPersonRelNav"
+					},
+					success: jQuery.proxy(this.contactPersonData, this),
+					error: jQuery.proxy(this.oError, this)
+				});
+			},
+
 			contactPersonData: function (oData, oResponse) {
 				var oContPersonModel = new JSONModel();
-				oContPersonModel.setData(oData.results);
+				oContPersonModel.setData(oData.results[0].CPERSONNAV.results);
 				this.getView().byId("tbl_ContPrsnData").setModel(oContPersonModel, "oContactPersonData");
+
+				var oRelationsModel = new JSONModel();
+				oRelationsModel.setData(oData.results[0].ContactPersonRelNav.results);
+				this.getView().setModel(oRelationsModel, "oRelationsModel");
 			},
 
 			onEditCommDets: function (oEvent) {
@@ -3203,6 +3216,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 				}
 				this.getView().setModel(new JSONModel({
+					sTitle: "",
 					sFname: "",
 					sLName: "",
 					sPhone: "",
@@ -3214,7 +3228,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					sRegion: this.getView().getModel("POSTADR").getProperty("/0/region"),
 					sCountry: this.getView().getModel("POSTADR").getProperty("/0/country"),
 					sPostalCode: this.getView().getModel("POSTADR").getProperty("/0/postalCode"),
-					aRegions: this.getView().getModel("POSTADR").getProperty("/0/aRegions")
+					aRegions: this.getView().getModel("POSTADR").getProperty("/0/aRegions"),
+					aRelations: this.getView().getModel("oRelationsModel").getData()
 				}), "oContModel");
 				this.getView().addDependent(this._contAdd);
 				this._contAdd.open();
@@ -3228,7 +3243,43 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				// 	sEmail: "",
 				// 	sRelType: ""
 				// }), "oContModel");
+				var aNewContactData = this.getView().getModel("oContModel").getData();
+				var aPayload = {
+					BpCa: this.getView().byId("BP").getValue(),
+					Title: aNewContactData.sTitle,
+					ContactFirstName: aNewContactData.sFname,
+					ContactLastName: aNewContactData.sLName,
+					Phone: aNewContactData.sPhone,
+					Email: aNewContactData.sEmail,
+					Relationship: aNewContactData.sRelType,
+					HouseNum1: aNewContactData.sHouseNo,
+					Street: aNewContactData.sStreet,
+					City1: aNewContactData.sCity,
+					Region: aNewContactData.sRegion,
+					PostCode1: aNewContactData.sPostalCode,
+					Country: aNewContactData.sCountry
+				};
+
+				var newContactAddSet = "/ContactPersonSet";
+
+				var oManifestEntry2 = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_GET_ADDRESS_SRV.uri;
+				var oModel2 = new sap.ui.model.odata.ODataModel(oManifestEntry2, {
+					async: true
+				});
+				oModel2.create(newContactAddSet, aPayload, {
+					success: jQuery.proxy(this.newContactAddResults, this),
+					error: jQuery.proxy(this.newContactAddErrors, this)
+				});
+			},
+
+			newContactAddResults: function (oData, oResponse) {
+				// sap.m.MessageToast.show("New Contact Added Successfully");
+				this.getContactPersonData();
 				this._contAdd.close();
+			},
+
+			newContactAddErrors: function (oData, oResponse) {
+				sap.m.MessageToast.show("New Contact Addition Failed");
 			},
 
 			onContCancel: function () {
@@ -3243,11 +3294,20 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				var sPath = oEvent.getSource().getParent().getBindingContextPath();
 				var selRow = oEvent.getSource().getModel("oContactPersonData").getProperty(sPath);
 				this.getView().setModel(new JSONModel({
+					sTitle: selRow.Title,
 					sFname: selRow.ContactFirstName,
 					sLName: selRow.ContactLastName,
 					sPhone: selRow.Email,
 					sEmail: selRow.Phone,
-					sRelType: selRow.Relationship
+					sRelType: selRow.Relationship,
+					sHouseNo: selRow.HouseNum1,
+					sStreet: selRow.Street,
+					sCity: selRow.City1,
+					sRegion: selRow.Region,
+					sCountry: selRow.Country,
+					sPostalCode: selRow.PostCode1,
+					aRegions: this.getView().getModel("POSTADR").getProperty("/0/aRegions"),
+					aRelations: this.getView().getModel("oRelationsModel").getData()
 				}), "oContEditModel");
 				if (!this._contEdit) {
 					this._contEdit = sap.ui.xmlfragment(this.getView().getId(),
