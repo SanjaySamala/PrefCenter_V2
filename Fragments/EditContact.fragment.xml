@@ -14,7 +14,7 @@
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="First Name" design="Bold"></Label>
-					<Input value="{oContEditModel>/sFname}" width="10rem"></Input>
+					<Input value="{oContEditModel>/sFName}" width="10rem"></Input>
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="Last Name" design="Bold"></Label>
