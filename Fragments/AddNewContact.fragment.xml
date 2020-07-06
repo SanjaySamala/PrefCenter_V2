@@ -10,23 +10,23 @@
 			<HBox justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="Title" design="Bold"></Label>
-					<Input value="{oContModel>/sTitle}" width="10rem"></Input>
+					<Input value="{oContModel>/sTitle}" width="10rem" id="title"></Input>
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="First Name" design="Bold"></Label>
-					<Input value="{oContModel>/sFname}" width="10rem"></Input>
+					<Input value="{oContModel>/sFName}" width="10rem" id="fName"></Input>
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="Last Name" design="Bold"></Label>
-					<Input value="{oContModel>/sLName}" width="10rem"></Input>
+					<Input value="{oContModel>/sLName}" width="10rem" id="lName"></Input>
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="Email" design="Bold"></Label>
-					<Input value="{oContModel>/sEmail}" width="10rem"></Input>
+					<Input value="{oContModel>/sEmail}" width="10rem" id="email"></Input>
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="Phone" design="Bold"></Label>
-					<Input value="{oContModel>/sPhone}" width="10rem"></Input>
+					<Input value="{oContModel>/sPhone}" width="10rem" id="phone"></Input>
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="Relation Type" design="Bold"></Label>

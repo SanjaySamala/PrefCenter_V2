@@ -3215,9 +3215,17 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						"ZPREFCNTR_v2.Fragments.AddNewContact", this);
 
 				}
+				sap.ui.core.Fragment.byId(this.getView().getId(), "fName").setValueState("None");
+				sap.ui.core.Fragment.byId(this.getView().getId(), "fName").setValueStateText("");
+				sap.ui.core.Fragment.byId(this.getView().getId(), "lName").setValueState("None");
+				sap.ui.core.Fragment.byId(this.getView().getId(), "lName").setValueStateText("");
+				sap.ui.core.Fragment.byId(this.getView().getId(), "email").setValueState("None");
+				sap.ui.core.Fragment.byId(this.getView().getId(), "email").setValueStateText("");
+				sap.ui.core.Fragment.byId(this.getView().getId(), "phone").setValueState("None");
+				sap.ui.core.Fragment.byId(this.getView().getId(), "phone").setValueStateText("");
 				this.getView().setModel(new JSONModel({
 					sTitle: "",
-					sFname: "",
+					sFName: "",
 					sLName: "",
 					sPhone: "",
 					sEmail: "",
@@ -3237,17 +3245,21 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 			onContSave: function () {
 				// this.getView().setModel(new JSONModel({
-				// 	sFname: "",
+				// 	sFName: "",
 				// 	sLName: "",
 				// 	sPhone: "",
 				// 	sEmail: "",
 				// 	sRelType: ""
 				// }), "oContModel");
 				var aNewContactData = this.getView().getModel("oContModel").getData();
+				var bError = this.bValidateNewContDetails(aNewContactData);
+				if (!bError) {
+					return;
+				}
 				var aPayload = {
 					BpCa: this.getView().byId("BP").getValue(),
 					Title: aNewContactData.sTitle,
-					ContactFirstName: aNewContactData.sFname,
+					ContactFirstName: aNewContactData.sFName,
 					ContactLastName: aNewContactData.sLName,
 					Phone: aNewContactData.sPhone,
 					Email: aNewContactData.sEmail,
@@ -3270,6 +3282,55 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					success: jQuery.proxy(this.newContactAddResults, this),
 					error: jQuery.proxy(this.newContactAddErrors, this)
 				});
+			},
+
+			bValidateNewContDetails: function (aNewContactData) {
+				var phnNumPattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+				var mailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
+				var telePhone = aNewContactData.sPhone;
+				var email = aNewContactData.sEmail;
+				var fName = aNewContactData.sFName;
+				var lName = aNewContactData.sLName;
+
+				if (fName.trim() === "") {
+					sap.ui.core.Fragment.byId(this.getView().getId(), "fName").setValueState("Error");
+					sap.ui.core.Fragment.byId(this.getView().getId(), "fName").setValueStateText("First Name cannot be blank");
+					return false;
+				} else {
+					sap.ui.core.Fragment.byId(this.getView().getId(), "fName").setValueState("None");
+					sap.ui.core.Fragment.byId(this.getView().getId(), "fName").setValueStateText("");
+				}
+
+				if (lName.trim() === "") {
+					sap.ui.core.Fragment.byId(this.getView().getId(), "lName").setValueState("Error");
+					sap.ui.core.Fragment.byId(this.getView().getId(), "lName").setValueStateText("Last Name cannot be blank");
+					return false;
+				} else {
+					sap.ui.core.Fragment.byId(this.getView().getId(), "lName").setValueState("None");
+					sap.ui.core.Fragment.byId(this.getView().getId(), "lName").setValueStateText("");
+				}
+
+				if (email.trim() !== "" && !mailPattern.test(email)) {
+					sap.ui.core.Fragment.byId(this.getView().getId(), "email").setValueState("Error");
+					sap.ui.core.Fragment.byId(this.getView().getId(), "email").setValueStateText("Invalid Email ID");
+					return false;
+				} else {
+					sap.ui.core.Fragment.byId(this.getView().getId(), "email").setValueState("None");
+					sap.ui.core.Fragment.byId(this.getView().getId(), "email").setValueStateText("");
+				}
+
+				if (telePhone.trim() !== "" && !phnNumPattern.test(telePhone)) {
+					sap.ui.core.Fragment.byId(this.getView().getId(), "phone").setValueState("Error");
+					sap.ui.core.Fragment.byId(this.getView().getId(), "phone").setValueStateText("Invalid Telephone Number");
+					return false;
+				} else {
+					sap.ui.core.Fragment.byId(this.getView().getId(), "phone").setValueState("None");
+					sap.ui.core.Fragment.byId(this.getView().getId(), "phone").setValueStateText("");
+				}
+
+				return true;
+
 			},
 
 			newContactAddResults: function (oData, oResponse) {
@@ -3295,7 +3356,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				var selRow = oEvent.getSource().getModel("oContactPersonData").getProperty(sPath);
 				this.getView().setModel(new JSONModel({
 					sTitle: selRow.Title,
-					sFname: selRow.ContactFirstName,
+					sFName: selRow.ContactFirstName,
 					sLName: selRow.ContactLastName,
 					sPhone: selRow.Email,
 					sEmail: selRow.Phone,
