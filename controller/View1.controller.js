@@ -968,7 +968,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					// oTelephoneInp.setValueStateText("Invalid Telephone!");
 
 					this.getView().byId("id_telephone").setValueState("Error");
-					this.getView().byId("id_telephone").setValueStateText("Invalid Telephone");
+					this.getView().byId("id_telephone").setValueStateText("Enter 10-digit Phone no.");
 
 					//return false;
 					errorMessages.push("Please maintain valid 10 digit Telephone number");
@@ -980,7 +980,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					errorMessages.push("Please maintain valid Mobile number");
 
 					this.getView().byId("id_mobile").setValueState("Error");
-					this.getView().byId("id_mobile").setValueStateText("Invalid Mobile");
+					this.getView().byId("id_mobile").setValueStateText("Enter 10-digit Mobile no.");
 
 					//return false;
 					errorCount = errorCount + 1;
@@ -3322,7 +3322,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 				if (telePhone.trim() !== "" && !phnNumPattern.test(telePhone)) {
 					sap.ui.core.Fragment.byId(this.getView().getId(), "phone").setValueState("Error");
-					sap.ui.core.Fragment.byId(this.getView().getId(), "phone").setValueStateText("Invalid Telephone Number");
+					sap.ui.core.Fragment.byId(this.getView().getId(), "phone").setValueStateText("Enter 10-digit Phone no.");
 					return false;
 				} else {
 					sap.ui.core.Fragment.byId(this.getView().getId(), "phone").setValueState("None");
@@ -3358,8 +3358,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					sTitle: selRow.Title,
 					sFName: selRow.ContactFirstName,
 					sLName: selRow.ContactLastName,
-					sPhone: selRow.Email,
-					sEmail: selRow.Phone,
+					sPhone: selRow.Phone,
+					sEmail: selRow.Email,
 					sRelType: selRow.Relationship,
 					sHouseNo: selRow.HouseNum1,
 					sStreet: selRow.Street,
@@ -3368,7 +3368,9 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					sCountry: selRow.Country,
 					sPostalCode: selRow.PostCode1,
 					aRegions: this.getView().getModel("POSTADR").getProperty("/0/aRegions"),
-					aRelations: this.getView().getModel("oRelationsModel").getData()
+					aRelations: this.getView().getModel("oRelationsModel").getData(),
+					sContactPersons: selRow.ContactPersons,
+					sBusinessPartner: selRow.BusinessPartner
 				}), "oContEditModel");
 				if (!this._contEdit) {
 					this._contEdit = sap.ui.xmlfragment(this.getView().getId(),
@@ -3376,12 +3378,123 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 				}
 				this.getView().addDependent(this._contEdit);
+				sap.ui.core.Fragment.byId(this.getView().getId(), "contEmail").setValueState("None");
+				sap.ui.core.Fragment.byId(this.getView().getId(), "contEmail").setValueStateText("");
+				sap.ui.core.Fragment.byId(this.getView().getId(), "contPhone").setValueState("None");
+				sap.ui.core.Fragment.byId(this.getView().getId(), "contPhone").setValueStateText("");
 				this._contEdit.open();
 
 			},
 
 			onContEditSave: function () {
+				var phnNumPattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+				var mailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
+				var email = this.getView().getModel("oContEditModel").getProperty("/sEmail");
+				if (!mailPattern.test(email)) {
+					sap.ui.core.Fragment.byId(this.getView().getId(), "contEmail").setValueState("Error");
+					sap.ui.core.Fragment.byId(this.getView().getId(), "contEmail").setValueStateText("Invalid Email ID");
+					return;
+				} else {
+					sap.ui.core.Fragment.byId(this.getView().getId(), "contEmail").setValueState("None");
+					sap.ui.core.Fragment.byId(this.getView().getId(), "contEmail").setValueStateText("");
+				}
+				var telephone = this.getView().getModel("oContEditModel").getProperty("/sPhone");
+				if (telephone !== "" && !phnNumPattern.test(telephone)) {
+					sap.ui.core.Fragment.byId(this.getView().getId(), "contPhone").setValueState("Error");
+					sap.ui.core.Fragment.byId(this.getView().getId(), "contPhone").setValueStateText("Enter 10-digit Phone no.");
+					return;
+				} else {
+					sap.ui.core.Fragment.byId(this.getView().getId(), "contPhone").setValueState("None");
+					sap.ui.core.Fragment.byId(this.getView().getId(), "contPhone").setValueStateText("");
+				}
+
+				var aEditContData = this.getView().getModel("oContEditModel").getData();
+
+				var oUpdatePayload = {
+					BpCa: this.getView().byId("BP").getValue(),
+					BusinessPartner: aEditContData.sBusinessPartner,
+					Title: aEditContData.sTitle,
+					ContactPersons: aEditContData.sContactPersons,
+					ContactFirstName: aEditContData.sFName,
+					ContactLastName: aEditContData.sLName,
+					Email: aEditContData.sEmail,
+					Phone: aEditContData.sPhone,
+					Relationship: aEditContData.sRelType,
+					HouseNum1: aEditContData.sHouseNo,
+					Street: aEditContData.sStreet,
+					City1: aEditContData.sCity,
+					Region: aEditContData.sRegion,
+					PostCode1: aEditContData.sPostalCode,
+					Country: aEditContData.sCountry
+				};
+
+				var updateContDataSet = "/ContactPersonSet('1200001166')";
+				var oManifestEntryUpdateContData = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_GET_ADDRESS_SRV.uri;
+				var oModelAddNewPref = new sap.ui.model.odata.v2.ODataModel(oManifestEntryUpdateContData, {
+					async: true
+				});
+
+
+				/*this.getView().getModel().setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/City1", aEditContData.sCity);
+				this.getView().getModel().setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/Region", aEditContData.sRegion);
+				this.getView().getModel().setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/PostCode1", aEditContData.sPostalCode);
+				this.getView().getModel().setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/Country", aEditContData.sCountry);
+				this.getView().getModel("ZPC_GET_ADDRESS_SRV").setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/BpCa", this.getView().byId("BP").getValue());
+				this.getView().getModel("ZPC_GET_ADDRESS_SRV").setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/BusinessPartner", aEditContData.sBusinessPartner);
+				this.getView().getModel("ZPC_GET_ADDRESS_SRV").setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/Title", aEditContData.sTitle);
+				this.getView().getModel("ZPC_GET_ADDRESS_SRV").setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/ContactPersons", aEditContData.sContactPersons);
+				this.getView().getModel("ZPC_GET_ADDRESS_SRV").setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/ContactFirstName", aEditContData.sFName);
+				this.getView().getModel("ZPC_GET_ADDRESS_SRV").setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/ContactLastName", aEditContData.sLName);
+				this.getView().getModel("ZPC_GET_ADDRESS_SRV").setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/Email", aEditContData.sEmail);
+				this.getView().getModel("ZPC_GET_ADDRESS_SRV").setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/Phone", aEditContData.sPhone);
+				this.getView().getModel("ZPC_GET_ADDRESS_SRV").setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/Relationship", aEditContData.sRelType);
+				this.getView().getModel("ZPC_GET_ADDRESS_SRV").setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/HouseNum1", aEditContData.sHouseNo);
+				this.getView().getModel("ZPC_GET_ADDRESS_SRV").setProperty(
+					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/Street", aEditContData.sStreet);
+
+				this.getView().getModel("ZPC_GET_ADDRESS_SRV").setDeferredGroups(["updateContactInfo"]);
+				this.getView().getModel("ZPC_GET_ADDRESS_SRV").submitChanges({
+					groupId: "updateContactInfo",
+					success: function (oData, oResponse) {
+						this.getContactPersonData();
+						sap.m.MessageToast.show("Contact Data Updated successfully");
+						this._contEdit.close();
+					},
+					error: function (oError) {
+						sap.m.MessageToast.show("Contact Update Failed");
+					}
+				});*/
+
+				oModelAddNewPref.update(updateContDataSet, oUpdatePayload, {
+					success: jQuery.proxy(this.updateContDataResults, this),
+					error: jQuery.proxy(this.updateContDataError, this)
+				});
+
+			},
+
+			updateContDataResults: function (oData, oResponse) {
+				this.getContactPersonData();
+				sap.m.MessageToast.show("Contact Data Updated successfully");
 				this._contEdit.close();
+			},
+
+			updateContDataError: function (oError) {
+				sap.m.MessageToast.show("Contact Update Failed");
 			},
 
 			onContEditCancel: function () {

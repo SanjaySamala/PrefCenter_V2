@@ -22,11 +22,11 @@
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="Email" design="Bold"></Label>
-					<Input value="{oContEditModel>/sEmail}" width="10rem"></Input>
+					<Input value="{oContEditModel>/sEmail}" width="10rem" id="contEmail"></Input>
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="Phone" design="Bold"></Label>
-					<Input value="{oContEditModel>/sPhone}" width="10rem"></Input>
+					<Input value="{oContEditModel>/sPhone}" width="10rem" id="contPhone"></Input>
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="Relation Type" design="Bold"></Label>

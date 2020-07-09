@@ -67,7 +67,7 @@
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
-					"localUri": "localService/ZPC_GET_ADDRESS_SRV/metadata.xml"
+					"localUri": "localService/metadata.xml"
 				}
 			}
 		}
@@ -87,10 +87,7 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": [
-			"sap_hcb",
-			"sap_belize"
-		]
+		"supportedThemes": ["sap_hcb", "sap_belize"]
 	},
 	"sap.ui5": {
 		"rootView": {
@@ -120,14 +117,23 @@
 				"settings": {
 					"bundleName": "ZPREFCNTR_v2.i18n.i18n"
 				}
+			},
+			"ZPC_GET_ADDRESS_SRV": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Inline",
+					"defaultUpdateMethod": "Put",
+					"useBatch": false
+				},
+				"dataSource": "ZPC_GET_ADDRESS_SRV"
 			}
 		},
 		"resources": {
-			"css": [
-				{
-					"uri": "css/style.css"
-				}
-			]
+			"css": [{
+				"uri": "css/style.css"
+			}]
 		},
 		"routing": {
 			"config": {
@@ -139,18 +145,15 @@
 				"controlId": "app",
 				"clearControlAggregation": false
 			},
-			"routes": [
-				{
-					"name": "Search",
-					"pattern": "",
-					"target": "Search"
-				},
-				{
-					"name": "View1",
-					"pattern": "View1",
-					"target": "View1"
-				}
-			],
+			"routes": [{
+				"name": "Search",
+				"pattern": "",
+				"target": "Search"
+			}, {
+				"name": "View1",
+				"pattern": "View1",
+				"target": "View1"
+			}],
 			"targets": {
 				"View1": {
 					"viewType": "XML",
