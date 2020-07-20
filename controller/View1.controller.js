@@ -3429,10 +3429,11 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					Country: aEditContData.sCountry
 				};
 
-				var updateContDataSet = "/ContactPersonSet('1200001166')";
+				var updateContDataSet = "/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')";
 				var oManifestEntryUpdateContData = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_GET_ADDRESS_SRV.uri;
-				var oModelAddNewPref = new sap.ui.model.odata.v2.ODataModel(oManifestEntryUpdateContData, {
-					async: true
+				var oModelAddNewPref = new sap.ui.model.odata.ODataModel(oManifestEntryUpdateContData, {
+					// json: true,
+					// loadMetadataAsync: true
 				});
 
 				/*this.getView().getModel().setProperty(
@@ -3480,7 +3481,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				});*/
 
 				oModelAddNewPref.update(updateContDataSet, oUpdatePayload, {
-					method: "PUT",
+					// method: "PUT",
 					async: false,
 					success: jQuery.proxy(this.updateContDataResults, this),
 					error: jQuery.proxy(this.updateContDataError, this)
