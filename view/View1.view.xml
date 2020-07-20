@@ -287,6 +287,9 @@
 														<Column hAlign="Left">
 															<Text text="" class="sapUiTinyMarginBegin TextLabel"></Text>
 														</Column>
+														<Column hAlign="Left">
+															<Text text="" class="sapUiLargeMarginEnd TextLabel"></Text>
+														</Column>
 													</columns>
 													<items>
 														<ColumnListItem>
@@ -300,6 +303,7 @@
 																	icon="sap-icon://customer"/>
 																<!--<core:Icon src="sap-icon://edit" color="dimgray" press="onEditContactPersonData"></core:Icon>-->
 																<core:Icon src="sap-icon://edit" class="AdrsIcon" color="dimgray" press="onContactEdit" visible="{=${oBpCaModel>/sBpCa} === 'BP' &amp;&amp; ${oContactPersonData>ObjectType} === 'BP' || ${oBpCaModel>/sBpCa} === 'CA' &amp;&amp; ${oContactPersonData>ObjectType} !== 'BP'}"/>
+																<core:Icon src="sap-icon://delete" class="AdrsIcon" color="red" press="onContactDelete" visible="{=${oBpCaModel>/sBpCa} === 'BP' &amp;&amp; ${oContactPersonData>ObjectType} === 'BP' || ${oBpCaModel>/sBpCa} === 'CA' &amp;&amp; ${oContactPersonData>ObjectType} !== 'BP'}"/>
 															</cells>
 														</ColumnListItem>
 													</items>

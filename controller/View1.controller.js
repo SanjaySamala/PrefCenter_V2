@@ -3435,7 +3435,6 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					async: true
 				});
 
-
 				/*this.getView().getModel().setProperty(
 					"/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')/City1", aEditContData.sCity);
 				this.getView().getModel().setProperty(
@@ -3481,6 +3480,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				});*/
 
 				oModelAddNewPref.update(updateContDataSet, oUpdatePayload, {
+					method: "PUT",
+					async: false,
 					success: jQuery.proxy(this.updateContDataResults, this),
 					error: jQuery.proxy(this.updateContDataError, this)
 				});
@@ -3605,6 +3606,33 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 			onBackPress: function (oEvent) {
 				this.getOwnerComponent().getRouter().navTo("Search");
+			},
+
+			onContactDelete: function (oEvent) {
+				var sPath = oEvent.getSource().getParent().getBindingContextPath();
+				var selRow = oEvent.getSource().getModel("oContactPersonData").getProperty(sPath);
+				var delContactSet = "/ContactPersonDeleteSet(BpCa='" + this.getView().byId("BP").getValue() + "',Reltyp='" + selRow.Reltyp +
+					"',BusinessPartner='" + selRow.ContactPersons + "')";
+				var oManifestEntryDelContact = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_GET_ADDRESS_SRV.uri;
+				var oModelDelContact = new sap.ui.model.odata.v2.ODataModel(oManifestEntryDelContact, {
+					async: true
+				});
+
+				oModelDelContact.remove(delContactSet, {
+					method: "DELETE",
+					async: true,
+					success: this.delContactSuccess.bind(this),
+					error: this.delContactError.bind(this)
+				});
+			},
+
+			delContactSuccess: function (oData, oResponse) {
+				// sap.m.MessageToast.show("Delete Relationship successful");
+				this.getContactPersonData();
+			},
+
+			delContactError: function (oData, oResponse) {
+				sap.m.MessageToast.show("Delete Relationship failed");
 			}
 		});
 	});
