@@ -3627,12 +3627,12 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 			},
 
 			delContactSuccess: function (oData, oResponse) {
-				// sap.m.MessageToast.show("Delete Relationship successful");
+				sap.m.MessageToast.show("Contact person deleted successfully");
 				this.getContactPersonData();
 			},
 
 			delContactError: function (oData, oResponse) {
-				sap.m.MessageToast.show("Delete Relationship failed");
+				sap.m.MessageToast.show("Unable to delete contact person");
 			}
 		});
 	});
