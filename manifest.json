@@ -87,7 +87,10 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": ["sap_hcb", "sap_belize"]
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
 	},
 	"sap.ui5": {
 		"rootView": {
@@ -132,9 +135,11 @@
 			}
 		},
 		"resources": {
-			"css": [{
-				"uri": "css/style.css"
-			}]
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
 		},
 		"routing": {
 			"config": {
@@ -146,15 +151,18 @@
 				"controlId": "app",
 				"clearControlAggregation": false
 			},
-			"routes": [{
-				"name": "Search",
-				"pattern": "",
-				"target": "Search"
-			}, {
-				"name": "View1",
-				"pattern": "View1",
-				"target": "View1"
-			}],
+			"routes": [
+				{
+					"name": "Search",
+					"pattern": "",
+					"target": "Search"
+				},
+				{
+					"name": "View1",
+					"pattern": "View1",
+					"target": "View1"
+				}
+			],
 			"targets": {
 				"View1": {
 					"viewType": "XML",
