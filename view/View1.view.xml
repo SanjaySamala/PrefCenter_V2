@@ -385,23 +385,23 @@
 														<Column/>
 														<Column>
 															<l:HorizontalLayout>
-																<core:Icon src="sap-icon://email" class="size1" tooltip="Email" color="#ffffff"/>
+																<core:Icon src="sap-icon://email" tooltip="Email" color="#ffffff"/>
 																<Text width="5px"/>
-																<Text text="Email" class="TextLabel"/>
+																<Text text="Email" class="PrefLabelEmail"/>
 															</l:HorizontalLayout>
 														</Column>
 														<Column>
 															<l:HorizontalLayout>
-																<core:Icon src="sap-icon://iphone" class="size1" tooltip="SMS" color="#ffffff"/>
+																<core:Icon src="sap-icon://iphone" tooltip="SMS" color="#ffffff"/>
 																<Text width="5px"/>
-																<Text text="Text" class="TextLabel"/>
+																<Text text="Text" class="PrefLabel"/>
 															</l:HorizontalLayout>
 														</Column>
 														<Column>
 															<l:HorizontalLayout>
-																<core:Icon src="sap-icon://letter" class="size1" tooltip="Post" color="#ffffff"/>
+																<core:Icon src="sap-icon://letter" tooltip="Post" color="#ffffff"/>
 																<Text width="5px"/>
-																<Text text="Mail" class="TextLabel"/>
+																<Text text="Mail" class="PrefLabel"/>
 															</l:HorizontalLayout>
 															<!--<Button icon="sap-icon://save" id="S2" text="Save Preferences" press="PrefSave"/>-->
 														</Column>
@@ -409,7 +409,7 @@
 													<items>
 														<ColumnListItem>
 															<cells>
-																<Text text="{PREFERENCE>PREF_TEXT}" class="PrefLabel"/>
+																<Text text="{PREFERENCE>PREF_TEXT}" class="PrefLabelName" color="dimgray"/>
 																<!--Start of change by Hemant Bhalla -->
 																<l:HorizontalLayout>
 																	<HBox>

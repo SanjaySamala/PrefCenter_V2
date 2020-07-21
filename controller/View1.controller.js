@@ -701,6 +701,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 								},
 								error: function (error) {
 									sap.ui.core.BusyIndicator.hide();
+									that._BusyDialogSave.close();
 									var sMessage = JSON.parse(error.response.body);
 									sap.m.MessageBox.show(sMessage.error.message.value, {
 										icon: "ERROR",
@@ -1047,6 +1048,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						title: "Error Message",
 						actions: [sap.m.MessageBox.Action.OK]
 					});
+					this._BusyDialogSave.close();
 				}
 				if (no_email === "X" && email_count > 0) { //"Email" is default preference, but if no email has been maintained
 					err_pref = "X";
@@ -1055,6 +1057,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						title: "Error Message",
 						actions: [sap.m.MessageBox.Action.OK]
 					});
+					this._BusyDialogSave.close();
 				} else {
 
 					var oManifestEntry1 = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_PREF_USERTRANSDATA_SRV.uri;
@@ -1253,6 +1256,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 									actions: [sap.m.MessageBox.Action.OK],
 									onClose: function (oAction) {}
 								});
+								this._BusyDialogSave.close();
 							}
 
 						});
@@ -1378,6 +1382,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					},
 
 					error: function (error) {
+						this._BusyDialogSave.close();
 						// var sMessage = JSON.parse(error.response.body);
 						var sMessage;
 						// sap.m.MessageBox.show(sMessage.error.message.value, {
@@ -1433,6 +1438,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 								actions: [sap.m.MessageBox.Action.OK],
 								onClose: function (oAction) {}
 							});
+							that._BusyDialogSave.close();
 						}
 					});
 					// Get BP preferences incase CA preference is not present --- ONLY FOR CA
@@ -2709,7 +2715,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 				if (HouseNum) {
 					if (sAddress) {
-						sAddress = sAddress + ", " + HouseNum;
+						sAddress = sAddress + ",\n " + HouseNum;
 					} else {
 						sAddress = sAddress + HouseNum;
 					}
@@ -3612,6 +3618,26 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 			onContactDelete: function (oEvent) {
 				var sPath = oEvent.getSource().getParent().getBindingContextPath();
 				var selRow = oEvent.getSource().getModel("oContactPersonData").getProperty(sPath);
+				var that = this;
+				this.selRow = selRow;
+				sap.m.MessageBox.show("Are you sure, you want to delete the contact?", {
+					icon: "WARNING",
+					title: "Warning",
+					styleClass: "Message",
+					actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+					onClose: function (oAction) {
+						if (oAction === "YES") {
+							that.confirmContactDelete(that.selRow);
+						} else {
+							return;
+						}
+					}
+				});
+
+			},
+
+			confirmContactDelete: function (selRow) {
+
 				var delContactSet = "/ContactPersonDeleteSet(BpCa='" + this.getView().byId("BP").getValue() + "',Reltyp='" + selRow.Reltyp +
 					"',BusinessPartner='" + selRow.ContactPersons + "')";
 				var oManifestEntryDelContact = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_GET_ADDRESS_SRV.uri;
