@@ -13,7 +13,7 @@
 			<VBox class="sapUiTinyMarginTopBottom" visible="{=${oCommEditModel>/selComm} === 'Mail'}">
 				<HBox alignItems="Center">
 					<Label text="Title / First Name / Last Name" width="13rem" class="sapUiLargeMarginEnd" design="Bold"></Label>
-					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oCommEditModel>/title}" enabled="false" width="8rem"></Input>
+					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oCommEditModel>/title}" width="8rem"></Input>
 					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oCommEditModel>/fName}" width="10rem"></Input>
 					<Input class="CustomAdrs sapUiTinyMarginEnd" value="{oCommEditModel>/lName}" width="10rem"></Input>
 				</HBox>

@@ -2709,52 +2709,54 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				var Country = newAddressData.country;
 				var Zip = newAddressData.postalCode;
 				var sAddress = "";
-				if (fullName) {
-					sAddress = fullName;
-				}
+				// if (fullName) {
+				// 	sAddress = fullName;
+				// }
+				// if (sAddress) {
+				// 	sAddress = sAddress + ", \n";
+				// }
 
-				if (HouseNum) {
-					if (sAddress) {
-						sAddress = sAddress + ",\n " + HouseNum;
-					} else {
-						sAddress = sAddress + HouseNum;
-					}
-
+				if (HouseNum.trim()) {
+					sAddress = sAddress + HouseNum;
 				}
-				if (Street) {
+				if (Street.trim()) {
 					if (sAddress === "") {
 						sAddress = sAddress + Street;
 					} else {
 						sAddress = sAddress + ", " + Street;
 					}
 				}
-				if (City) {
+				if (City.trim()) {
 					if (sAddress === "") {
 						sAddress = sAddress + City;
 					} else {
 						sAddress = sAddress + ", " + City;
 					}
 				}
-				if (State) {
+				if (State.trim()) {
 					if (sAddress === "") {
 						sAddress = sAddress + State;
 					} else {
 						sAddress = sAddress + ", " + State;
 					}
 				}
-				if (Zip) {
+				if (Zip.trim()) {
 					if (sAddress === "") {
 						sAddress = sAddress + Zip;
 					} else {
 						sAddress = sAddress + ", " + Zip;
 					}
 				}
-				if (Country) {
+				if (Country.trim()) {
 					if (sAddress === "") {
 						sAddress = sAddress + Country;
 					} else {
 						sAddress = sAddress + ", " + Country;
 					}
+				}
+				
+				if(fullName){
+					sAddress = fullName + ", \n" + sAddress;
 				}
 
 				this.getView().getModel("POSTADR").setProperty("/0/value", sAddress);
