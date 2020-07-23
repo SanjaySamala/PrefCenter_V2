@@ -1568,6 +1568,23 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						oTable.setModel(oModel_Temp, "PREFERENCE");
 					}
 
+					if (this.defPref !== undefined && ca_data[0].ExBpOrCaFlag === "CA") {
+						if (this.defPref) {
+							that.getView().byId("Toggle1").setState(true);
+							that.DefaultToggle();
+						}/* else {
+							that.getView().byId("Toggle1").setState(false);
+						}*/
+						
+						if (this.bpPref) {
+							that.getView().byId("Toggle2").setState(true);
+							that.BPToggle();
+						} /*else {
+							that.getView().byId("Toggle2").setState(false);
+						}*/
+						
+					}
+
 					// else {
 					// 	for (var i = 0; i < pref.length; i++) {
 					// 		if (use_default < 1) { //Set Default preferences 
@@ -1762,6 +1779,11 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				// var data = evt.getSource().getParent().getCells()[0].getModel('CA_LIST').getData();
 				// var ca = data[index.slice(1, 2)].CA_BP_NUM;
 				var ca = evt.getSource().getProperty('text');
+
+				var sPath = evt.getSource().getParent().getParent().getBindingContextPath();
+				var selRow = evt.getSource().getModel("CA_LIST").getProperty(sPath);
+				this.bpPref = selRow.BP_PREF_FLAG;
+				this.defPref = selRow.DEF_PREF_FLAG;
 
 				org_bp = this.getView().byId("BP").getValue();
 				this.getView().byId("Back").setVisible(true);
@@ -2754,8 +2776,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						sAddress = sAddress + ", " + Country;
 					}
 				}
-				
-				if(fullName){
+
+				if (fullName) {
 					sAddress = fullName + ", \n" + sAddress;
 				}
 
