@@ -957,54 +957,54 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				// var oEmailInp = oTable.getItems()[3].getCells()[2];
 				//sap.ui.core.BusyIndicator.show();
 
-				var telephone = this.getView().getModel("POSTADR").getProperty("/1/value");
-				var mobile = this.getView().getModel("POSTADR").getProperty("/2/value");
-				var email = this.getView().getModel("POSTADR").getProperty("/3/value");
+				// var telephone = this.getView().getModel("POSTADR").getProperty("/1/value");
+				// var mobile = this.getView().getModel("POSTADR").getProperty("/2/value");
+				// var email = this.getView().getModel("POSTADR").getProperty("/3/value");
 
-				var errorCount = 0;
-				var errorMessages = [];
-				var phnNumPattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-				if (telephone !== "" && !phnNumPattern.test(telephone)) {
+				// var errorCount = 0;
+				// var errorMessages = [];
+				// var phnNumPattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+				// if (telephone !== "" && !phnNumPattern.test(telephone)) {
 					// oTelephoneInp.setValueState("Error");
 					// oTelephoneInp.setValueStateText("Invalid Telephone!");
 
-					this.getView().byId("id_telephone").setValueState("Error");
-					this.getView().byId("id_telephone").setValueStateText("Enter 10-digit Phone no.");
+					// this.getView().byId("id_telephone").setValueState("Error");
+					// this.getView().byId("id_telephone").setValueStateText("Enter 10-digit Phone no.");
 
 					//return false;
-					errorMessages.push("Please maintain valid 10 digit Telephone number");
-					errorCount = errorCount + 1;
-				}
-				if (mobile !== "" && !phnNumPattern.test(mobile)) {
+				// 	errorMessages.push("Please maintain valid 10 digit Telephone number");
+				// 	errorCount = errorCount + 1;
+				// }
+				// if (mobile !== "" && !phnNumPattern.test(mobile)) {
 					// oPhoneNumberInp.setValueState("Error");
 					// oPhoneNumberInp.setValueStateText("Invalid Mobile!");
-					errorMessages.push("Please maintain valid Mobile number");
+					// errorMessages.push("Please maintain valid Mobile number");
 
-					this.getView().byId("id_mobile").setValueState("Error");
-					this.getView().byId("id_mobile").setValueStateText("Enter 10-digit Mobile no.");
+					// this.getView().byId("id_mobile").setValueState("Error");
+					// this.getView().byId("id_mobile").setValueStateText("Enter 10-digit Mobile no.");
 
 					//return false;
-					errorCount = errorCount + 1;
-				}
+				// 	errorCount = errorCount + 1;
+				// }
 
-				var mailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+				// var mailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 
-				if (!mailPattern.test(email)) {
+				// if (!mailPattern.test(email)) {
 					// oEmailInp.setValueState("Error");
 					// oEmailInp.setValueStateText("Invalid Email!");
 
-					this.getView().byId("id_email").setValueState("Error");
-					this.getView().byId("id_email").setValueStateText("Invalid Email");
+					// this.getView().byId("id_email").setValueState("Error");
+					// this.getView().byId("id_email").setValueStateText("Invalid Email");
 
 					//return false;
-					errorMessages.push("Please maintain valid Email");
-					errorCount = errorCount + 1;
-				}
+				// 	errorMessages.push("Please maintain valid Email");
+				// 	errorCount = errorCount + 1;
+				// }
 
-				if (errorCount > 0) {
-					sap.m.MessageToast.show(errorMessages.join("\n"));
-					return false;
-				}
+				// if (errorCount > 0) {
+				// 	sap.m.MessageToast.show(errorMessages.join("\n"));
+				// 	return false;
+				// }
 
 				this.PrefSave(evt);
 				if (err_pref === " ") {
