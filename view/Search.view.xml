@@ -16,7 +16,7 @@
 						</VBox>
 						<VBox width="10%" alignContent="Center" alignItems="Center" direction="Column" justifyContent="Center">
 							<!--<core:Icon src="sap-icon://save" class="size2 sapUiMediumMarginEnd" id="ALL" press="SaveAll" tooltip="Save your preferences"/>-->
-							<Text text="V2.4" class="versionText sapUiMediumMarginBegin"></Text>
+							<Text text="V2.5" class="versionText sapUiMediumMarginBegin"></Text>
 						</VBox>
 					</HBox>
 				</headerContent>
