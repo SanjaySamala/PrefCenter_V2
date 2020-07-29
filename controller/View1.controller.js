@@ -3245,6 +3245,10 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						"ZPREFCNTR_v2.Fragments.AddNewContact", this);
 
 				}
+				var bNoConsent = "";
+				if(this.getView().getModel("POSTADR").getProperty("/0/NoConsent")){
+					bNoConsent = "X";
+				}
 				sap.ui.core.Fragment.byId(this.getView().getId(), "fName").setValueState("None");
 				sap.ui.core.Fragment.byId(this.getView().getId(), "fName").setValueStateText("");
 				sap.ui.core.Fragment.byId(this.getView().getId(), "lName").setValueState("None");
@@ -3267,10 +3271,20 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					sCountry: this.getView().getModel("POSTADR").getProperty("/0/country"),
 					sPostalCode: this.getView().getModel("POSTADR").getProperty("/0/postalCode"),
 					aRegions: this.getView().getModel("POSTADR").getProperty("/0/aRegions"),
-					aRelations: this.getView().getModel("oRelationsModel").getData()
+					aRelations: this.getView().getModel("oRelationsModel").getData(),
+					bNoConsent: bNoConsent
 				}), "oContModel");
 				this.getView().addDependent(this._contAdd);
 				this._contAdd.open();
+			},
+			
+			onAddNoConsentSel: function(oEvent){
+				var oAddNewContactData = this.getView().getModel("oContModel").getData();
+				if(oEvent.getSource().getSelected()){
+					oAddNewContactData.bNoConsent = "X";
+				} else {
+					oAddNewContactData.bNoConsent = "";
+				}
 			},
 
 			onContSave: function () {
@@ -3286,6 +3300,10 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				if (!bError) {
 					return;
 				}
+				var bNoConsent = "";
+				if(aNewContactData.bNoConsent){
+					bNoConsent = "X";
+				}
 				var aPayload = {
 					BpCa: this.getView().byId("BP").getValue(),
 					Title: aNewContactData.sTitle,
@@ -3299,7 +3317,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					City1: aNewContactData.sCity,
 					Region: aNewContactData.sRegion,
 					PostCode1: aNewContactData.sPostalCode,
-					Country: aNewContactData.sCountry
+					Country: aNewContactData.sCountry,
+					NoConsent: bNoConsent
 				};
 
 				var newContactAddSet = "/ContactPersonSet";
@@ -3384,6 +3403,10 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 			onContactEdit: function (oEvent) {
 				var sPath = oEvent.getSource().getParent().getBindingContextPath();
 				var selRow = oEvent.getSource().getModel("oContactPersonData").getProperty(sPath);
+				var bNoConsent = "";
+				if(selRow.NoConsent){
+					bNoConsent = "X";
+				}
 				this.getView().setModel(new JSONModel({
 					sTitle: selRow.Title,
 					sFName: selRow.ContactFirstName,
@@ -3400,7 +3423,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					aRegions: this.getView().getModel("POSTADR").getProperty("/0/aRegions"),
 					aRelations: this.getView().getModel("oRelationsModel").getData(),
 					sContactPersons: selRow.ContactPersons,
-					sBusinessPartner: selRow.BusinessPartner
+					sBusinessPartner: selRow.BusinessPartner,
+					bNoConsent: bNoConsent
 				}), "oContEditModel");
 				if (!this._contEdit) {
 					this._contEdit = sap.ui.xmlfragment(this.getView().getId(),
@@ -3415,7 +3439,16 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				this._contEdit.open();
 
 			},
-
+			
+			onEditNoConsentSel: function(oEvent){
+				var oEditContactData = this.getView().getModel("oContEditModel").getData();
+				if(oEvent.getSource().getSelected()){
+					oEditContactData.bNoConsent = "X";
+				} else {
+					oEditContactData.bNoConsent = "";
+				}
+			},
+			
 			onContEditSave: function () {
 				var phnNumPattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 				var mailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
@@ -3440,6 +3473,11 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				}
 
 				var aEditContData = this.getView().getModel("oContEditModel").getData();
+				
+				var bNoConsent = "";
+				if(aEditContData.bNoConsent){
+					bNoConsent = "X";
+				}
 
 				var oUpdatePayload = {
 					BpCa: this.getView().byId("BP").getValue(),
@@ -3456,7 +3494,8 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					City1: aEditContData.sCity,
 					Region: aEditContData.sRegion,
 					PostCode1: aEditContData.sPostalCode,
-					Country: aEditContData.sCountry
+					Country: aEditContData.sCountry,
+					NoConsent: bNoConsent
 				};
 
 				var updateContDataSet = "/ContactPersonSet('" + this.getView().byId("BP").getValue() + "')";
@@ -3644,7 +3683,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				var selRow = oEvent.getSource().getModel("oContactPersonData").getProperty(sPath);
 				var that = this;
 				this.selRow = selRow;
-				sap.m.MessageBox.show("Are you sure, you want to delete the contact?", {
+				sap.m.MessageBox.show("Are you sure you want to remove the contact person from the account?", {
 					icon: "WARNING",
 					title: "Warning",
 					styleClass: "Message",

@@ -117,41 +117,41 @@
 											<core:Icon src="sap-icon://discussion-2" class="sapUiTinyMarginBegin"></core:Icon>
 											<Text class="sapUiTinyMarginBegin TextLabel" text="Communication"></Text>
 										</Toolbar>
-										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center" justifyContent="SpaceBetween">
-											<Label text="Mail:" width="7rem"></Label>
-											<Text class="CustomAdrs" text="{POSTADR>/0/value}"></Text>
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+											<Label text="Mail:" width="6rem"></Label>
+											<Text class="CustomAdrs" text="{POSTADR>/0/value}" width="9rem"></Text>
 											<!--<TextArea id="id_mail" class="CustomAdrs" enabled="{POSTADR>/0/enabled}" liveChange="onChangePhone" value="{POSTADR>/0/value}" rows="4"></TextArea>-->
 											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginTop sapUiTinyMarginBegin sapUiSmallMarginEnd"
 												color="dimgray" tooltip="Mail"/>
 											<!--<Text class="txt_formelement" text="{POSTADR>/0/value}"></Text>-->
 										</HBox>
-										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center" justifyContent="SpaceBetween">
-											<Label text="Telephone:" width="7rem"></Label>
-											<Text class="CustomAdrs" text="{POSTADR>/1/value}"></Text>
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+											<Label text="Telephone:" width="6rem"></Label>
+											<Text class="CustomAdrs" text="{POSTADR>/1/value}" width="9rem"></Text>
 											<!--<Input id="id_telephone" class="CustomAdrs" enabled="{POSTADR>/1/enabled}" liveChange="onChangePhone" value="{POSTADR>/1/value}"></Input>-->
 											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
 												tooltip="Telephone"/>
 											<!--<Text class="txt_formelement" text="{POSTADR>/1/value}"></Text>-->
 										</HBox>
-										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center" justifyContent="SpaceBetween">
-											<Label text="Mobile:" width="7rem"></Label>
-											<Text class="CustomAdrs" text="{POSTADR>/2/value}"></Text>
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+											<Label text="Mobile:" width="6rem"></Label>
+											<Text class="CustomAdrs" text="{POSTADR>/2/value}" width="9rem"></Text>
 											<!--<Input id="id_mobile" class="CustomAdrs" enabled="{POSTADR>/2/enabled}" liveChange="onChangePhone" value="{POSTADR>/2/value}"></Input>-->
 											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
 												tooltip="Mobile"/>
 											<!--<Text class="txt_formelement" text="{POSTADR>/2/value}"></Text>-->
 										</HBox>
-										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center" justifyContent="SpaceBetween">
-											<Label text="Email:" width="7rem"></Label>
-											<Text class="CustomAdrs" text="{POSTADR>/3/value}"></Text>
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+											<Label text="Email:" width="6rem"></Label>
+											<Text class="CustomAdrs" text="{POSTADR>/3/value}" width="9rem"></Text>
 											<!--<Input id="id_email" class="CustomAdrs" enabled="{POSTADR>/3/enabled}" liveChange="onChangePhone" value="{POSTADR>/3/value}"></Input>-->
 											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
 												tooltip="Email"/>
 											<!--<Text class="txt_formelement" text="{POSTADR>/3/value}"></Text>-->
 										</HBox>
-										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center" justifyContent="SpaceBetween">
-											<Label text="Fax:" width="7rem"></Label>
-											<Text class="CustomAdrs" text="{POSTADR>/4/value}"></Text>
+										<HBox class="sapUiTinyMarginTop sapUiTinyMarginBegin" alignItems="Center">
+											<Label text="Fax:" width="6rem"></Label>
+											<Text class="CustomAdrs" text="{POSTADR>/4/value}" width="9rem"></Text>
 											<!--<Input id="id_fax" class="CustomAdrs" enabled="{POSTADR>/4/enabled}" liveChange="onChangePhone" value="{POSTADR>/4/value}"></Input>-->
 											<core:Icon src="sap-icon://edit" press="onEditCommDets" class="AdrsIcon sapUiTinyMarginBegin sapUiSmallMarginEnd" color="dimgray"
 												tooltip="Fax"/>

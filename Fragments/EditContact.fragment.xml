@@ -29,6 +29,13 @@
 					<Input value="{oContEditModel>/sPhone}" width="10rem" id="contPhone"></Input>
 				</VBox>
 				<VBox class="sapUiSmallMarginEnd">
+					<Label text=""></Label>
+					<CheckBox text="No Consent"  selected="{=${oContEditModel>/bNoConsent} === 'X'}" select="onEditNoConsentSel"></CheckBox>
+				</VBox>
+				
+			</HBox>
+			<HBox class="sapUiSmallMarginBottom">
+				<VBox class="sapUiSmallMarginEnd">
 					<Label text="Relation Type" design="Bold"></Label>
 					<!--<Input value="{oContEditModel>/sRelType}" width="12rem"></Input>-->
 					<Select forceSelection="false" selectedKey="{oContEditModel>/sRelType}" items="{oContEditModel>/aRelations}" enabled="true"

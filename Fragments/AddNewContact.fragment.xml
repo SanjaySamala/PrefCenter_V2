@@ -7,7 +7,7 @@
 			<Button text="CANCEL" press="onContCancel"/>
 		</endButton>
 		<VBox class="sapUiSmallMarginTop sapUiSmallMarginBeginEnd" height="auto">
-			<HBox justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
+			<HBox justifyContent="SpaceBetween" class="sapUiSmallMarginBottom" alignItems="Center">
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="Title" design="Bold"></Label>
 					<Input value="{oContModel>/sTitle}" width="10rem" id="title"></Input>
@@ -28,6 +28,12 @@
 					<Label text="Phone" design="Bold"></Label>
 					<Input value="{oContModel>/sPhone}" width="10rem" id="phone"></Input>
 				</VBox>
+				<VBox class="sapUiSmallMarginEnd">
+					<Label text=""></Label>
+					<CheckBox text="No Consent" selected="{=${oContModel>/bNoConsent} === 'X'}" select="onAddNoConsentSel"></CheckBox>
+				</VBox>
+			</HBox>
+			<HBox class="sapUiSmallMarginBottom">
 				<VBox class="sapUiSmallMarginEnd">
 					<Label text="Relation Type" design="Bold"></Label>
 					<!--<Input value="{oContModel>/sRelType}" width="10rem"></Input>-->
