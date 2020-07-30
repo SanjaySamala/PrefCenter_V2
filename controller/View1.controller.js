@@ -965,38 +965,38 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				// var errorMessages = [];
 				// var phnNumPattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 				// if (telephone !== "" && !phnNumPattern.test(telephone)) {
-					// oTelephoneInp.setValueState("Error");
-					// oTelephoneInp.setValueStateText("Invalid Telephone!");
+				// oTelephoneInp.setValueState("Error");
+				// oTelephoneInp.setValueStateText("Invalid Telephone!");
 
-					// this.getView().byId("id_telephone").setValueState("Error");
-					// this.getView().byId("id_telephone").setValueStateText("Enter 10-digit Phone no.");
+				// this.getView().byId("id_telephone").setValueState("Error");
+				// this.getView().byId("id_telephone").setValueStateText("Enter 10-digit Phone no.");
 
-					//return false;
+				//return false;
 				// 	errorMessages.push("Please maintain valid 10 digit Telephone number");
 				// 	errorCount = errorCount + 1;
 				// }
 				// if (mobile !== "" && !phnNumPattern.test(mobile)) {
-					// oPhoneNumberInp.setValueState("Error");
-					// oPhoneNumberInp.setValueStateText("Invalid Mobile!");
-					// errorMessages.push("Please maintain valid Mobile number");
+				// oPhoneNumberInp.setValueState("Error");
+				// oPhoneNumberInp.setValueStateText("Invalid Mobile!");
+				// errorMessages.push("Please maintain valid Mobile number");
 
-					// this.getView().byId("id_mobile").setValueState("Error");
-					// this.getView().byId("id_mobile").setValueStateText("Enter 10-digit Mobile no.");
+				// this.getView().byId("id_mobile").setValueState("Error");
+				// this.getView().byId("id_mobile").setValueStateText("Enter 10-digit Mobile no.");
 
-					//return false;
+				//return false;
 				// 	errorCount = errorCount + 1;
 				// }
 
 				// var mailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 
 				// if (!mailPattern.test(email)) {
-					// oEmailInp.setValueState("Error");
-					// oEmailInp.setValueStateText("Invalid Email!");
+				// oEmailInp.setValueState("Error");
+				// oEmailInp.setValueStateText("Invalid Email!");
 
-					// this.getView().byId("id_email").setValueState("Error");
-					// this.getView().byId("id_email").setValueStateText("Invalid Email");
+				// this.getView().byId("id_email").setValueState("Error");
+				// this.getView().byId("id_email").setValueStateText("Invalid Email");
 
-					//return false;
+				//return false;
 				// 	errorMessages.push("Please maintain valid Email");
 				// 	errorCount = errorCount + 1;
 				// }
@@ -1572,17 +1572,19 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 						if (this.defPref) {
 							that.getView().byId("Toggle1").setState(true);
 							that.DefaultToggle();
-						}/* else {
-							that.getView().byId("Toggle1").setState(false);
-						}*/
-						
+						}
+						/* else {
+													that.getView().byId("Toggle1").setState(false);
+												}*/
+
 						if (this.bpPref) {
 							that.getView().byId("Toggle2").setState(true);
 							that.BPToggle();
-						} /*else {
+						}
+						/*else {
 							that.getView().byId("Toggle2").setState(false);
 						}*/
-						
+
 					}
 
 					// else {
@@ -2206,7 +2208,13 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 									if (j === 0) {
 										obj.src = "sap-icon://building"; //Address
 										obj.text = "Mail";
-										obj.value = data.results[i].PostalAddress;
+										var formattedAddress = data.results[i].PostalAddress;
+										if (formattedAddress.includes("#")) {
+											var splitAddress = formattedAddress.split("#");
+											formattedAddress = splitAddress[0] + "\n" + splitAddress[1];
+										}
+										// obj.value = data.results[i].PostalAddress;
+										obj.value = formattedAddress;
 										obj.title = data.results[i].Title;
 										obj.fName = data.results[i].FirstName;
 										obj.lName = data.results[i].LastName;
@@ -3246,7 +3254,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 				}
 				var bNoConsent = "";
-				if(this.getView().getModel("POSTADR").getProperty("/0/NoConsent")){
+				if (this.getView().getModel("POSTADR").getProperty("/0/NoConsent")) {
 					bNoConsent = "X";
 				}
 				sap.ui.core.Fragment.byId(this.getView().getId(), "fName").setValueState("None");
@@ -3277,10 +3285,10 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				this.getView().addDependent(this._contAdd);
 				this._contAdd.open();
 			},
-			
-			onAddNoConsentSel: function(oEvent){
+
+			onAddNoConsentSel: function (oEvent) {
 				var oAddNewContactData = this.getView().getModel("oContModel").getData();
-				if(oEvent.getSource().getSelected()){
+				if (oEvent.getSource().getSelected()) {
 					oAddNewContactData.bNoConsent = "X";
 				} else {
 					oAddNewContactData.bNoConsent = "";
@@ -3301,7 +3309,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					return;
 				}
 				var bNoConsent = "";
-				if(aNewContactData.bNoConsent){
+				if (aNewContactData.bNoConsent) {
 					bNoConsent = "X";
 				}
 				var aPayload = {
@@ -3404,7 +3412,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				var sPath = oEvent.getSource().getParent().getBindingContextPath();
 				var selRow = oEvent.getSource().getModel("oContactPersonData").getProperty(sPath);
 				var bNoConsent = "";
-				if(selRow.NoConsent){
+				if (selRow.NoConsent) {
 					bNoConsent = "X";
 				}
 				this.getView().setModel(new JSONModel({
@@ -3439,16 +3447,16 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				this._contEdit.open();
 
 			},
-			
-			onEditNoConsentSel: function(oEvent){
+
+			onEditNoConsentSel: function (oEvent) {
 				var oEditContactData = this.getView().getModel("oContEditModel").getData();
-				if(oEvent.getSource().getSelected()){
+				if (oEvent.getSource().getSelected()) {
 					oEditContactData.bNoConsent = "X";
 				} else {
 					oEditContactData.bNoConsent = "";
 				}
 			},
-			
+
 			onContEditSave: function () {
 				var phnNumPattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 				var mailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
@@ -3473,9 +3481,9 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				}
 
 				var aEditContData = this.getView().getModel("oContEditModel").getData();
-				
+
 				var bNoConsent = "";
-				if(aEditContData.bNoConsent){
+				if (aEditContData.bNoConsent) {
 					bNoConsent = "X";
 				}
 
