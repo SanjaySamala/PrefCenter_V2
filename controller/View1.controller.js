@@ -2210,7 +2210,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 										obj.text = "Mail";
 										var formattedAddress = data.results[i].PostalAddress;
 										if (formattedAddress.includes("#")) {
-											var splitAddress = formattedAddress.split("#");
+											var splitAddress = formattedAddress.split("#,");
 											formattedAddress = splitAddress[0] + "\n" + splitAddress[1];
 										}
 										// obj.value = data.results[i].PostalAddress;
