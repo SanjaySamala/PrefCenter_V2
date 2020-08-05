@@ -19,7 +19,7 @@
 						</VBox>
 						<VBox width="10%" alignContent="Center" alignItems="Center" direction="Column" justifyContent="Center">
 							<core:Icon src="sap-icon://save" class="size2 sapUiMediumMarginEnd" id="ALL" press="openBusyDialogForSave" tooltip="Save your preferences"/>
-							<Text text="V2.5" class="versionText sapUiMediumMarginBegin"></Text>
+							<Text text="V2.6" class="versionText sapUiMediumMarginBegin"></Text>
 						</VBox>
 					</HBox>
 				</headerContent>
@@ -207,7 +207,7 @@
 														<Column width="11rem">
 															<l:HorizontalLayout>
 																<Text width="5px"/>
-																<Text text=" Address" class="TextLabel"/>
+																<Text text=" Service Address" class="TextLabel"/>
 															</l:HorizontalLayout>
 														</Column>
 														<Column width="8rem">
@@ -272,7 +272,7 @@
 														<Column hAlign="Left">
 															<Text text="Last Name" class="sapUiTinyMarginBegin TextLabel"></Text>
 														</Column>
-														<Column hAlign="Left">
+														<Column hAlign="Left" width="18rem">
 															<Text text="Email" class="sapUiTinyMarginBegin TextLabel"></Text>
 														</Column>
 														<Column hAlign="Left">
@@ -296,7 +296,7 @@
 															<cells>
 																<Text class="sapUiTinyMarginBegin" text="{oContactPersonData>ContactFirstName}" wrapping="true"></Text>
 																<Text text="{oContactPersonData>ContactLastName}" wrapping="true"></Text>
-																<Text text="{oContactPersonData>Email}" wrapping="true"></Text>
+																<Text text="{oContactPersonData>Email}" wrapping="true" width="18rem"></Text>
 																<Text text="{oContactPersonData>Phone}" wrapping="true"></Text>
 																<Text text="{oContactPersonData>Relationship}" wrapping="true"></Text>
 																<ObjectStatus text="{oContactPersonData>ObjectType}" state="{= ${oContactPersonData>ObjectType} === 'BP' ? 'Warning' : 'Success' }"
