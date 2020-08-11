@@ -54,7 +54,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				this.getView().byId("Toggle2").setState(false);
 				this.getView().byId("Toggle1").setState(false);
 				this.getView().byId("defPref").setText("Turn Default Preferences ON");
-				this.getView().byId("BP_Label").setText("Turn BP Preferences ON");
+				this.getView().byId("BP_Label").setText("Turn Customer Preferences ON");
 
 				// rg1.setSelectedIndex(0);
 				// rg1.setVisible(false);
@@ -263,12 +263,12 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					var data1 = items[i].getBindingContext('CA_LIST').oModel.oData[i];
 					if (data1.DEF_PREF_FLAG === true) {
 						data1.DEF_PREF_TXT = "Turn Default Preferences OFF";
-						data1.BP_PREF_TXT = "Turn BP Preferences ON";
+						data1.BP_PREF_TXT = "Turn Customer Preferences ON";
 						data1.BP_PREF_FLAG = false;
 					}
 					if (data1.DEF_PREF_FLAG === false) {
 						data1.DEF_PREF_TXT = "Turn Default Preferences ON";
-						// data1.BP_PREF_TXT= "Turn BP Preferences OFF";
+						// data1.BP_PREF_TXT= "Turn Customer Preferences OFF";
 						// data1.BP_PREF_FLAG = true;
 					}
 					ca_list.push(data1);
@@ -286,12 +286,12 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				for (var i = 0; i < items.length; i++) { // CA List
 					var data1 = items[i].getBindingContext('CA_LIST').oModel.oData[i];
 					if (data1.BP_PREF_FLAG === true) {
-						data1.BP_PREF_TXT = "Turn BP Preferences OFF";
+						data1.BP_PREF_TXT = "Turn Customer Preferences OFF";
 						data1.DEF_PREF_TXT = "Turn Default Preferences ON";
 						data1.DEF_PREF_FLAG = false;
 					}
 					if (data1.BP_PREF_FLAG === false) {
-						data1.BP_PREF_TXT = "Turn BP Preferences ON";
+						data1.BP_PREF_TXT = "Turn Customer Preferences ON";
 						// data1.DEF_PREF_TXT= "Turn Default Preferences OFF";
 						// data1.DEF_PREF_FLAG = true;
 					}
@@ -311,7 +311,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 				if (status === true) {
 					this.getView().byId("Toggle2").setState(false);
-					this.getView().byId("BP_Label").setText("Turn BP Preferences ON");
+					this.getView().byId("BP_Label").setText("Turn Customer Preferences ON");
 					this.getView().byId("defPref").setText("Turn Default Preferences OFF");
 
 					for (var i = 0; i < def_pref.length; i++) {
@@ -364,7 +364,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				} else {
 					this.getView().byId("defPref").setText("Turn Default Preferences ON");
 					this.getView().byId("obj_noBpPref").setVisible(false);
-					// this.getView().byId("BP_Label").setText("Turn BP Preferences OFF");
+					// this.getView().byId("BP_Label").setText("Turn Customer Preferences OFF");
 					var that = this;
 					var oManifestEntry2 = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.ZPC_GET_ADDRESS_SRV.uri;
 					var oModel2 = new sap.ui.model.odata.ODataModel(oManifestEntry2, {
@@ -584,7 +584,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 				if (status === true) {
 					this.getView().byId("Toggle1").setState(false);
-					this.getView().byId("BP_Label").setText("Turn BP Preferences OFF");
+					this.getView().byId("BP_Label").setText("Turn Customer Preferences OFF");
 					this.getView().byId("defPref").setText("Turn Default Preferences ON");
 					// sap.m.MessageToast.show("Use Business Partner preferences");
 					// Get BP preferences
@@ -717,7 +717,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 
 					}
 				} else {
-					this.getView().byId("BP_Label").setText("Turn BP Preferences ON");
+					this.getView().byId("BP_Label").setText("Turn Customer Preferences ON");
 					// this.getView().byId("defPref").setText("Turn Default Preferences OFF");
 					// sap.m.MessageToast.show("Use Account preferences");
 					var oModel_Temp = new sap.ui.model.json.JSONModel();
@@ -1938,7 +1938,7 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 				this.getView().byId("Toggle2").setState(false);
 				this.getView().byId("Toggle1").setState(false);
 				this.getView().byId("defPref").setText("Turn Default Preferences ON");
-				this.getView().byId("BP_Label").setText("Turn BP Preferences ON");
+				this.getView().byId("BP_Label").setText("Turn Customer Preferences ON");
 				this.getView().byId("obj_noBpPref").setVisible(false);
 
 				var bp = this.getView().byId("BP").getValue();
@@ -2405,10 +2405,10 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 									}
 									if (data.results[i].BP_PREF_FLAG === 'true') {
 										obj.BP_PREF_FLAG = true;
-										obj.BP_PREF_TXT = "Turn BP Preferences OFF";
+										obj.BP_PREF_TXT = "Turn Customer Preferences OFF";
 									} else {
 										obj.BP_PREF_FLAG = false;
-										obj.BP_PREF_TXT = "Turn BP Preferences ON";
+										obj.BP_PREF_TXT = "Turn Customer Preferences ON";
 									}
 									ca_list.push(obj);
 								}
