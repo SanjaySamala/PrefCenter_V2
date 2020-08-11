@@ -38,7 +38,7 @@
 												<f:FormElement id="businessPartnerIdFE" label="Customer/Contract Account Number">
 													<f:fields>
 														<Input id="businessPartnerIdInput" value="{searchModel>BusinessPartnerID}" type="Text" maxLength="12" liveChange="validateBpCa"
-															placeholder="Enter BP/CA ..." 
+															placeholder="Enter Customer/Account ..." 
 															>
 															<layoutData>
 																<l:GridData span="XL4 L4 M4 S12"/>

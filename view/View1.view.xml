@@ -36,7 +36,7 @@
 							<VBox width="1%"/>
 							<VBox width="13%" fitContainer="true" class="sapUiSmallMarginTop">
 								<items>
-									<Input id="BP" required="true" showValueHelp="false" placeholder="Enter Business Partner/Account Number ..." submit="handleSearch"
+									<Input id="BP" required="true" showValueHelp="false" placeholder="Enter Customer/Account ..." submit="handleSearch"
 										textAlign="Begin" width="95%" fieldWidth="30%" class="CustomInput"/>
 								</items>
 							</VBox>
@@ -56,7 +56,7 @@
 							<VBox xmlns="sap.m" fitContainer="true" class="sapUiSmallMarginTop" justifyContent="End" direction="RowReverse" alignContent="End">
 								<items>
 									<ObjectStatus class="sapUiSmallMarginEnd sapUiTinyMarginTop" icon="sap-icon://customer" text="{oBpCaModel>/sBpCa}"
-										state="{=${oBpCaModel>/sBpCa} === 'BP' ? 'Warning' : 'Success'}" visible="{=${oBpCaModel>/sBpCa}.length > 0}"></ObjectStatus>
+										state="{=${oBpCaModel>/sBpCa} === 'Customer' ? 'Warning' : 'Success'}" visible="{=${oBpCaModel>/sBpCa}.length > 0}"></ObjectStatus>
 								</items>
 							</VBox>
 							<VBox xmlns="sap.m" fitContainer="true" class="sapUiSmallMarginTop" justifyContent="End" direction="RowReverse" alignContent="End">
@@ -299,11 +299,11 @@
 																<Text text="{oContactPersonData>Email}" wrapping="true" width="18rem"></Text>
 																<Text text="{oContactPersonData>Phone}" wrapping="true"></Text>
 																<Text text="{oContactPersonData>Relationship}" wrapping="true"></Text>
-																<ObjectStatus text="{oContactPersonData>ObjectType}" state="{= ${oContactPersonData>ObjectType} === 'BP' ? 'Warning' : 'Success' }"
-																	icon="sap-icon://customer"/>
+																<ObjectStatus text="{= ${oContactPersonData>ObjectType} === 'BP' ? 'Customer' : 'Account' }" state="{= ${oContactPersonData>ObjectType} === 'BP' ? 'Warning' : 'Success' }"
+																	icon="sap-icon://customer" class="objStatusCPData"/>
 																<!--<core:Icon src="sap-icon://edit" color="dimgray" press="onEditContactPersonData"></core:Icon>-->
-																<core:Icon src="sap-icon://edit" class="AdrsIcon" color="dimgray" press="onContactEdit" visible="{=${oBpCaModel>/sBpCa} === 'BP' &amp;&amp; ${oContactPersonData>ObjectType} === 'BP' || ${oBpCaModel>/sBpCa} === 'CA' &amp;&amp; ${oContactPersonData>ObjectType} !== 'BP'}"/>
-																<core:Icon src="sap-icon://delete" class="AdrsIcon" color="red" press="onContactDelete" visible="{=${oBpCaModel>/sBpCa} === 'BP' &amp;&amp; ${oContactPersonData>ObjectType} === 'BP' || ${oBpCaModel>/sBpCa} === 'CA' &amp;&amp; ${oContactPersonData>ObjectType} !== 'BP'}"/>
+																<core:Icon src="sap-icon://edit" class="editIconAlign sapUiMediumMarginBegin" color="dimgray" press="onContactEdit" visible="{=${oBpCaModel>/sBpCa} === 'Customer' &amp;&amp; ${oContactPersonData>ObjectType} === 'BP' || ${oBpCaModel>/sBpCa} === 'Account' &amp;&amp; ${oContactPersonData>ObjectType} !== 'BP'}"/>
+																<core:Icon src="sap-icon://delete" class="AdrsIcon" color="red" press="onContactDelete" visible="{=${oBpCaModel>/sBpCa} === 'Customer' &amp;&amp; ${oContactPersonData>ObjectType} === 'BP' || ${oBpCaModel>/sBpCa} === 'Account' &amp;&amp; ${oContactPersonData>ObjectType} !== 'BP'}"/>
 															</cells>
 														</ColumnListItem>
 													</items>

@@ -1620,3 +1620,11 @@ span.sapMBtnInner.sapMBtnEmphasized {
 .regionCls {
     outline: 1px solid #bfbfbf;
 }
+
+.editIconAlign{
+	text-align: center !important;
+}
+
+.objStatusCPData{
+	width: 7rem !important;
+}

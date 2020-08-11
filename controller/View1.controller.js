@@ -1962,9 +1962,9 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 					this.getView().byId("contData").setVisible(true);
 
 					if (this.getView().byId("BP").getValue().trim().length === 10) {
-						this.getView().getModel("oBpCaModel").setProperty("/sBpCa", "BP");
+						this.getView().getModel("oBpCaModel").setProperty("/sBpCa", "Customer");
 					} else if (this.getView().byId("BP").getValue().trim().length === 12) {
-						this.getView().getModel("oBpCaModel").setProperty("/sBpCa", "CA");
+						this.getView().getModel("oBpCaModel").setProperty("/sBpCa", "Account");
 					} else {
 						this.getView().getModel("oBpCaModel").setProperty("/sBpCa", "");
 					}
@@ -2209,8 +2209,9 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 										obj.src = "sap-icon://building"; //Address
 										obj.text = "Mail";
 										var formattedAddress = data.results[i].PostalAddress;
+										var splitAddress = [];
 										if (formattedAddress.includes("#")) {
-											var splitAddress = formattedAddress.split("#,");
+											splitAddress = formattedAddress.split("#,");
 											formattedAddress = splitAddress[0] + "\n" + splitAddress[1];
 										}
 										// obj.value = data.results[i].PostalAddress;
@@ -2226,7 +2227,14 @@ sap.ui.define(['sap/m/Token', 'sap/ui/core/mvc/Controller', 'sap/ui/model/json/J
 										obj.postalCode = data.results[i].PostCode1;
 										obj.aRegions = data.results[i].PostalRegionsNav.results;
 										var name = obj.value.split(',')[0];
-										that.getView().byId("name").setText(name);
+										if (that.getView().getModel("oBpCaModel").getProperty("/sBpCa") === "Customer") {
+											that.getView().byId("name").setText(name);
+										} else if(splitAddress.length > 1){
+											that.getView().byId("name").setText(splitAddress[1]);
+										} else {
+											that.getView().byId("name").setText(formattedAddress);
+										}
+
 										address.push(obj);
 									}
 									if (j === 1) {
